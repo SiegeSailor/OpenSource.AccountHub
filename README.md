@@ -16,21 +16,10 @@ See `engines` in [package.json](./package.json):
 File structure:
 
 ```
-├── images/
-├── patches/
 ├── source/
 │   ├── algorithms/
 │   │   ├── baby-step-giant-step/
 │   │   └── ...
-│   ├── common/
-│   │   ├── constants/
-│   │   ├── utilities/
-│   │   └── ...
-│   ├── illustration/
-│   │   ├── ElGamal.ts
-│   │   └── ...
-│   ├── types/
-│   ├── command.ts
 │   └── entry-point.ts
 └── README.md
 ```
@@ -53,16 +42,8 @@ Install all the packages you need. Remember that you have to run this under `nod
 npm install
 ```
 
-### Test
-
-Formulas uses Jest for unit tests purpose. You can generate the coverage report:
+After installing packages, run the following command to start the project:
 
 ```bash
-npm run test -- --coverage
-```
-
-Or see the detail for each test case:
-
-```bash
-npm run test -- --verbose
+npm run start
 ```
