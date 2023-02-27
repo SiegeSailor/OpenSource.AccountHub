@@ -1,6 +1,15 @@
 # Account Hub
 
-Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework.
+Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework. File structure:
+
+```
+├── source/
+│   ├── routes/
+│   │   └── ...
+│   └── entry-point.js
+├── ...
+└── README.md
+```
 
 ## Prerequisites
 
@@ -13,16 +22,7 @@ See `engines` in [package.json](./package.json):
 },
 ```
 
-File structure:
-
-```
-├── source/
-│   ├── algorithms/
-│   │   ├── baby-step-giant-step/
-│   │   └── ...
-│   └── entry-point.ts
-└── README.md
-```
+## Get Started
 
 Use the following commands to help you to run or develop this project locally:
 
