@@ -4,6 +4,7 @@ const {
   MYSQL_PASSWORD,
   MYSQL_DATABASE,
   MYSQL_CONNECTION_LIMIT,
+  JWT_SECRET_KEY,
 } = process.env;
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   MYSQL_PASSWORD,
   MYSQL_DATABASE,
   MYSQL_CONNECTION_LIMIT,
+  JWT_SECRET_KEY,
 };
