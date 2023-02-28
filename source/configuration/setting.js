@@ -1,9 +1,16 @@
-const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
-
-module.exports = {
+const {
   MYSQL_HOST,
   MYSQL_USER,
   MYSQL_PASSWORD,
   MYSQL_DATABASE,
+  MYSQL_CONNECTION_LIMIT,
+} = process.env;
+
+module.exports = {
   NAME: "Account Hub",
+  MYSQL_HOST,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+  MYSQL_CONNECTION_LIMIT,
 };
