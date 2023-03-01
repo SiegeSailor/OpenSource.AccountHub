@@ -4,4 +4,5 @@ module.exports = {
   profile: require("./profile"),
   update: require("./update"),
   freeze: require("./freeze"),
+  cancel: require("./cancel"),
 };

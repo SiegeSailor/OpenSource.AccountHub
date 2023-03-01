@@ -22,8 +22,8 @@ module.exports = async function (request, response) {
     switch (account.state) {
       case constant.MAP_STATE.FROZEN:
         return response.status(403).send("This account has been frozen.");
-      case constant.MAP_STATE.DELETED:
-        return response.status(403).send("This account has been deleted.");
+      case constant.MAP_STATE.CANCELED:
+        return response.status(403).send("This account has been canceled.");
       default:
         break;
     }

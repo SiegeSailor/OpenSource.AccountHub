@@ -3,8 +3,8 @@ const MAP_STATE = {
   FROZEN: "F",
   N: "NORMAL",
   NORMAL: "N",
-  D: "DELETED",
-  DELETED: "D",
+  C: "CANCELED",
+  CANCELED: "C",
 };
 
 const MAP_CATEGORY = {
