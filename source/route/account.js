@@ -8,6 +8,7 @@ const {
   update,
   freeze,
   cancel,
+  defrost,
 } = require("../controller");
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router
   .patch(permit.authenticate, update);
 
 router.route("/freeze/:email").post(permit.authenticate, freeze);
+router.route("/defrost/:email").post(permit.authenticate, defrost);
 
 module.exports = router;

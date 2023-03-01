@@ -5,4 +5,5 @@ module.exports = {
   update: require("./update"),
   freeze: require("./freeze"),
   cancel: require("./cancel"),
+  defrost: require("./defrost"),
 };

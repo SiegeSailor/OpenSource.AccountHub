@@ -55,7 +55,7 @@ npm run start
 
 ## Properties
 
-- Use `/account/freeze/:email` when there is a token leak
+- Use `/account/freeze/:email` when there is a token leak. Ask others to use `/account/defrost/:email` to defrost
 - `nobility` is set to 1 as default. Any advanced operation require `> 1` such as update other accounts
 
 ## Future Plan
