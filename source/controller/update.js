@@ -14,6 +14,7 @@ module.exports = async function (request, response) {
     switch (key) {
       case "username":
       case "passcode":
+      case "nobility":
         if (!request.body[key])
           return response.status(400).send(`${key} can't be empty.`);
         break;
