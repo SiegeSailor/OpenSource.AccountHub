@@ -5,10 +5,10 @@ USE account_hub;
 CREATE TABLE account (
     email               VARCHAR(320)        PRIMARY KEY,
     username            VARCHAR(16)         NOT NULL,
-    passcode            VARCHAR(320)        UNIQUE NOT NULL,
+    passcode            VARCHAR(320)        NOT NULL,
     salt                VARCHAR(256)        NOT NULL,
-    privilege_level     TINYINT             DEFAULT 1,
-    use_status          CHAR(1)             DEFAULT 'N',
+    rank                TINYINT             DEFAULT 1,
+    condition           CHAR(1)             DEFAULT 'N',
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

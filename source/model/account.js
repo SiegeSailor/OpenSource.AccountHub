@@ -6,8 +6,8 @@ class Account {
     username,
     passcode,
     salt,
-    privilege_level,
-    use_status,
+    rank,
+    condition,
     created_at,
     updated_at,
   }) {
@@ -15,8 +15,8 @@ class Account {
     this.username = username;
     this.passcode = passcode;
     this.salt = salt;
-    this.privilegeLevel = privilege_level;
-    this.useStatus = use_status;
+    this.rank = rank;
+    this.condition = condition;
     this.createdAt = created_at;
     this.updatedAt = updated_at;
   }
@@ -24,19 +24,36 @@ class Account {
   static async create(connection, email, username, password) {
     const { passcode, salt } = hash(password);
     await connection.execute(
-      "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?)",
+      "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
       [email, username, passcode, salt]
     );
   }
 
   static async findByEmail(connection, email) {
     const [rows] = await connection.execute(
-      "SELECT * FROM account WHERE email = ?",
+      "SELECT * FROM account WHERE email = ?;",
       [email]
     );
-    if (rows.length === 0) throw new Error("The email doesn't exist.");
+    return rows.map((row) => {
+      return new Account(row);
+    });
+  }
 
-    return new Account(rows[0]);
+  static async findByUsername(connection, username) {
+    const [rows] = await connection.execute(
+      "SELECT * FROM account WHERE username = ?;",
+      [username]
+    );
+    return rows.map((row) => {
+      return new Account(row);
+    });
+  }
+
+  static async queryAll(connection) {
+    const [rows] = await connection.execute("SELECT * FROM account;");
+    return rows.map((row) => {
+      return new Account(row);
+    });
   }
 }
 
