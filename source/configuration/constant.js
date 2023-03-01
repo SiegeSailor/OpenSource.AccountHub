@@ -1,4 +1,4 @@
-const USE_STATUS = {
+const MAP_USE_STATUS = {
   F: "FROZEN",
   FROZEN: "F",
   N: "NORMAL",
@@ -7,9 +7,23 @@ const USE_STATUS = {
   DELETED: "D",
 };
 
-const CATEGORY = {
+const MAP_CATEGORY = {
   A: "ACCOUNT",
+  ACCOUNT: "A",
   S: "SYSTEM",
+  SYSTEM: "S",
 };
 
-module.exports = { USE_STATUS, CATEGORY };
+const SET_HASH = {
+  FORMAT: "HEX",
+  ALGORITHM: "SHA512",
+  ITERATION: 1000,
+  SALT_LENGTH: 64,
+  HASH_LENGTH: 320,
+};
+
+module.exports = {
+  MAP_USE_STATUS,
+  MAP_CATEGORY,
+  SET_HASH,
+};

@@ -1,8 +1,30 @@
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 const setting = require("../configuration/setting");
+const constant = require("../configuration/constant");
 
-module.exports = function (request, response, next) {
+function hash(
+  password,
+  salt = crypto
+    .randomBytes(constant.SET_HASH.SALT_LENGTH)
+    .toString(constant.SET_HASH.FORMAT)
+) {
+  return {
+    passcode: crypto
+      .pbkdf2Sync(
+        password,
+        salt,
+        constant.SET_HASH.ITERATION,
+        constant.SET_HASH.HASH_LENGTH,
+        constant.SET_HASH.ALGORITHM
+      )
+      .toString(constant.SET_HASH.FORMAT),
+    salt,
+  };
+}
+
+function authenticate(request, response, next) {
   const token = request.headers.authorization;
   if (token) {
     try {
@@ -50,4 +72,9 @@ module.exports = function (request, response, next) {
   }
 
   const { username, password, email } = request.body;
+}
+
+module.exports = {
+  hash,
+  authenticate,
 };
