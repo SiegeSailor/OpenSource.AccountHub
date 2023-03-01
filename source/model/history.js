@@ -1,10 +1,10 @@
 class History {
-  constructor({ identifier, category, content, created_at, email }) {
+  constructor({ identifier, category, content, email, created_at }) {
     this.identifier = identifier;
     this.category = category;
     this.content = content;
-    this.createdAt = created_at;
     this.email = email;
+    this.createdAt = created_at;
   }
 
   static async create(connection, category, content, email) {

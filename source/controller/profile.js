@@ -2,9 +2,9 @@ const Account = require("../model/account");
 const pool = require("../model/database");
 
 module.exports = async function (request, response) {
-  const { email, state } = request.context;
-  if (request.params.email !== email && state <= 1) {
-    response.status(403).send("Your state is too low for this operation.");
+  const { email, nobility } = request.context;
+  if (request.params.email !== email && nobility <= 1) {
+    response.status(403).send("Your nobility is too low for this operation.");
     return;
   }
 

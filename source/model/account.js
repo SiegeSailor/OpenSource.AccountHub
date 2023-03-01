@@ -9,8 +9,8 @@ class Account {
     username,
     passcode,
     salt,
+    nobility,
     state,
-    condition,
     created_at,
     updated_at,
   }) {
@@ -18,8 +18,8 @@ class Account {
     this.username = username;
     this.passcode = passcode;
     this.salt = salt;
+    this.nobility = nobility;
     this.state = state;
-    this.condition = condition;
     this.createdAt = created_at;
     this.updatedAt = updated_at;
   }

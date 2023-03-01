@@ -28,7 +28,7 @@ module.exports = async function (request, response) {
       response.status(401).send("Incorrect password.");
       return;
     }
-    switch (account.condition) {
+    switch (account.state) {
       case constant.MAP_CONDITION.FROZEN:
         response.status(403).send("This account has been frozen.");
         return;
@@ -44,8 +44,8 @@ module.exports = async function (request, response) {
           email: account.email,
           username: account.username,
           passcode: account.passcode,
+          nobility: account.nobility,
           state: account.state,
-          condition: account.condition,
           createdAt: account.createdAt,
           updatedAt: account.updatedAt,
         },
