@@ -7,7 +7,7 @@ CREATE TABLE account (
     username            VARCHAR(16)         NOT NULL,
     passcode            VARCHAR(320)        NOT NULL,
     salt                VARCHAR(256)        NOT NULL,
-    rank                TINYINT             DEFAULT 1,
+    state               TINYINT             DEFAULT 1,
     condition           CHAR(1)             DEFAULT 'N',
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -18,6 +18,6 @@ CREATE TABLE history (
     category            CHAR(1)             NOT NULL,
     content             VARCHAR(80)         NOT NULL,
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY email REFERENCES account (email),
+    FOREIGN KEY (email) REFERENCES account (email),
     PRIMARY KEY (identitfer)
 );

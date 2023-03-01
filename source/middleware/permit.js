@@ -18,8 +18,8 @@ function hash(password, salt) {
 
 function authenticate(request, response, next) {
   const token = request.headers.authorization;
-  if (token === null) {
-    response.send(401).send("Must request with a token.");
+  if (!token) {
+    response.status(401).send("Must request with a token.");
     return;
   }
 
@@ -27,7 +27,7 @@ function authenticate(request, response, next) {
     request.context = jwt.verify(token, setting.JWT_SECRET_KEY);
     next();
   } catch {
-    res.status(401).send("Invalid token.");
+    response.status(401).send("Invalid token.");
   }
 }
 

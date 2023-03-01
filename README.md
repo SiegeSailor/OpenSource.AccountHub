@@ -4,8 +4,11 @@ Constructs endpoints for a sophisticated account database system within the OWAS
 
 ```
 ├── source/
-│   ├── routes/
-│   │   └── ...
+│   ├── configuration/
+│   ├── controller/
+│   ├── middleware/
+│   ├── model/
+│   ├── route/
 │   └── entry-point.js
 ├── ...
 └── README.md
@@ -21,6 +24,8 @@ See `engines` in [package.json](./package.json):
     "npm": ">= 8.0.0"
 },
 ```
+
+MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use.
 
 ## Get Started
 
@@ -47,3 +52,20 @@ After installing packages, run the following command to start the project:
 ```bash
 npm run start
 ```
+
+## Future Plan
+
+Things will be completed after the first release:
+
+- Dockerize with Monorepo Structure
+- GitHub Actions CICD
+- Deploy to AWS
+- Connect to AWS Database
+- Use AWS Cloud Logging
+- Rewrite with TypeScript
+- Session and Cookie
+- XSS Prevention
+- Unit Testing with Jest
+- GitHub Issues Board
+- Git Flow
+- ESlint with Husky

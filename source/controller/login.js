@@ -3,11 +3,12 @@ const jwt = require("jsonwebtoken");
 const Account = require("../model/account");
 const { hash } = require("../middleware/permit");
 const setting = require("../configuration/setting");
+const constant = require("../configuration/constant");
 
 module.exports = async function (request, response) {
   const { username, password } = request.body;
   if (username === null || password === null) {
-    response.status(400).send("Must fill all necessary fields.");
+    response.status(401).send("Must fill all necessary fields.");
     return;
   }
 
@@ -16,7 +17,7 @@ module.exports = async function (request, response) {
     connection = await pool.getConnection();
     const accounts = await Account.findByUsername(connection, username);
     if (accounts.length === 0) {
-      response.status(404).send("No account with such username.");
+      response.status(404).send("No account found with such username.");
       return;
     }
 
@@ -24,8 +25,17 @@ module.exports = async function (request, response) {
       return account.passcode === hash(password, account.salt);
     });
     if (account === null) {
-      response.status(403).send("Incorrect password.");
+      response.status(401).send("Incorrect password.");
       return;
+    }
+    switch (account.condition) {
+      case constant.MAP_CONDITION.FROZEN:
+        response.status(403).send("This account has been frozen.");
+        return;
+      case constant.MAP_CONDITION.DELETED:
+        response.status(403).send("This account has been deleted.");
+      default:
+        break;
     }
 
     response.status(200).send({
@@ -34,6 +44,10 @@ module.exports = async function (request, response) {
           email: account.email,
           username: account.username,
           passcode: account.passcode,
+          state: account.state,
+          condition: account.condition,
+          createdAt: account.createdAt,
+          updatedAt: account.updatedAt,
         },
         setting.JWT_SECRET_KEY,
         { expiresIn: "1D" }

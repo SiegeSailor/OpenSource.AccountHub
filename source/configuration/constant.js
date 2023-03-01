@@ -1,4 +1,4 @@
-const MAP_USE_STATUS = {
+const MAP_CONDITION = {
   F: "FROZEN",
   FROZEN: "F",
   N: "NORMAL",
@@ -23,7 +23,7 @@ const SET_HASH = {
 };
 
 module.exports = {
-  MAP_USE_STATUS,
+  MAP_CONDITION,
   MAP_CATEGORY,
   SET_HASH,
 };
