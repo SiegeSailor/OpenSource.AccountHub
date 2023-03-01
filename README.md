@@ -57,15 +57,16 @@ npm run start
 
 Things will be completed after the first release:
 
-- Dockerize with Monorepo Structure
-- GitHub Actions CICD
-- Deploy to AWS
-- Connect to AWS Database
-- Use AWS Cloud Logging
-- Rewrite with TypeScript
-- Session and Cookie
-- XSS Prevention
-- Unit Testing with Jest
-- GitHub Issues Board
-- Git Flow
-- ESlint with Husky
+1. Dockerize with Monorepo Structure
+2. GitHub Actions CICD
+3. Deploy to AWS
+4. Connect to AWS Database
+5. Use AWS Cloud Logging
+6. Rewrite with TypeScript
+7. Session and Cookie
+8. XSS Prevention
+9. Unit Testing with Jest
+10. GitHub Issues Board
+11. Git Flow
+12. ESlint with Husky
+13. Integration Test with Postman
