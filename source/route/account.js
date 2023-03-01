@@ -9,10 +9,12 @@ const {
   freeze,
   cancel,
   defrost,
+  accounts,
 } = require("../controller");
 
 const router = express.Router();
 
+router.route("/").get(permit.authenticate, accounts);
 router.route("/register").post(register);
 router.route("/login").post(login);
 router.route("/cancel").post(permit.authenticate, cancel);

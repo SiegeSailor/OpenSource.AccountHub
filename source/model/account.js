@@ -83,7 +83,9 @@ class Account {
   }
 
   static async findAll(connection) {
-    const [rows] = await connection.execute("SELECT * FROM account;");
+    const [rows] = await connection.execute(
+      "SELECT email, nobility, state, created_at, updated_at FROM account;"
+    );
     return rows.map((row) => {
       return new Account(row);
     });

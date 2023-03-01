@@ -6,4 +6,5 @@ module.exports = {
   freeze: require("./freeze"),
   cancel: require("./cancel"),
   defrost: require("./defrost"),
+  accounts: require("./accounts"),
 };
