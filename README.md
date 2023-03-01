@@ -53,6 +53,11 @@ After installing packages, run the following command to start the project:
 npm run start
 ```
 
+## Properties
+
+- Use `/account/freeze/:email` when there is a token leak
+- `nobility` is set to 1 as default. Any advanced operation require `> 1` such as update other accounts
+
 ## Future Plan
 
 Things will be completed after the first release:
