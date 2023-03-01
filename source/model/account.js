@@ -72,16 +72,6 @@ class Account {
     });
   }
 
-  static async findByCredential(connection, username, passcode) {
-    const [rows] = await connection.execute(
-      "SELECT * FROM account WHERE username = ? AND passcode = ?;",
-      [username, passcode]
-    );
-    return rows.map((row) => {
-      return new Account(row);
-    });
-  }
-
   static async findAll(connection, limit, offset) {
     const [rows] = await connection.execute(
       "SELECT email, nobility, state, created_at, updated_at FROM account LIMIT ? OFFSET ? ORDER BY email;",
