@@ -4,10 +4,18 @@ const { constant } = require("../configuration");
 module.exports = async function (request, response) {
   const { email } = request.context;
 
+  const { limit, page } = request.query;
+  if (!limit || !page)
+    return response.status(400).send(`Must query with "limit" and "page".`);
+
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const accounts = await Account.findAll(connection);
+    const accounts = await Account.findAll(
+      connection,
+      limit,
+      (page - 1) * limit
+    );
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,

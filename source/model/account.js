@@ -82,9 +82,10 @@ class Account {
     });
   }
 
-  static async findAll(connection) {
+  static async findAll(connection, limit, offset) {
     const [rows] = await connection.execute(
-      "SELECT email, nobility, state, created_at, updated_at FROM account;"
+      "SELECT email, nobility, state, created_at, updated_at FROM account LIMIT ? OFFSET ? ORDER BY email;",
+      [limit, offset]
     );
     return rows.map((row) => {
       return new Account(row);
