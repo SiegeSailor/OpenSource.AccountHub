@@ -1,11 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const Account = require("../model/account");
-const History = require("../model/history");
-const pool = require("../model/database");
-const { hash } = require("../middleware/permit");
-const setting = require("../configuration/setting");
-const constant = require("../configuration/constant");
+const { pool, Account, History } = require("../model");
+const { setting, constant } = require("../configuration");
+const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { username, password } = request.body;
@@ -24,7 +21,7 @@ module.exports = async function (request, response) {
     }
 
     const account = accounts.find((account) => {
-      return account.passcode === hash(password, account.salt);
+      return account.passcode === permit.hash(password, account.salt);
     });
     if (account === null) {
       response.status(401).send("Incorrect password.");

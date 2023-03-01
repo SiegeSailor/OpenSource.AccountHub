@@ -1,8 +1,7 @@
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
-const setting = require("../configuration/setting");
-const constant = require("../configuration/constant");
+const { setting, constant } = require("../configuration");
 
 function hash(password, salt) {
   return crypto

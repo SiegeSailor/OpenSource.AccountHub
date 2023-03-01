@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
-const { hash } = require("../middleware/permit");
-const constant = require("../configuration/constant");
+const { permit } = require("../middleware");
+const { constant } = require("../configuration");
 
 class Account {
   constructor({
@@ -28,7 +28,7 @@ class Account {
     const salt = crypto
       .randomBytes(constant.SET_HASH.SALT_LENGTH)
       .toString(constant.SET_HASH.FORMAT);
-    const passcode = hash(password, salt);
+    const passcode = permit.hash(password, salt);
     await connection.execute(
       "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
       [email, username, passcode, salt]

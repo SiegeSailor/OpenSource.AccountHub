@@ -1,7 +1,5 @@
-const Account = require("../model/account");
-const History = require("../model/history");
-const pool = require("../model/database");
-const constant = require("../configuration/constant");
+const { pool, Account, History } = require("../model");
+const { constant } = require("../configuration");
 
 module.exports = async function (request, response) {
   const { email, username, password } = request.body;
