@@ -29,6 +29,7 @@ class Account {
       const salt = crypto
         .randomBytes(constant.SET_HASH.SALT_LENGTH)
         .toString(constant.SET_HASH.FORMAT);
+
       substitution.passcode = permit.hash(substitution.passcode, salt);
       substitution.salt = salt;
     }
@@ -65,6 +66,16 @@ class Account {
     const [rows] = await connection.execute(
       "SELECT * FROM account WHERE username = ?;",
       [username]
+    );
+    return rows.map((row) => {
+      return new Account(row);
+    });
+  }
+
+  static async findByCredential(connection, username, passcode) {
+    const [rows] = await connection.execute(
+      "SELECT * FROM account WHERE username = ? AND passcode = ?;",
+      [username, passcode]
     );
     return rows.map((row) => {
       return new Account(row);

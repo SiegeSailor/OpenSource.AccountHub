@@ -4,7 +4,7 @@ USE account_hub;
 
 CREATE TABLE account (
     email               VARCHAR(320)        PRIMARY KEY,
-    username            VARCHAR(16)         NOT NULL,
+    username            VARCHAR(16)         UNIQUE NOT NULL,
     passcode            VARCHAR(320)        NOT NULL,
     salt                VARCHAR(256)        NOT NULL,
     nobility            TINYINT             DEFAULT 1,

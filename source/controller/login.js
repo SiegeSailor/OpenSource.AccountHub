@@ -13,6 +13,7 @@ module.exports = async function (request, response) {
   try {
     connection = await pool.getConnection();
     const accounts = await Account.findByUsername(connection, username);
+
     if (accounts.length === 0)
       return response.status(404).send("No account found with such username.");
 

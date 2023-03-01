@@ -9,10 +9,11 @@ module.exports = async function (request, response) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const accounts = await Account.findByEmail(connection, email);
     /** MySQL would still check for duplicates. This is for more accurate error messages. */
-    if (accounts.length !== 0)
+    if ((await Account.findByEmail(connection, email)).length !== 0)
       return response.status(409).send("The email already exists.");
+    if ((await Account.findByUsername(connection, username)).length !== 0)
+      return response.status(409).send("The username already exists.");
 
     await connection.beginTransaction();
     await Account.create(connection, email, username, passcode);

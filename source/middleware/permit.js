@@ -15,7 +15,7 @@ function hash(passcode, salt) {
     .toString(constant.SET_HASH.FORMAT);
 }
 
-function authenticate(request, response, next) {
+async function authenticate(request, response, next) {
   const token = request.headers.authorization;
   if (!token) return response.status(401).send("Must request with a token.");
 
@@ -24,6 +24,7 @@ function authenticate(request, response, next) {
     next();
   } catch {
     response.status(401).send("Invalid token.");
+  } finally {
   }
 }
 
