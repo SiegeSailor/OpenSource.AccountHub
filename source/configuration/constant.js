@@ -19,7 +19,7 @@ const SET_HASH = {
   ALGORITHM: "SHA512",
   ITERATION: 1000,
   SALT_LENGTH: 64,
-  HASH_LENGTH: 320,
+  HASH_LENGTH: 128,
 };
 
 module.exports = {
