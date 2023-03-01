@@ -23,6 +23,8 @@ function authenticate(request, response, next) {
     request.context = jwt.verify(token, setting.JWT_SECRET_KEY);
     if (request.context.state === constant.MAP_STATE.FROZEN)
       return response.status(401).send("The account has been frozen.");
+    if (setting.PRIVILEGED_EMAILS.includes(request.context.email))
+      request.context.nobility++;
     next();
   } catch {
     response.status(401).send("Invalid token.");
