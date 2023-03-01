@@ -24,7 +24,52 @@ class Account {
     this.updatedAt = updated_at;
   }
 
+  static validate(input) {
+    for (const [key, value] of Object.entries(input)) {
+      switch (key) {
+        case "email":
+          if (!value.test(/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/))
+            throw new Error(`${value} is not a proper ${key}.`);
+          break;
+        case "username":
+        case "passcode":
+          if (value.length === 0 || value.length > 16)
+            throw new Error(`${value} has incorrect length as ${key}.`);
+          break;
+        case "nobility":
+          if (value <= 0) throw new Error(`${key} must be positive.`);
+          break;
+        case "state":
+          if (
+            ![
+              constant.MAP_STATE.NORMAL,
+              constant.MAP_STATE.FROZEN,
+              constant.MAP_STATE.CANCELED,
+            ].includes(value)
+          )
+            throw new Error(`${value} is not a valid ${key}.`);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  static async create(connection, email, username, passcode) {
+    this.validate({ email, username, passcode });
+
+    const salt = crypto
+      .randomBytes(constant.SET_HASH.SALT_LENGTH)
+      .toString(constant.SET_HASH.FORMAT);
+    await connection.execute(
+      "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
+      [email, username, permit.hash(passcode, salt), salt]
+    );
+  }
+
   static async update(connection, substitution, email) {
+    this.validate(substitution);
+
     if (substitution.passcode) {
       const salt = crypto
         .randomBytes(constant.SET_HASH.SALT_LENGTH)
@@ -39,16 +84,6 @@ class Account {
         return `${entry[0]} = '${entry[1]}'`;
       })} WHERE email = ?;`,
       [email]
-    );
-  }
-
-  static async create(connection, email, username, passcode) {
-    const salt = crypto
-      .randomBytes(constant.SET_HASH.SALT_LENGTH)
-      .toString(constant.SET_HASH.FORMAT);
-    await connection.execute(
-      "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
-      [email, username, permit.hash(passcode, salt), salt]
     );
   }
 
