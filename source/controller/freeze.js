@@ -3,12 +3,10 @@ const { constant } = require("../configuration");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
-  if (nobility <= 1)
+  if (request.params.email !== email && nobility <= 1)
     return response
       .status(403)
       .send("Your nobility is too low for this operation.");
-  if (request.params.email === email)
-    return response.status(400).send("Can't freeze yourself.");
 
   let connection = null;
   try {

@@ -12,15 +12,11 @@ module.exports = async function (request, response) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const accounts = await Account.findByUsername(connection, username);
+    const account = await Account.findByUsername(connection, username)[0];
 
-    if (accounts.length === 0)
+    if (!account)
       return response.status(404).send("No account found with such username.");
-
-    const account = accounts.find((account) => {
-      return account.passcode === permit.hash(passcode, account.salt);
-    });
-    if (account === null)
+    if (account.passcode !== permit.hash(passcode, account.salt))
       return response.status(401).send("Incorrect passcode.");
 
     switch (account.state) {

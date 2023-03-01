@@ -15,16 +15,17 @@ function hash(passcode, salt) {
     .toString(constant.SET_HASH.FORMAT);
 }
 
-async function authenticate(request, response, next) {
+function authenticate(request, response, next) {
   const token = request.headers.authorization;
   if (!token) return response.status(401).send("Must request with a token.");
 
   try {
     request.context = jwt.verify(token, setting.JWT_SECRET_KEY);
+    if (request.context.state === constant.MAP_STATE.FROZEN)
+      return response.status(401).send("The account has been frozen.");
     next();
   } catch {
     response.status(401).send("Invalid token.");
-  } finally {
   }
 }
 
