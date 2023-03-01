@@ -30,7 +30,7 @@
     "url": "git+https://github.com/SiegeSailor/OpenSource.AccountHub.git"
   },
   "scripts": {
-    "start": "clear && env $(cat .env) nodemon --watch source/entry-point.js"
+    "start": "clear && env $(cat .env) nodemon --watch source/"
   },
   "version": "1.0.0"
 }
