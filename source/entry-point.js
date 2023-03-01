@@ -21,7 +21,7 @@ ${setting.NAME} is on http://localhost:${setting.PORT}. The followings are valid
 | Method | Endpoint                     | Description                                                    | Protection                        |
 | ------ | ---------------------------- | -------------------------------------------------------------- | --------------------------------- |
 | GET    | /                            | Health check.                                                  |                                   |
-| GET    | /account?limit=&page=        | List all accounts with pagination and insensitive information. |                                   |
+| GET    | /account?limit=&page=        | List all accounts with pagination and insensitive information. | Token.                            |
 | POST   | /account/register            | Create an account.                                             |                                   |
 | POST   | /account/login               | Obtain a token with username and passcode.                     |                                   |
 | POST   | /account/cancel              | Cancel an account. This is irreversible.                       | Token. Only the owner.            |
