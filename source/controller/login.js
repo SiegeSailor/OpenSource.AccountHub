@@ -23,9 +23,9 @@ module.exports = async function (request, response) {
       return response.status(401).send("Incorrect passcode.");
 
     switch (account.state) {
-      case constant.MAP_CONDITION.FROZEN:
+      case constant.MAP_STATE.FROZEN:
         return response.status(403).send("This account has been frozen.");
-      case constant.MAP_CONDITION.DELETED:
+      case constant.MAP_STATE.DELETED:
         return response.status(403).send("This account has been deleted.");
       default:
         break;

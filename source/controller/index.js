@@ -3,4 +3,5 @@ module.exports = {
   login: require("./login"),
   profile: require("./profile"),
   update: require("./update"),
+  freeze: require("./freeze"),
 };
