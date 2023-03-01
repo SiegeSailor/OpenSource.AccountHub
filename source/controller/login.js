@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const Account = require("../model/account");
+const History = require("../model/history");
 const { hash } = require("../middleware/permit");
 const setting = require("../configuration/setting");
 const constant = require("../configuration/constant");
@@ -37,6 +38,13 @@ module.exports = async function (request, response) {
       default:
         break;
     }
+
+    await History.create(
+      connection,
+      constant.MAP_CATEGORY.ACCOUNT,
+      "Logged in.",
+      email
+    );
 
     response.status(200).send({
       token: jwt.sign(
