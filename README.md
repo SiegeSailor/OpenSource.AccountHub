@@ -53,7 +53,22 @@ After installing packages, run the following command to start the project:
 npm run start
 ```
 
-## Endpoints
+### Environment
+
+Create a `.env` file in root:
+
+```
+MYSQL_HOST=
+MYSQL_USER=
+MYSQL_PASSWORD=
+MYSQL_DATABASE=
+MYSQL_CONNECTION_LIMIT=
+JWT_SECRET_KEY=
+PRIVILEGED_EMAILS=
+PORT=
+```
+
+### Endpoints
 
 The followings are valid endpoints:
 
@@ -72,6 +87,20 @@ The followings are valid endpoints:
 | POST   | /account/freeze/:email       | Freeze an account.                                             | Token. Nobility `> 1` or ownership. |
 | POST   | /account/defrost/:email      | Defrost an account.                                            | Token. Nobility `> 1`.              |
 | GET    | /history/:email?limit=&page= | List all history for the desired email with pagination.        | Token.                              |
+
+### Test Flow
+
+The following step may be used for integration test:
+
+1. Register 2 accounts. 1 is in `PRIVILEGED_EMAILS`
+2. Login with the system-privileged account
+3. Update the system-privileged account with nobility `2`
+4. See profiles
+5. Login with the unprivileged account
+6. Freeze the account
+7. Use the privileged account to defrost
+8. Cancel the unprivileged account
+9. See all history
 
 ## Future Plan
 

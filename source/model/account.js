@@ -28,7 +28,7 @@ class Account {
     for (const [key, value] of Object.entries(input)) {
       switch (key) {
         case "email":
-          if (!value.test(/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/))
+          if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(value))
             throw new Error(`${value} is not a proper ${key}.`);
           break;
         case "username":
