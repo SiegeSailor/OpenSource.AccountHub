@@ -53,10 +53,25 @@ After installing packages, run the following command to start the project:
 npm run start
 ```
 
-## Properties
+## Endpoints
+
+The followings are valid endpoints:
 
 - Use `/account/freeze/:email` when there is a token leak. Ask others to use `/account/defrost/:email` to defrost
 - `nobility` is set to 1 as default. Any advanced operation require `> 1` such as update other accounts
+
+| Method | Endpoint                     | Description                                                    | Protection                          |
+| ------ | ---------------------------- | -------------------------------------------------------------- | ----------------------------------- |
+| GET    | /                            | Health check.                                                  |                                     |
+| GET    | /account?limit=&page=        | List all accounts with pagination and insensitive information. |                                     |
+| POST   | /account/register            | Create an account.                                             |                                     |
+| POST   | /account/login               | Obtain a token with username and passcode.                     |                                     |
+| POST   | /account/cancel              | Cancel an account. This is irreversible.                       | Token. Only the owner.              |
+| GET    | /account/profile/:email      | Obtain the account information for the desired email.          | Token. Nobility `> 1` or ownership. |
+| PATCH  | /account/profile/:email      | Update the account information for the desired email.          | Token. Nobility `> 1` or ownership. |
+| POST   | /account/freeze/:email       | Freeze an account.                                             | Token. Nobility `> 1` or ownership. |
+| POST   | /account/defrost/:email      | Defrost an account.                                            | Token. Nobility `> 1`.              |
+| GET    | /history/:email?limit=&page= | List all history for the desired email with pagination.        | Token.                              |
 
 ## Future Plan
 

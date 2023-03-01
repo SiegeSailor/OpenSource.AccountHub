@@ -6,6 +6,7 @@ const {
   MYSQL_CONNECTION_LIMIT,
   JWT_SECRET_KEY,
   PRIVILEGED_EMAILS,
+  PORT,
 } = process.env;
 
 module.exports = {
@@ -17,4 +18,5 @@ module.exports = {
   MYSQL_CONNECTION_LIMIT: Number(MYSQL_CONNECTION_LIMIT),
   JWT_SECRET_KEY,
   PRIVILEGED_EMAILS: PRIVILEGED_EMAILS.split(","),
+  PORT: Number(PORT),
 };
