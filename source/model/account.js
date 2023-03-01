@@ -55,7 +55,7 @@ class Account {
     });
   }
 
-  static async queryAll(connection) {
+  static async findAll(connection) {
     const [rows] = await connection.execute("SELECT * FROM account;");
     return rows.map((row) => {
       return new Account(row);

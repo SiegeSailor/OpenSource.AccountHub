@@ -14,7 +14,7 @@ CREATE TABLE account (
 );
 
 CREATE TABLE history (
-    identitfer          INT                 NOT NULL AUTO_INCREMENT,
+    identifier          INT                 NOT NULL AUTO_INCREMENT,
     category            CHAR(1)             NOT NULL,
     content             VARCHAR(80)         NOT NULL,
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
