@@ -5,8 +5,8 @@ const { setting, constant } = require("../configuration");
 const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
-  const { username, password } = request.body;
-  if (username === null || password === null) {
+  const { username, passcode } = request.body;
+  if (!username || !passcode) {
     response.status(401).send("Must fill all necessary fields.");
     return;
   }
@@ -21,10 +21,10 @@ module.exports = async function (request, response) {
     }
 
     const account = accounts.find((account) => {
-      return account.passcode === permit.hash(password, account.salt);
+      return account.passcode === permit.hash(passcode, account.salt);
     });
     if (account === null) {
-      response.status(401).send("Incorrect password.");
+      response.status(401).send("Incorrect passcode.");
       return;
     }
     switch (account.state) {

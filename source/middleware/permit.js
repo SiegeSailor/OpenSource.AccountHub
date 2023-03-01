@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 
 const { setting, constant } = require("../configuration");
 
-function hash(password, salt) {
+function hash(passcode, salt) {
   return crypto
     .pbkdf2Sync(
-      password,
+      passcode,
       salt,
       constant.SET_HASH.ITERATION,
       constant.SET_HASH.HASH_LENGTH,

@@ -2,8 +2,8 @@ const { pool, Account, History } = require("../model");
 const { constant } = require("../configuration");
 
 module.exports = async function (request, response) {
-  const { email, username, password } = request.body;
-  if (email === null || username === null || password === null) {
+  const { email, username, passcode } = request.body;
+  if (!email || !username || !passcode) {
     response.status(400).send("Must fill all necessary fields.");
     return;
   }
@@ -19,7 +19,7 @@ module.exports = async function (request, response) {
     }
 
     await connection.beginTransaction();
-    await Account.create(connection, email, username, password);
+    await Account.create(connection, email, username, passcode);
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,

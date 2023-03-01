@@ -24,14 +24,20 @@ class Account {
     this.updatedAt = updated_at;
   }
 
-  static async create(connection, email, username, password) {
+  async update(connection, substitution, email) {
+    await connection.execute("UPDATE account SET ? WHERE email = ?;", [
+      substitution,
+      email,
+    ]);
+  }
+
+  static async create(connection, email, username, passcode) {
     const salt = crypto
       .randomBytes(constant.SET_HASH.SALT_LENGTH)
       .toString(constant.SET_HASH.FORMAT);
-    const passcode = permit.hash(password, salt);
     await connection.execute(
       "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
-      [email, username, passcode, salt]
+      [email, username, permit.hash(passcode, salt), salt]
     );
   }
 
