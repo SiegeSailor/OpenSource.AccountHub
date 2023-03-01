@@ -24,11 +24,21 @@ class Account {
     this.updatedAt = updated_at;
   }
 
-  async update(connection, substitution, email) {
-    await connection.execute("UPDATE account SET ? WHERE email = ?;", [
-      substitution,
-      email,
-    ]);
+  static async update(connection, substitution, email) {
+    if (substitution.passcode) {
+      const salt = crypto
+        .randomBytes(constant.SET_HASH.SALT_LENGTH)
+        .toString(constant.SET_HASH.FORMAT);
+      substitution.passcode = permit.hash(substitution.passcode, salt);
+      substitution.salt = salt;
+    }
+    /** UPDATE <table> SET ? WHERE <column> = ?; doesn't work here. */
+    await connection.execute(
+      `UPDATE account SET ${Object.entries(substitution).map((entry) => {
+        return `${entry[0]} = '${entry[1]}'`;
+      })} WHERE email = ?;`,
+      [email]
+    );
   }
 
   static async create(connection, email, username, passcode) {

@@ -6,33 +6,27 @@ const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { username, passcode } = request.body;
-  if (!username || !passcode) {
-    response.status(401).send("Must fill all necessary fields.");
-    return;
-  }
+  if (!username || !passcode)
+    return response.status(401).send("Must fill all necessary fields.");
 
   let connection = null;
   try {
     connection = await pool.getConnection();
     const accounts = await Account.findByUsername(connection, username);
-    if (accounts.length === 0) {
-      response.status(404).send("No account found with such username.");
-      return;
-    }
+    if (accounts.length === 0)
+      return response.status(404).send("No account found with such username.");
 
     const account = accounts.find((account) => {
       return account.passcode === permit.hash(passcode, account.salt);
     });
-    if (account === null) {
-      response.status(401).send("Incorrect passcode.");
-      return;
-    }
+    if (account === null)
+      return response.status(401).send("Incorrect passcode.");
+
     switch (account.state) {
       case constant.MAP_CONDITION.FROZEN:
-        response.status(403).send("This account has been frozen.");
-        return;
+        return response.status(403).send("This account has been frozen.");
       case constant.MAP_CONDITION.DELETED:
-        response.status(403).send("This account has been deleted.");
+        return response.status(403).send("This account has been deleted.");
       default:
         break;
     }

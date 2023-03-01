@@ -17,10 +17,7 @@ function hash(passcode, salt) {
 
 function authenticate(request, response, next) {
   const token = request.headers.authorization;
-  if (!token) {
-    response.status(401).send("Must request with a token.");
-    return;
-  }
+  if (!token) return response.status(401).send("Must request with a token.");
 
   try {
     request.context = jwt.verify(token, setting.JWT_SECRET_KEY);
