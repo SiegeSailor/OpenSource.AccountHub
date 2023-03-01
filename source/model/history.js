@@ -14,10 +14,10 @@ class History {
     );
   }
 
-  static async findByEmail(connection, email) {
+  static async findByEmail(connection, email, limit, offset) {
     const [rows] = await connection.execute(
-      "SELECT * FROM history WHERE email = ? ORDER BY identifier;",
-      [email]
+      "SELECT * FROM history WHERE email = ?  LIMIT ? OFFSET ? ORDER BY identifier;",
+      [email, limit, offset]
     );
     return rows.map((row) => {
       return new History(row);

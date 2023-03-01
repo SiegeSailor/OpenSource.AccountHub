@@ -1,9 +1,10 @@
 const express = require("express");
 
 const { permit } = require("../middleware");
+const { histories } = require("../controller");
 
 const router = express.Router();
 
-router.route("/:identity").get(function (request, response) {});
+router.route("/:email").get(permit.authenticate, histories);
 
 module.exports = router;

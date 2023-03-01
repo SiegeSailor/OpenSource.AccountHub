@@ -1,4 +1,4 @@
-const { pool, Account, History } = require("../model");
+const { pool, History } = require("../model");
 const { constant } = require("../configuration");
 
 module.exports = async function (request, response) {
@@ -11,21 +11,26 @@ module.exports = async function (request, response) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const accounts = await Account.findAll(
+    const histories = await History.findByEmail(
       connection,
+      request.params.email,
       limit,
       (page - 1) * limit
     );
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,
-      "Viewed all profile.",
+      `Viewed histories for ${request.params.email}.`,
       email
     );
-    response.status(200).send({ data: accounts });
+    response.status(200).send({ data: histories });
   } catch (error) {
     if (connection) await connection.rollback();
-    response.status(500).send(`Failed to view all profile.\n${error.message}`);
+    response
+      .status(500)
+      .send(
+        `Failed to view histories for ${request.params.email}.\n${error.message}`
+      );
     throw error;
   } finally {
     if (connection) connection.release();

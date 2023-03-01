@@ -7,4 +7,5 @@ module.exports = {
   cancel: require("./cancel"),
   defrost: require("./defrost"),
   accounts: require("./accounts"),
+  histories: require("./histories"),
 };
