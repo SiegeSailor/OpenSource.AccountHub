@@ -1,5 +1,6 @@
 const { pool, Account, History } = require("../model");
 const { constant } = require("../configuration");
+const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
@@ -13,6 +14,7 @@ module.exports = async function (request, response) {
     connection = await pool.getConnection();
     await Account.update(
       connection,
+      permit.hash,
       { state: constant.MAP_STATE.NORMAL },
       request.params.email
     );

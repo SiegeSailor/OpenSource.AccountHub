@@ -1,5 +1,6 @@
 const { pool, Account, History } = require("../model");
 const { constant } = require("../configuration");
+const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { email, username, passcode } = request.body;
@@ -16,7 +17,7 @@ module.exports = async function (request, response) {
       return response.status(409).send("The username already exists.");
 
     await connection.beginTransaction();
-    await Account.create(connection, email, username, passcode);
+    await Account.create(connection, permit.hash, email, username, passcode);
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,

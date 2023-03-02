@@ -1,6 +1,5 @@
 const crypto = require("crypto");
 
-const { permit } = require("../middleware");
 const { constant } = require("../configuration");
 
 class Account {
@@ -66,7 +65,7 @@ class Account {
     }
   }
 
-  static async create(connection, email, username, passcode) {
+  static async create(connection, hash, email, username, passcode) {
     this.validate({ email, username, passcode });
 
     const salt = crypto
@@ -74,11 +73,11 @@ class Account {
       .toString(constant.SET_HASH.FORMAT);
     await connection.execute(
       "INSERT INTO account (email, username, passcode, salt) VALUES (?, ?, ?, ?);",
-      [email, username, permit.hash(passcode, salt), salt]
+      [email, username, hash(passcode, salt), salt]
     );
   }
 
-  static async update(connection, substitution, email) {
+  static async update(connection, hash, substitution, email) {
     this.validate(substitution);
 
     if (substitution.passcode) {
@@ -86,7 +85,7 @@ class Account {
         .randomBytes(constant.SET_HASH.SALT_LENGTH)
         .toString(constant.SET_HASH.FORMAT);
 
-      substitution.passcode = permit.hash(substitution.passcode, salt);
+      substitution.passcode = hash(substitution.passcode, salt);
       substitution.salt = salt;
     }
     /** UPDATE <table> SET ? WHERE <column> = ?; doesn't work here. */

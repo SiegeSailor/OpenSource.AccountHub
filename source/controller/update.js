@@ -1,5 +1,6 @@
 const { pool, Account, History } = require("../model");
 const { constant } = require("../configuration");
+const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
@@ -32,7 +33,12 @@ module.exports = async function (request, response) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    await Account.update(connection, request.body, request.params.email);
+    await Account.update(
+      connection,
+      permit.hash,
+      request.body,
+      request.params.email
+    );
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,
