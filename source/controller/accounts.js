@@ -22,7 +22,9 @@ module.exports = async function (request, response) {
       "Viewed all profile.",
       email
     );
-    response.status(200).send({ data: accounts });
+    response
+      .status(200)
+      .send({ data: accounts.map((account) => account.wild()) });
   } catch (error) {
     if (connection) await connection.rollback();
     response.status(500).send(`Failed to view all profile.\n${error.message}`);

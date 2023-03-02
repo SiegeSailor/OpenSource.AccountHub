@@ -19,7 +19,7 @@ module.exports = async function (request, response) {
     );
     await History.create(
       connection,
-      constant.MAP_CATEGORY.ACCOUNT,
+      constant.MAP_CATEGORY.HISTORY,
       `Viewed histories for ${request.params.email}.`,
       email
     );

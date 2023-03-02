@@ -12,6 +12,8 @@ const MAP_CATEGORY = {
   ACCOUNT: "A",
   S: "SYSTEM",
   SYSTEM: "S",
+  H: "HISTORY",
+  HISTORY: "H",
 };
 
 const SET_HASH = {
@@ -26,4 +28,5 @@ module.exports = {
   MAP_STATE,
   MAP_CATEGORY,
   SET_HASH,
+  TOKEN_EXPIRE_IN: "1D",
 };

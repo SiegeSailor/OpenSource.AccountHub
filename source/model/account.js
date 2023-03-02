@@ -24,6 +24,17 @@ class Account {
     this.updatedAt = updated_at;
   }
 
+  wild() {
+    return {
+      email: this.email,
+      username: this.username,
+      nobility: this.nobility,
+      state: this.state,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
+
   static validate(input) {
     for (const [key, value] of Object.entries(input)) {
       switch (key) {
@@ -109,7 +120,7 @@ class Account {
 
   static async findAll(connection, limit, offset) {
     const [rows] = await connection.execute(
-      "SELECT email, nobility, state, created_at, updated_at FROM account LIMIT ? OFFSET ? ORDER BY email;",
+      "SELECT * FROM account LIMIT ? OFFSET ? ORDER BY email;",
       [limit, offset]
     );
     return rows.map((row) => {

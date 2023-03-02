@@ -21,7 +21,7 @@ module.exports = async function (request, response) {
       `Viewed profile for ${request.params.email}.`,
       email
     );
-    response.status(200).send({ data: accounts });
+    response.status(200).send({ data: accounts[0].wild() });
   } catch (error) {
     if (connection) await connection.rollback();
     response

@@ -12,7 +12,7 @@ module.exports = async function (request, response) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const account = await Account.findByUsername(connection, username)[0];
+    const account = (await Account.findByUsername(connection, username))[0];
 
     if (!account)
       return response.status(404).send("No account found with such username.");
@@ -47,7 +47,7 @@ module.exports = async function (request, response) {
           updatedAt: account.updatedAt,
         },
         setting.JWT_SECRET_KEY,
-        { expiresIn: "1D" }
+        { expiresIn: constant.TOKEN_EXPIRE_IN }
       ),
     });
   } catch (error) {

@@ -15,6 +15,10 @@ module.exports = async function (request, response) {
       case "username":
       case "passcode":
       case "nobility":
+        if (request.params.email === email)
+          return response
+            .status(403)
+            .send(`${key} can't be changed by the owner self.`);
         if (!request.body[key])
           return response.status(400).send(`${key} can't be empty.`);
         break;

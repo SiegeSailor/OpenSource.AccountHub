@@ -92,15 +92,17 @@ The followings are valid endpoints:
 
 The following step may be used for integration test:
 
-1. Register 2 accounts. 1 is in `PRIVILEGED_EMAILS`
-2. Login with the system-privileged account
-3. Update the system-privileged account with nobility `2`
-4. See profiles
-5. Login with the unprivileged account
-6. Freeze the account
-7. Use the privileged account to defrost
-8. Cancel the unprivileged account
-9. See all history
+1. Register 2 accounts. Let's say there are `A` and `B`, and `A` is in `PRIVILEGED_EMAILS`.
+2. Login with the `A`, the system-privileged account
+3. Update `B` with nobility `2`
+4. Login with `B`
+5. See profiles
+6. Freeze `B` self
+7. Use `A` to defrost
+8. Login with `A`
+9. Cancel `A`
+10. Login with `B`
+11. See all history
 
 ## Future Plan
 
