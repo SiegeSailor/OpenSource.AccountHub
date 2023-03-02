@@ -119,7 +119,6 @@ class Account {
 
   static async findAll(connection, limit, page) {
     const offset = (page - 1) * limit;
-    console.log(limit, offset);
     const [rows] = await connection.execute(
       `SELECT * FROM account ORDER BY email LIMIT ?${
         offset ? " OFFSET ?" : ""
