@@ -2,7 +2,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 const { setting, constant } = require("../configuration");
-const { seeFrozen } = require("../utility");
+const { verifyState } = require("../utility");
 
 function hash(passcode, salt) {
   return crypto
@@ -22,13 +22,13 @@ async function authenticate(request, response, next) {
 
   try {
     request.context = jwt.verify(token, setting.JWT_SECRET_KEY);
-    if (await seeFrozen(request.context.email))
-      return response.status(401).send("The account has been frozen.");
+    if (await verifyState(request.context.email))
+      return response.status(401).send("The account is not in a valid state.");
     if (setting.PRIVILEGED_EMAILS.includes(request.context.email))
       request.context.nobility++;
     next();
-  } catch {
-    response.status(401).send("Invalid token.");
+  } catch (error) {
+    response.status(401).send(`Invalid token.\n${error.message}`);
   }
 }
 

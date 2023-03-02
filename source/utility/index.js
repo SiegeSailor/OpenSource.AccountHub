@@ -2,7 +2,7 @@ const { Account, pool } = require("../model");
 const { constant } = require("../configuration");
 
 module.exports = {
-  seeFrozen: async function (email) {
+  verifyState: async function (email) {
     let connection = null;
     try {
       connection = await pool.getConnection();
@@ -10,7 +10,9 @@ module.exports = {
 
       return !!accounts.find(
         (account) =>
-          account.email === email && account.state === constant.MAP_STATE.FROZEN
+          account.email === email &&
+          (account.state === constant.MAP_STATE.FROZEN ||
+            account.state === constant.MAP_STATE.CANCELED)
       );
     } catch (error) {
       throw error;

@@ -12,7 +12,7 @@ module.exports = async function (request, response) {
       connection,
       permit.hash,
       { state: constant.MAP_STATE.CANCELED },
-      request.params.email
+      email
     );
     await History.create(
       connection,
