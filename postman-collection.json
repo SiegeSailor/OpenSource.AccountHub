@@ -1,0 +1,1128 @@
+{
+	"info": {
+		"_postman_id": "37b8ef83-696b-42e2-9652-dcb33465dba4",
+		"name": "Term Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7720599"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "/account/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "google@bu.edu",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "google",
+									"type": "text"
+								},
+								{
+									"key": "passcode",
+									"value": "0000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "A",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "siege@bu.edu",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "siegesailor",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-NHwu6leSKCVQF/ijQE0dfG5XdnE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 01 Mar 2023 23:35:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Successfully registered an account."
+						},
+						{
+							"name": "B",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "google@bu.edu",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "google",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-NHwu6leSKCVQF/ijQE0dfG5XdnE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 01 Mar 2023 23:36:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Successfully registered an account."
+						}
+					]
+				},
+				{
+					"name": "/account/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "siegesailor",
+									"type": "text"
+								},
+								{
+									"key": "passcode",
+									"value": "0000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "A",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "siegesailor",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "701"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2bd-LHCDxj2i99z0b0YUciklqWDuLDw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 01 Mar 2023 23:46:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw\"\n}"
+						},
+						{
+							"name": "B",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "google",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "696"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b8-K89C33EH7yizzyVMTNpXXmBrD6c\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 01 Mar 2023 23:55:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/account/profile/<email>",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nobility",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/profile/google@bu.edu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"profile",
+								"google@bu.edu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/account/profile/<email>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/account/profile/google@bu.edu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"profile",
+								"google@bu.edu"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "A",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account/profile/siege@bu.edu",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"profile",
+										"siege@bu.edu"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "161"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a1-VB/VE5271vGXyRvzO+NPsAi4zAs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:00:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"siege@bu.edu\",\n        \"username\": \"siegesailor\",\n        \"nobility\": 1,\n        \"state\": \"N\",\n        \"createdAt\": \"2023-03-01T23:35:45.000Z\",\n        \"updatedAt\": \"2023-03-01T23:35:45.000Z\"\n    }\n}"
+						},
+						{
+							"name": "B",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account/profile/google@bu.edu",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"profile",
+										"google@bu.edu"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9d-AOqVmnqdnnOE8V0is/U0iwfvZR4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:00:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"google@bu.edu\",\n        \"username\": \"google\",\n        \"nobility\": 2,\n        \"state\": \"N\",\n        \"createdAt\": \"2023-03-01T23:36:27.000Z\",\n        \"updatedAt\": \"2023-03-01T23:54:46.000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "/account/freeze/<email>",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/freeze/google@bu.edu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"freeze",
+								"google@bu.edu"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Already Frozen",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/freeze/google@bu.edu",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"freeze",
+										"google@bu.edu"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-bvKlZTZpRblvcP7TIoz2708lC8I\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "The account has been frozen."
+						}
+					]
+				},
+				{
+					"name": "/account/defrost/<email>",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/account/defrost/google@bu.edu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"defrost",
+								"google@bu.edu"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account/defrost/google@bu.edu",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"defrost",
+										"google@bu.edu"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-29ptS9VEgKnsRyHmwHGT7qnvb14\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:19:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Successfully defrosted google@bu.edu."
+						}
+					]
+				},
+				{
+					"name": "/account/cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/account/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Already Canceled",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account/cancel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"cancel"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-hanGdFIzboid4nUzBe5DCT/A3Zc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:25:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "The account is not in a valid state."
+						}
+					]
+				},
+				{
+					"name": "/account/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/account?limit=5&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account?limit=5&page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "312"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"138-de3G8mcflXrrW3uDnsDeaio7IUM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:38:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"email\": \"google@bu.edu\",\n            \"username\": \"google\",\n            \"nobility\": 2,\n            \"state\": \"N\",\n            \"createdAt\": \"2023-03-01T23:36:27.000Z\",\n            \"updatedAt\": \"2023-03-02T00:19:47.000Z\"\n        },\n        {\n            \"email\": \"siege@bu.edu\",\n            \"username\": \"siegesailor\",\n            \"nobility\": 1,\n            \"state\": \"C\",\n            \"createdAt\": \"2023-03-01T23:35:45.000Z\",\n            \"updatedAt\": \"2023-03-02T00:21:33.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "History",
+			"item": [
+				{
+					"name": "/history/<email>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/history/siege@bu.edu?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"history",
+								"siege@bu.edu"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/history/siege@bu.edu?page=1&limit=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"history",
+										"siege@bu.edu"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1182"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49e-NjdJmmY7g2n/u6E+HnGwbBn8V5M\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Mar 2023 00:39:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"identifier\": 21,\n            \"category\": \"A\",\n            \"content\": \"Registered an account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:35:45.000Z\"\n        },\n        {\n            \"identifier\": 23,\n            \"category\": \"A\",\n            \"content\": \"Logged in.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:46:45.000Z\"\n        },\n        {\n            \"identifier\": 24,\n            \"category\": \"A\",\n            \"content\": \"Updated profile with nobility for google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:54:46.000Z\"\n        },\n        {\n            \"identifier\": 31,\n            \"category\": \"A\",\n            \"content\": \"Froze google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:01:30.000Z\"\n        },\n        {\n            \"identifier\": 34,\n            \"category\": \"A\",\n            \"content\": \"Defrosted google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:19:47.000Z\"\n        },\n        {\n            \"identifier\": 35,\n            \"category\": \"A\",\n            \"content\": \"Defrosted google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:19:51.000Z\"\n        },\n        {\n            \"identifier\": 36,\n            \"category\": \"A\",\n            \"content\": \"Logged in.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:20:18.000Z\"\n        },\n        {\n            \"identifier\": 37,\n            \"category\": \"A\",\n            \"content\": \"Canceled the account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:21:33.000Z\"\n        },\n        {\n            \"identifier\": 38,\n            \"category\": \"A\",\n            \"content\": \"Canceled the account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:21:39.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Health Check",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17-LUftEepLH34frdZyWh2Pzgs9bKg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Mar 2023 06:51:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Account Hub is working."
+				}
+			]
+		}
+	]
+}
