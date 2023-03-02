@@ -19,6 +19,6 @@ CREATE TABLE history (
     content             VARCHAR(80)         NOT NULL,
     email               VARCHAR(320)        NOT NULL,
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (email) REFERENCES account (email),
+    FOREIGN KEY (email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
     PRIMARY KEY (identifier)
 );
