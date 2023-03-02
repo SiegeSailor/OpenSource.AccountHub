@@ -36,19 +36,9 @@ module.exports = async function (request, response) {
     );
 
     response.status(200).send({
-      token: jwt.sign(
-        {
-          email: account.email,
-          username: account.username,
-          passcode: account.passcode,
-          nobility: account.nobility,
-          state: account.state,
-          createdAt: account.createdAt,
-          updatedAt: account.updatedAt,
-        },
-        setting.JWT_SECRET_KEY,
-        { expiresIn: constant.TOKEN_EXPIRE_IN }
-      ),
+      token: jwt.sign({ email: account.email }, setting.JWT_SECRET_KEY, {
+        expiresIn: constant.TOKEN_EXPIRE_IN,
+      }),
     });
   } catch (error) {
     if (connection) await connection.rollback();
