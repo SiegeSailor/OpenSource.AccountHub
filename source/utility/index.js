@@ -6,17 +6,13 @@ module.exports = {
     let connection = null;
     try {
       connection = await pool.getConnection();
-      const accounts = await Account.findByEmail(
-        connection,
-        request.params.email
-      );
+      const accounts = await Account.findByEmail(connection, email);
 
       return !!accounts.find(
         (account) =>
           account.email === email && account.state === constant.MAP_STATE.FROZEN
       );
     } catch (error) {
-      if (connection) await connection.rollback();
       throw error;
     } finally {
       if (connection) connection.release();
