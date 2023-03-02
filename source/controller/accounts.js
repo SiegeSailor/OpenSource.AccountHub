@@ -5,17 +5,15 @@ module.exports = async function (request, response) {
   const { email } = request.context;
 
   const { limit, page } = request.query;
-  if (!limit || !page)
-    return response.status(400).send('Must query with "limit" and "page".');
+  if (!Number(limit) || !Number(page))
+    return response
+      .status(400)
+      .send('Must query with valid "limit" and "page".');
 
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const accounts = await Account.findAll(
-      connection,
-      limit,
-      (page - 1) * limit
-    );
+    const accounts = await Account.findAll(connection, limit, page);
     await History.create(
       connection,
       constant.MAP_CATEGORY.ACCOUNT,

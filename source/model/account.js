@@ -117,10 +117,14 @@ class Account {
     });
   }
 
-  static async findAll(connection, limit, offset) {
+  static async findAll(connection, limit, page) {
+    const offset = (page - 1) * limit;
+    console.log(limit, offset);
     const [rows] = await connection.execute(
-      "SELECT * FROM account LIMIT ? OFFSET ? ORDER BY email;",
-      [limit, offset]
+      `SELECT * FROM account ORDER BY email LIMIT ?${
+        offset ? " OFFSET ?" : ""
+      };`,
+      offset ? [limit, offset] : [limit]
     );
     return rows.map((row) => {
       return new Account(row);

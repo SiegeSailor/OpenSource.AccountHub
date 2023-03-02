@@ -5,8 +5,10 @@ module.exports = async function (request, response) {
   const { email } = request.context;
 
   const { limit, page } = request.query;
-  if (!limit || !page)
-    return response.status(400).send('Must query with "limit" and "page".');
+  if (!Number(limit) || !Number(page))
+    return response
+      .status(400)
+      .send('Must query with valid "limit" and "page".');
 
   let connection = null;
   try {
@@ -15,7 +17,7 @@ module.exports = async function (request, response) {
       connection,
       request.params.email,
       limit,
-      (page - 1) * limit
+      page
     );
     await History.create(
       connection,

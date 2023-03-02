@@ -103,6 +103,7 @@ The following step may be used for integration test:
 9. Cancel `A`
 10. Login with `B`
 11. See all history
+12. See all accounts
 
 ## Future Plan
 
