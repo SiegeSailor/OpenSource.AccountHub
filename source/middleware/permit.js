@@ -28,11 +28,16 @@ async function authenticate(request, response, next) {
           _status: 401,
           message: "Must request with a token.",
         };
+
       const { email } = jwt.verify(token, setting.JWT_SECRET_KEY);
       const accounts = await Account.findByEmail(connection, email);
       const account = accounts.find((account) => account.email === email);
 
-      if (account === null) throw new Error("No such account.");
+      if (account === null)
+        return {
+          _status: 404,
+          message: "No such account.",
+        };
 
       if (
         account.state === constant.MAP_STATE.FROZEN ||
