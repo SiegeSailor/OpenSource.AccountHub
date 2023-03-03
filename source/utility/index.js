@@ -1,8 +1,8 @@
 const { pool } = require("../model");
 const { version } = require("../../package.json");
 
-function format(result) {
-  return {
+function format(response, status, result) {
+  const { json, xml } = {
     json: result,
     xml: `<?xml version="${version}"?><content>${Object.entries(result)
       .map(([key, value]) => {
@@ -27,14 +27,27 @@ function format(result) {
       })
       .join("")}</content>`,
   };
+  response.status(status).format({
+    json: function () {
+      response.json(json);
+    },
+    xml: function () {
+      response.send(xml);
+    },
+    default: function () {
+      response.json(json);
+    },
+  });
 }
 
+/** JSON will be used if the user doesn't specify "accept". */
 async function connect(response, callback, reason) {
   let connection = null;
   try {
     connection = await pool.getConnection();
     const result = await callback(connection);
-    if (result.constructor.name === "ServerResponse") {
+    if (result._status) {
+      format(response, result._status, { message: result.message });
       if (connection) {
         await connection.rollback();
         connection.release();
@@ -42,35 +55,10 @@ async function connect(response, callback, reason) {
       return;
     }
 
-    const { json, xml } = format(result);
-    response.status(200).format({
-      /** JSON will be used if the user doesn't specify "accept". */
-      json: function () {
-        response.json(json);
-      },
-      xml: function () {
-        response.send(xml);
-      },
-      default: function () {
-        response
-          .status(406)
-          .send({ message: "The content type is not acceptable." });
-      },
-    });
+    format(response, 200, result);
   } catch (error) {
     if (connection) await connection.rollback();
-    const { json, xml } = format({ message: `${reason} ${error.message}` });
-    response.status(500).format({
-      json: function () {
-        response.json(json);
-      },
-      xml: function () {
-        response.send(xml);
-      },
-      default: function () {
-        response.json(json);
-      },
-    });
+    format(response, 500, { message: `${reason} ${error.message}` });
   } finally {
     if (connection) connection.release();
   }
