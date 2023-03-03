@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { setting } = require("./configuration");
+const { format } = require("./utility");
 
 const application = express();
 
@@ -9,7 +10,9 @@ application.use(express.urlencoded({ extended: true }));
 
 application.use("/", require("./route/index"));
 application.use(function (request, response) {
-  response.status(404).send(`Route "${encodeURI(request.url)}" doesn't exist.`);
+  format(response, 404, {
+    message: `Route "${encodeURI(request.url)}" doesn't exist.`,
+  });
 });
 
 application.listen(setting.PORT, function () {

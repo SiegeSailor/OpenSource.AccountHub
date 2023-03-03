@@ -64,4 +64,4 @@ async function connect(response, callback, reason) {
   }
 }
 
-module.exports = { connect };
+module.exports = { connect, format };
