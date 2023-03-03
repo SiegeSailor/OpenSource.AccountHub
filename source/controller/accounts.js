@@ -1,5 +1,6 @@
-const { pool, Account, History } = require("../model");
+const { Account, History } = require("../model");
 const { constant } = require("../configuration");
+const { connect } = require("../utility");
 
 module.exports = async function (request, response) {
   const { email } = request.context;
@@ -10,24 +11,29 @@ module.exports = async function (request, response) {
       .status(400)
       .send('Must query with valid "limit" and "page".');
 
-  let connection = null;
-  try {
-    connection = await pool.getConnection();
-    const accounts = await Account.findAll(connection, limit, page);
-    await History.create(
-      connection,
-      constant.MAP_CATEGORY.ACCOUNT,
-      "Viewed all profile.",
-      email
-    );
-    response
-      .status(200)
-      .send({ data: accounts.map((account) => account.wild()) });
-  } catch (error) {
-    if (connection) await connection.rollback();
-    response.status(500).send(`Failed to view all profile.\n${error.message}`);
-    throw error;
-  } finally {
-    if (connection) connection.release();
-  }
+  await connect(
+    response,
+    async function (connection) {
+      const accounts = await Account.findAll(connection, limit, page);
+      await History.create(
+        connection,
+        constant.MAP_CATEGORY.ACCOUNT,
+        "Viewed all profile.",
+        email
+      );
+      const data = accounts.map((account) => account.wild());
+      return {
+        json: { data },
+        xml: data
+          .map(
+            (item) =>
+              `<account>${Object.entries(item).map(
+                ([key, value]) => `<${key}>${value}</${key}>`
+              )}</account>`
+          )
+          .join(""),
+      };
+    },
+    "Failed to view all profile."
+  );
 };
