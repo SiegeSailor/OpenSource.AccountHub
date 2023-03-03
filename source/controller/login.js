@@ -7,12 +7,13 @@ const { connect } = require("../utility");
 
 module.exports = async function (request, response) {
   const { username, passcode } = request.body;
-  if (!username || !passcode)
-    return response.status(401).send("Must fill all necessary fields.");
 
   await connect(
     response,
     async function (connection) {
+      if (!username || !passcode)
+        return response.status(401).send("Must fill all necessary fields.");
+
       const account = (await Account.findByUsername(connection, username))[0];
 
       if (!account)

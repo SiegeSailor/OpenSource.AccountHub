@@ -5,14 +5,15 @@ const { connect } = require("../utility");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
-  if (nobility <= constant.SET_NOBILITY.NAIVE)
-    return response
-      .status(403)
-      .send("Your nobility is too low for this operation.");
 
   await connect(
     response,
     async function (connection) {
+      if (nobility <= constant.SET_NOBILITY.NAIVE)
+        return response
+          .status(403)
+          .send("Your nobility is too low for this operation.");
+
       await Account.update(
         connection,
         permit.hash,
