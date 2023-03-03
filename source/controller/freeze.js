@@ -13,9 +13,10 @@ module.exports = async function (request, response) {
         request.params.email !== email &&
         nobility <= constant.SET_NOBILITY.NAIVE
       )
-        return response
-          .status(403)
-          .send("Your nobility is too low for this operation.");
+        return {
+          _status: 403,
+          message: "Your nobility is too low for this operation.",
+        };
 
       await Account.update(
         connection,

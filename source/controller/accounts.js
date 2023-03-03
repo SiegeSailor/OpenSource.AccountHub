@@ -11,9 +11,10 @@ module.exports = async function (request, response) {
     response,
     async function (connection) {
       if (!Number(limit) || !Number(page))
-        return response
-          .status(400)
-          .send('Must query with valid "limit" and "page".');
+        return {
+          _status: 400,
+          message: 'Must query with valid "limit" and "page".',
+        };
 
       const accounts = await Account.findAll(connection, limit, page);
       await History.create(

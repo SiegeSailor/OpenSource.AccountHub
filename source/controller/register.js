@@ -10,12 +10,21 @@ module.exports = async function (request, response) {
     response,
     async function (connection) {
       if (!email || !username || !passcode)
-        return response.status(400).send("Must fill all necessary fields.");
+        return {
+          _status: 400,
+          message: "Must fill all necessary fields.",
+        };
 
       if ((await Account.findByEmail(connection, email)).length !== 0)
-        return response.status(409).send("The email already exists.");
+        return {
+          _status: 409,
+          message: "The email already exists.",
+        };
       if ((await Account.findByUsername(connection, username)).length !== 0)
-        return response.status(409).send("The username already exists.");
+        return {
+          _status: 409,
+          message: "The username already exists.",
+        };
 
       await connection.beginTransaction();
       await Account.create(connection, permit.hash, email, username, passcode);

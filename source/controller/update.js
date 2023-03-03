@@ -13,9 +13,10 @@ module.exports = async function (request, response) {
         request.params.email !== email &&
         nobility <= constant.SET_NOBILITY.NAIVE
       )
-        return response
-          .status(403)
-          .send("Your nobility is too low for this operation.");
+        return {
+          _status: 403,
+          message: "Your nobility is too low for this operation.",
+        };
 
       /** So far only allow username and passcode to be modified by users. */
       const keys = Object.keys(request.body);
@@ -24,20 +25,28 @@ module.exports = async function (request, response) {
           case "username":
           case "passcode":
             if (!request.body[key])
-              return response.status(400).send(`${key} can't be empty.`);
+              return {
+                _status: 400,
+                message: `${key} can't be empty.`,
+              };
             break;
           case "nobility":
             if (request.params.email === email)
-              return response
-                .status(403)
-                .send(`${key} can't be changed by the owner self.`);
+              return {
+                _status: 403,
+                message: `${key} can't be changed by the owner self.`,
+              };
             if (!request.body[key])
-              return response.status(400).send(`${key} can't be empty.`);
+              return {
+                _status: 400,
+                message: `${key} can't be empty.`,
+              };
             break;
           default:
-            return response
-              .status(400)
-              .send("One or all of the keys is not modifiable.");
+            return {
+              _status: 400,
+              message: "One or all of the keys is not modifiable.",
+            };
         }
       }
 
