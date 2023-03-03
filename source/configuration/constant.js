@@ -24,9 +24,14 @@ const SET_HASH = {
   HASH_LENGTH: 128,
 };
 
+const SET_NOBILITY = {
+  NAIVE: 1,
+};
+
 module.exports = {
   MAP_STATE,
   MAP_CATEGORY,
   SET_HASH,
+  SET_NOBILITY,
   TOKEN_EXPIRE_IN: "1D",
 };

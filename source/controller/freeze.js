@@ -4,7 +4,7 @@ const { permit } = require("../middleware");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
-  if (request.params.email !== email && nobility <= 1)
+  if (request.params.email !== email && nobility <= constant.SET_NOBILITY.NAIVE)
     return response
       .status(403)
       .send("Your nobility is too low for this operation.");
