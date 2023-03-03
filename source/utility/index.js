@@ -5,13 +5,37 @@ async function connect(response, callback, message) {
   let connection = null;
   try {
     connection = await pool.getConnection();
-    const { json, xml } = await callback(connection);
+    const result = await callback(connection);
     response.status(200).format({
+      /** JSON will be used if the user doesn't specify "accept". */
       json: function () {
-        response.json(json);
+        response.json(result);
       },
       xml: function () {
-        response.send(`<?xml version="${version}"?><content>${xml}</content>`);
+        response.send(
+          `<?xml version="${version}"?><content>${Object.entries(result)
+            .map(([key, value]) => {
+              let context = "";
+              if (value.constructor.name === "Array") {
+                context = value
+                  .map(
+                    (item) =>
+                      `<item>${Object.entries(item)
+                        .map(([key, value]) => `<${key}>${value}</${key}>`)
+                        .join("")}</item>`
+                  )
+                  .join("");
+              } else if (typeof value === "object") {
+                context = Object.entries(value)
+                  .map(([key, value]) => `<${key}>${value}</${key}>`)
+                  .join("");
+              } else {
+                context = value;
+              }
+              return `<${key}>${context}</${key}>`;
+            })
+            .join("")}</content>`
+        );
       },
       default: function () {
         response.status(406).send("The content type is not acceptable.");

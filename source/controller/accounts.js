@@ -21,18 +21,7 @@ module.exports = async function (request, response) {
         "Viewed all profile.",
         email
       );
-      const data = accounts.map((account) => account.wild());
-      return {
-        json: { data },
-        xml: data
-          .map(
-            (item) =>
-              `<account>${Object.entries(item).map(
-                ([key, value]) => `<${key}>${value}</${key}>`
-              )}</account>`
-          )
-          .join(""),
-      };
+      return { data: accounts.map((account) => account.wild()) };
     },
     "Failed to view all profile."
   );

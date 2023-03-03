@@ -1,6 +1,7 @@
-const { pool, Account, History } = require("../model");
+const { Account, History } = require("../model");
 const { constant } = require("../configuration");
 const { permit } = require("../middleware");
+const { connect } = require("../utility");
 
 module.exports = async function (request, response) {
   const { email, nobility } = request.context;
@@ -30,35 +31,25 @@ module.exports = async function (request, response) {
     }
   }
 
-  let connection = null;
-  try {
-    connection = await pool.getConnection();
-    await Account.update(
-      connection,
-      permit.hash,
-      request.body,
-      request.params.email
-    );
-    await History.create(
-      connection,
-      constant.MAP_CATEGORY.ACCOUNT,
-      `Updated profile with ${keys} for ${request.params.email}.`,
-      email
-    );
-    response
-      .status(200)
-      .send(
-        `Successfully updated profile with ${keys} for ${request.params.email}.`
+  await connect(
+    response,
+    async function (connection) {
+      await Account.update(
+        connection,
+        permit.hash,
+        request.body,
+        request.params.email
       );
-  } catch (error) {
-    if (connection) await connection.rollback();
-    response
-      .status(500)
-      .send(
-        `Failed to update profile with ${keys} for ${email}.\n${error.message}`
+      await History.create(
+        connection,
+        constant.MAP_CATEGORY.ACCOUNT,
+        `Updated profile with ${keys} for ${request.params.email}.`,
+        email
       );
-    throw error;
-  } finally {
-    if (connection) connection.release();
-  }
+      return {
+        message: `Successfully updated profile with ${keys} for ${request.params.email}.`,
+      };
+    },
+    `Failed to update profile with ${keys} for ${email}.`
+  );
 };
