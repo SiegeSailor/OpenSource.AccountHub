@@ -1,11 +1,19 @@
 const { pool } = require("../model");
 const { version } = require("../../package.json");
 
-async function connect(response, callback, message) {
+async function connect(response, callback, reason) {
   let connection = null;
   try {
     connection = await pool.getConnection();
     const result = await callback(connection);
+    if (result.constructor.name === "ServerResponse") {
+      if (connection) {
+        await connection.rollback();
+        connection.release();
+      }
+      return;
+    }
+
     response.status(200).format({
       /** JSON will be used if the user doesn't specify "accept". */
       json: function () {
@@ -38,12 +46,14 @@ async function connect(response, callback, message) {
         );
       },
       default: function () {
-        response.status(406).send("The content type is not acceptable.");
+        response
+          .status(406)
+          .send({ message: "The content type is not acceptable." });
       },
     });
   } catch (error) {
     if (connection) await connection.rollback();
-    response.status(500).send(`${message}\n${error.message}`);
+    response.status(500).send({ message: `${reason}\n${error.message}` });
     throw error;
   } finally {
     if (connection) connection.release();
