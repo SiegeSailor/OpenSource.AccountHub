@@ -34,4 +34,5 @@ module.exports = {
   SET_HASH,
   SET_NOBILITY,
   TOKEN_EXPIRE_IN: "1D",
+  CREDENTIAL_LENGTH: 16,
 };

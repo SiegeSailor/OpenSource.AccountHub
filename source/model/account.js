@@ -43,11 +43,12 @@ class Account {
           break;
         case "username":
         case "passcode":
-          if (value.length === 0 || value.length > 16)
-            throw new Error(`${value} has incorrect length as ${key}.`);
+          if (value.length === 0 || value.length > constant.CREDENTIAL_LENGTH)
+            throw new Error(`${key} has incorrect length ${value.length}.`);
           break;
         case "nobility":
-          if (value <= 0) throw new Error(`${key} must be positive.`);
+          if (value <= 0)
+            throw new Error(`${key} must be non-zero and positive.`);
           break;
         case "state":
           if (
