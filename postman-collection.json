@@ -13,18 +13,24 @@
 					"name": "/account/register",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "google@bu.edu",
+									"value": "amazon@bu.edu",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "google",
+									"value": "amazon",
 									"type": "text"
 								},
 								{
@@ -195,6 +201,168 @@
 							],
 							"cookie": [],
 							"body": "Successfully registered an account."
+						},
+						{
+							"name": "C",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "dropbox@bu.edu",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "dropbox",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-goivyvP71kkWk2DCvKQO5OgzB4g\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 06:43:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully registered an account.\"\n}"
+						},
+						{
+							"name": "D",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "amazon@bu.edu",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "amazon",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-jCx0hkROjarp8ya/Ua37KRbqa6M\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 06:44:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0.0\"?>\n<content>\n    <message>Successfully registered an account.</message>\n</content>"
 						}
 					]
 				},
@@ -202,13 +370,20 @@
 					"name": "/account/login",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "siegesailor",
+									"value": "google",
 									"type": "text"
 								},
 								{
@@ -369,6 +544,165 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o\"\n}"
+						},
+						{
+							"name": "C",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/xml",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "dropbox",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-rWJ8XRPUrD6rNKePUDO6UI06xcg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 06:44:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRyb3Bib3hAYnUuZWR1IiwiaWF0IjoxNjc3ODI1ODkzLCJleHAiOjE2Nzc5MTIyOTN9.H5YK_EAjv8Hd0u8kk3A2MJLwvg-8bdUStMvzUO2WXro\"\n}"
+						},
+						{
+							"name": "D - XML",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "amazon",
+											"type": "text"
+										},
+										{
+											"key": "passcode",
+											"value": "0000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/account/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "217"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d9-L+jhdQoftr5qm0wD4LpRXtbRjiE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 07:01:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0.0\"?>\n<content>\n    <token>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFtYXpvbkBidS5lZHUiLCJpYXQiOjE2Nzc4MjY5MTMsImV4cCI6MTY3NzkxMzMxM30.wl2cQwtlkGCdvhtD1pTTFa6WUMpO7ZQJccrfLVusJLA</token>\n</content>"
 						}
 					]
 				},
@@ -379,7 +713,12 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRyb3Bib3hAYnUuZWR1IiwiaWF0IjoxNjc3ODI1ODkzLCJleHAiOjE2Nzc5MTIyOTN9.H5YK_EAjv8Hd0u8kk3A2MJLwvg-8bdUStMvzUO2WXro",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
 								"type": "text"
 							}
 						],
@@ -387,14 +726,14 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "nobility",
-									"value": "2",
+									"key": "username",
+									"value": "",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/account/profile/google@bu.edu",
+							"raw": "http://localhost:3000/account/profile/dropbox@bu.edu",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -403,7 +742,7 @@
 							"path": [
 								"account",
 								"profile",
-								"google@bu.edu"
+								"dropbox@bu.edu"
 							]
 						}
 					},
@@ -416,12 +755,17 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRyb3Bib3hAYnUuZWR1IiwiaWF0IjoxNjc3ODI1ODkzLCJleHAiOjE2Nzc5MTIyOTN9.H5YK_EAjv8Hd0u8kk3A2MJLwvg-8bdUStMvzUO2WXro",
+								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/xml",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/account/profile/google@bu.edu",
+							"raw": "http://localhost:3000/account/profile/dropbox@bu.edu",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -430,7 +774,7 @@
 							"path": [
 								"account",
 								"profile",
-								"google@bu.edu"
+								"dropbox@bu.edu"
 							]
 						}
 					},
@@ -556,6 +900,76 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": {\n        \"email\": \"google@bu.edu\",\n        \"username\": \"google\",\n        \"nobility\": 2,\n        \"state\": \"N\",\n        \"createdAt\": \"2023-03-01T23:36:27.000Z\",\n        \"updatedAt\": \"2023-03-01T23:54:46.000Z\"\n    }\n}"
+						},
+						{
+							"name": "C - XML",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRyb3Bib3hAYnUuZWR1IiwiaWF0IjoxNjc3ODI1ODkzLCJleHAiOjE2Nzc5MTIyOTN9.H5YK_EAjv8Hd0u8kk3A2MJLwvg-8bdUStMvzUO2WXro",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/account/profile/dropbox@bu.edu",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"account",
+										"profile",
+										"dropbox@bu.edu"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "310"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"136-RkWbV3ylECbcqdfL1UQDVzXKipo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 06:54:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0.0\"?>\n<content>\n    <data>\n        <email>dropbox@bu.edu</email>\n        <username>dropbox</username>\n        <nobility>1</nobility>\n        <state>N</state>\n        <createdAt>Fri Mar 03 2023 01:43:44 GMT-0500 (Eastern Standard Time)</createdAt>\n        <updatedAt>Fri Mar 03 2023 01:48:12 GMT-0500 (Eastern Standard Time)</updatedAt>\n    </data>\n</content>"
 						}
 					]
 				},
@@ -566,7 +980,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRyb3Bib3hAYnUuZWR1IiwiaWF0IjoxNjc3ODI1ODkzLCJleHAiOjE2Nzc5MTIyOTN9.H5YK_EAjv8Hd0u8kk3A2MJLwvg-8bdUStMvzUO2WXro",
 								"type": "text"
 							}
 						],
@@ -575,7 +989,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:3000/account/freeze/google@bu.edu",
+							"raw": "http://localhost:3000/account/freeze/dropbox@bu.edu",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -584,7 +998,7 @@
 							"path": [
 								"account",
 								"freeze",
-								"google@bu.edu"
+								"dropbox@bu.edu"
 							]
 						}
 					},
@@ -663,12 +1077,17 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpZWdlQGJ1LmVkdSIsInVzZXJuYW1lIjoic2llZ2VzYWlsb3IiLCJwYXNzY29kZSI6ImU1MzU4MmU5OTBlNDlkYjZiZGFiYTA2ZjgyNmEzNmFiNGQ1ZjJhYjA5ZDk3NGY0NDgxMmMzZjkwMGNkMDViZTk2MzQwMDRmN2NlMDExOThiM2UxNGRiYmQ0Yjc0ZmNjM2QyNTY1NmUzYmE0NTBjNTIzMDIyZTA3ZWQxMjkwZjNiNmUwZjQ3NjIwOWM4YjE4ZWViZDg1MTAyZGMxOGI4NzFhZGY0ZDNlMTk0ODRmNDdhOGMyZTg5YjU1NTg0YzIxZmYyNmE3OTIwMzdjMGJhNDI5NGUyNzcwZDc4MDM4YjFhZDU5MTI2YzRmNWFhNDk4MDk1MjE5YWQ1ODQ4OGNhZWYiLCJub2JpbGl0eSI6MSwic3RhdGUiOiJOIiwiY3JlYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMy0wMy0wMVQyMzozNTo0NS4wMDBaIiwiaWF0IjoxNjc3NzE0NDA1LCJleHAiOjE2Nzc4MDA4MDV9.qM6Lxuumx1iT60iUypv2Cpm_GXNGjjUGX9ame6-i5xw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJpYXQiOjE2Nzc4MjY4MzYsImV4cCI6MTY3NzkxMzIzNn0.PgrwlAJh1n7XRyZNyTCqKiUE7yWKf6lS_O6aWfo8EIw",
+								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/xml",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/account/defrost/google@bu.edu",
+							"raw": "http://localhost:3000/account/defrost/dropbox@bu.edu",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -677,7 +1096,7 @@
 							"path": [
 								"account",
 								"defrost",
-								"google@bu.edu"
+								"dropbox@bu.edu"
 							]
 						}
 					},
@@ -839,8 +1258,14 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ldGFAYnUuZWR1IiwiaWF0IjoxNjc3ODIyNTcxLCJleHAiOjE2Nzc5MDg5NzF9.uQG9xvPL-x1KqXb6QJvZgk4wtieSH94uzc39sM6Bn6Y",
 								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
@@ -949,8 +1374,14 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJ1c2VybmFtZSI6Imdvb2dsZSIsInBhc3Njb2RlIjoiZGExYTA5NWJkMmRjMjFiZWIzZThhN2E4M2I3OTU5YTEwN2RjOTZkYWVhZjU5NDMyMGQxYWQ1ZWE3OTI2NjU1M2YyMzZhMDcwZWMwYTJkYjljM2U0NWJiMmFmMzZiOWNmMzlmMDAyOTQzYTNmOTQyZDdjYjg5MDEzNDk2Y2I5ZjUxMWUwNjY5YWI0NTA3OTM1ZDExNjc2ZDNlMzY4YjhkMTFiMDFiMmJhZDM2MzA2OWM2ODU3NWVhZjE4ZDhiMDg5YTNhZDgzZmE2ZjU2ZGY2ZWE3MTA0M2U2OWM2ODRlZjhlZTcxY2FjMDc1NTFjZDkzOTAzODU0MmM3NzBiNzQ3MiIsIm5vYmlsaXR5IjoyLCJzdGF0ZSI6Ik4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjM2OjI3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDIzOjU0OjQ2LjAwMFoiLCJpYXQiOjE2Nzc3MTQ5MTMsImV4cCI6MTY3NzgwMTMxM30.wUIdLKOz6H81e6Q6fd-jgk2feEGmverzCVtJpqKS-5o",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ldGFAYnUuZWR1IiwiaWF0IjoxNjc3ODIyNTcxLCJleHAiOjE2Nzc5MDg5NzF9.uQG9xvPL-x1KqXb6QJvZgk4wtieSH94uzc39sM6Bn6Y",
 								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
@@ -1046,6 +1477,85 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        {\n            \"identifier\": 21,\n            \"category\": \"A\",\n            \"content\": \"Registered an account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:35:45.000Z\"\n        },\n        {\n            \"identifier\": 23,\n            \"category\": \"A\",\n            \"content\": \"Logged in.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:46:45.000Z\"\n        },\n        {\n            \"identifier\": 24,\n            \"category\": \"A\",\n            \"content\": \"Updated profile with nobility for google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-01T23:54:46.000Z\"\n        },\n        {\n            \"identifier\": 31,\n            \"category\": \"A\",\n            \"content\": \"Froze google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:01:30.000Z\"\n        },\n        {\n            \"identifier\": 34,\n            \"category\": \"A\",\n            \"content\": \"Defrosted google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:19:47.000Z\"\n        },\n        {\n            \"identifier\": 35,\n            \"category\": \"A\",\n            \"content\": \"Defrosted google@bu.edu.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:19:51.000Z\"\n        },\n        {\n            \"identifier\": 36,\n            \"category\": \"A\",\n            \"content\": \"Logged in.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:20:18.000Z\"\n        },\n        {\n            \"identifier\": 37,\n            \"category\": \"A\",\n            \"content\": \"Canceled the account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:21:33.000Z\"\n        },\n        {\n            \"identifier\": 38,\n            \"category\": \"A\",\n            \"content\": \"Canceled the account.\",\n            \"email\": \"siege@bu.edu\",\n            \"createdAt\": \"2023-03-02T00:21:39.000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success - XML",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdvb2dsZUBidS5lZHUiLCJpYXQiOjE2Nzc4MjY4MzYsImV4cCI6MTY3NzkxMzIzNn0.PgrwlAJh1n7XRyZNyTCqKiUE7yWKf6lS_O6aWfo8EIw",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/history/dropbox@bu.edu?page=1&limit=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"history",
+										"dropbox@bu.edu"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/xml; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2059"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"80b-qnz34Urx1JVlaP/eluaPwQ+SHVE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Mar 2023 07:01:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0.0\"?>\n<content>\n    <data>\n        <item>\n            <identifier>96</identifier>\n            <category>A</category>\n            <content>Registered an account.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:43:44 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>99</identifier>\n            <category>A</category>\n            <content>Logged in.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:44:53 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>100</identifier>\n            <category>A</category>\n            <content>Updated profile with username for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:47:59 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>101</identifier>\n            <category>A</category>\n            <content>Updated profile with username for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:48:12 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>102</identifier>\n            <category>A</category>\n            <content>Viewed profile for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:54:33 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>103</identifier>\n            <category>A</category>\n            <content>Viewed profile for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:54:37 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>104</identifier>\n            <category>A</category>\n            <content>Viewed profile for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:54:46 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>105</identifier>\n            <category>A</category>\n            <content>Viewed profile for dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:54:55 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n        <item>\n            <identifier>106</identifier>\n            <category>A</category>\n            <content>Froze dropbox@bu.edu.</content>\n            <email>dropbox@bu.edu</email>\n            <createdAt>Fri Mar 03 2023 01:55:22 GMT-0500 (Eastern Standard Time)</createdAt>\n        </item>\n    </data>\n</content>"
 						}
 					]
 				}
