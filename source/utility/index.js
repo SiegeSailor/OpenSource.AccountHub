@@ -40,7 +40,7 @@ function format(response, status, result) {
   });
 }
 
-/** JSON will be used if the user doesn't specify "accept". */
+/** JSON will be used if the user doesn't specify "accept: application/xml". */
 async function connect(response, callback, reason) {
   let connection = null;
   try {
