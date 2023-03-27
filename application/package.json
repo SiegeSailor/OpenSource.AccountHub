@@ -1,0 +1,43 @@
+{
+  "author": "SiegeSailor",
+  "bugs": {
+    "url": "https://github.com/SiegeSailor/OpenSource.AccountHub/issues"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "jsonwebtoken": "9.0.0",
+    "mysql2": "3.2.0"
+  },
+  "description": "Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework.",
+  "devDependencies": {
+    "@types/jest": "29.5.0",
+    "@types/node": "18.15.10",
+    "nodemon": "2.0.20",
+    "ts-jest": "29.0.5",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.2"
+  },
+  "engines": {
+    "node": ">= 16.0.0",
+    "npm": ">= 8.0.0"
+  },
+  "homepage": "https://github.com/SiegeSailor/OpenSource.AccountHub#readme",
+  "keywords": [
+    "account",
+    "endpoints",
+    "standalone"
+  ],
+  "license": "ISC",
+  "main": "./build/source/entry-point.js",
+  "name": "account-hub",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiegeSailor/OpenSource.AccountHub.git"
+  },
+  "scripts": {
+    "build": "npm run test && tsc",
+    "start": "clear && env $(cat .env) ts-node --watch ./source/",
+    "test": "jest"
+  },
+  "version": "1.0.0"
+}
