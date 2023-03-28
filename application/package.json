@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/jest": "29.5.0",
     "@types/node": "18.15.10",
-    "nodemon": "2.0.20",
+    "nodemon": "^2.0.20",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
     "typescript": "5.0.2"
@@ -36,7 +36,8 @@
   },
   "scripts": {
     "build": "npm run test && tsc",
-    "start": "clear && env $(cat .env) ts-node --watch ./source/",
+    "run": "nodemon --watch ./source/entry-point.ts",
+    "start": "ts-node ./source/entry-point.ts",
     "test": "jest"
   },
   "version": "1.0.0"

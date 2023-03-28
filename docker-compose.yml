@@ -1,0 +1,58 @@
+version: "3"
+
+name: account-hub
+
+networks:
+  entry:
+    name: entry
+    labels:
+      PROJECT: account-hub
+
+volumes:
+  data:
+    labels:
+    PROJECT: account-hub
+
+services:
+  database:
+    build:
+      labels:
+        PROJECT: account-hub
+        SERVICE: database
+      context: ./database
+      dockerfile: Dockerfile
+    image: account-hub-database
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+    container_name: database
+    networks:
+      - entry
+    volumes:
+      - data:/var/lib/mysql
+
+  application:
+    restart: always
+    build:
+      labels:
+        PROJECT: account-hub
+        SERVICE: application
+      context: ./application
+      dockerfile: Dockerfile
+    image: account-hub-application
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_CONNECTION_LIMIT=${DATABASE_CONNECTION_LIMIT}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - PRIVILEGED_EMAILS=${PRIVILEGED_EMAILS}
+      - PORT=${PORT}
+    container_name: application
+    networks:
+      - entry
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - database
