@@ -1,7 +1,5 @@
 FROM node:18
 
-ENV PORT=3000
-
 WORKDIR /application
 
 COPY package*.json ./

@@ -10,21 +10,22 @@
   },
   "description": "Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework.",
   "devDependencies": {
+    "@types/express": "4.17.17",
     "@types/jest": "29.5.0",
     "@types/node": "18.15.10",
-    "nodemon": "^2.0.20",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "5.0.2"
   },
   "engines": {
-    "node": ">= 16.0.0",
+    "node": ">= 18.0.0",
     "npm": ">= 8.0.0"
   },
   "homepage": "https://github.com/SiegeSailor/OpenSource.AccountHub#readme",
   "keywords": [
     "account",
-    "endpoints",
+    "service",
     "standalone"
   ],
   "license": "ISC",
@@ -36,7 +37,7 @@
   },
   "scripts": {
     "build": "npm run test && tsc",
-    "run": "nodemon --watch ./source/entry-point.ts",
+    "watch": "ts-node-dev --respawn -- ./source/entry-point.ts",
     "start": "ts-node ./source/entry-point.ts",
     "test": "jest"
   },

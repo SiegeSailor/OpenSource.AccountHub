@@ -3,7 +3,6 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./source",
-    "charset": "UTF-8",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
@@ -16,6 +15,12 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "outDir": "./build",
+    "paths": {
+      "routes/*": ["routes/*"],
+      "utilities/*": ["utilities/*"],
+      "setting": ["setting"],
+      "constants": ["constants"]
+    },
     "resolveJsonModule": true,
     "rootDir": "./source",
     "skipDefaultLibCheck": true,

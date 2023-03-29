@@ -11,7 +11,7 @@ networks:
 volumes:
   data:
     labels:
-    PROJECT: account-hub
+      PROJECT: account-hub
 
 services:
   database:
@@ -53,6 +53,6 @@ services:
     networks:
       - entry
     ports:
-      - ${PORT}:${PORT}
+      - 80:${PORT}
     depends_on:
       - database
