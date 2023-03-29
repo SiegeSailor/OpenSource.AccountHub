@@ -18,6 +18,6 @@ application.use(function (request, response) {
     );
 });
 
-application.listen(settings.external.PORT, function () {
-  console.log(`Listening at ${settings.external.PORT}.`);
+application.listen(settings.PORT, function () {
+  console.log(`Listening at ${settings.PORT}.`);
 });
