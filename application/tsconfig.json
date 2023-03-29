@@ -18,8 +18,8 @@
     "paths": {
       "routes/*": ["routes/*"],
       "utilities/*": ["utilities/*"],
-      "setting": ["setting"],
-      "constants": ["constants"]
+      "settings/*": ["settings/*"],
+      "constants/*": ["constants/*"]
     },
     "resolveJsonModule": true,
     "rootDir": "./source",
@@ -31,5 +31,5 @@
     "tsBuildInfoFile": "./build-cache"
   },
   "exclude": ["node_modules"],
-  "include": ["source"]
+  "include": ["**/*.ts"]
 }

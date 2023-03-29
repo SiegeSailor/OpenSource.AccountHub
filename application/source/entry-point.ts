@@ -2,7 +2,7 @@ import express from "express";
 
 import utilities from "utilities";
 import routes from "routes";
-import setting from "setting";
+import settings from "settings";
 
 const application = express();
 
@@ -18,4 +18,6 @@ application.use(function (request, response) {
     );
 });
 
-application.listen(setting.PORT, function () {});
+application.listen(settings.external.PORT, function () {
+  console.log(`Listening at ${settings.external.PORT}.`);
+});

@@ -6,7 +6,7 @@ const {
   DATABASE_CONNECTION_LIMIT,
   JWT_SECRET_KEY,
   PRIVILEGED_EMAILS = "",
-  PORT,
+  PORT = 3000,
 } = process.env;
 
 export default {

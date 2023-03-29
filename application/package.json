@@ -15,7 +15,8 @@
     "@types/node": "18.15.10",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
-    "ts-node-dev": "^2.0.0",
+    "ts-node-dev": "2.0.0",
+    "tsconfig-paths": "4.1.2",
     "typescript": "5.0.2"
   },
   "engines": {
@@ -37,8 +38,8 @@
   },
   "scripts": {
     "build": "npm run test && tsc",
-    "watch": "ts-node-dev --respawn -- ./source/entry-point.ts",
-    "start": "ts-node ./source/entry-point.ts",
+    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/entry-point.ts",
+    "start": "ts-node --require tsconfig-paths/register ./source/entry-point.ts",
     "test": "jest"
   },
   "version": "1.0.0"
