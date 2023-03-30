@@ -1,21 +1,7 @@
-const {
-  DATABASE_HOST,
-  DATABASE_USER,
-  DATABASE_PASSWORD,
-  DATABASE_DATABASE,
-  DATABASE_CONNECTION_LIMIT = 10,
-  JWT_SECRET_KEY,
-  PRIVILEGED_EMAILS = "",
-  PORT = 3000,
-} = process.env;
+import processes from "settings/processes";
+import constants from "settings/constants";
 
 export default {
-  DATABASE_HOST,
-  DATABASE_USER,
-  DATABASE_PASSWORD,
-  DATABASE_DATABASE,
-  DATABASE_CONNECTION_LIMIT: Number(DATABASE_CONNECTION_LIMIT),
-  JWT_SECRET_KEY,
-  PRIVILEGED_EMAILS: PRIVILEGED_EMAILS.split(","),
-  PORT: Number(PORT),
+  processes,
+  constants,
 };

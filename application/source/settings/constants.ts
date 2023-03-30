@@ -16,14 +16,6 @@ enum ECategory {
   HISTORY = "H",
 }
 
-enum EHash {
-  FORMAT = "HEX",
-  ALGORITHM = "SHA512",
-  ITERATION = 1000,
-  SALT_LENGTH = 64,
-  HASH_LENGTH = 128,
-}
-
 enum ENobility {
   NAIVE = 1,
 }
@@ -31,7 +23,6 @@ enum ENobility {
 export default {
   EState,
   ECategory,
-  EHash,
   ENobility,
   TOKEN_EXPIRE_IN: "1D",
   PASSWORD_LENGTH: 16,

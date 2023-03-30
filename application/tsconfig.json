@@ -16,7 +16,6 @@
     "noImplicitReturns": true,
     "outDir": "./build",
     "paths": {
-      "constants/*": ["constants/*"],
       "controllers/*": ["controllers/*"],
       "middleware/*": ["middleware/*"],
       "models/*": ["models/*"],
