@@ -18,6 +18,6 @@ application.use(function (request, response) {
     );
 });
 
-application.listen(settings.processes.PORT, function () {
-  console.log(`Listening at ${settings.processes.PORT}.`);
+application.listen(settings.environment.PORT, function () {
+  console.log(`Listening at ${settings.environment.PORT}.`);
 });
