@@ -1,18 +1,12 @@
 enum EState {
-  F = "FROZEN",
   FROZEN = "F",
-  N = "NORMAL",
   NORMAL = "N",
-  C = "CANCELED",
   CANCELED = "C",
 }
 
 enum ECategory {
-  A = "ACCOUNT",
   ACCOUNT = "A",
-  S = "SYSTEM",
   SYSTEM = "S",
-  H = "HISTORY",
   HISTORY = "H",
 }
 

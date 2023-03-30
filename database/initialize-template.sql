@@ -1,6 +1,6 @@
-CREATE DATABASE account_hub;
+CREATE DATABASE ${MYSQL_DATABASE};
 
-USE account_hub;
+USE ${MYSQL_DATABASE};
 
 CREATE TABLE account (
     email               VARCHAR(320)        PRIMARY KEY,
