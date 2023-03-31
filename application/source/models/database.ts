@@ -6,6 +6,6 @@ export default mysql.createPool({
   host: settings.environment.DATABASE_HOST,
   user: settings.environment.DATABASE_USER,
   password: settings.environment.DATABASE_PASSWORD,
-  database: "account-hub",
+  database: "account_hub",
   connectionLimit: settings.environment.DATABASE_CONNECTION_LIMIT,
 });

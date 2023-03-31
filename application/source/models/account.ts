@@ -1,9 +1,9 @@
-export default class {
+class Account {
   email = "";
   username = "";
   passcode = "";
   salt = "";
-  nobility = 0;
+  nobility = 1;
   state = "";
   createdAt = 0;
   updatedAt = 0;
@@ -28,3 +28,5 @@ export default class {
     this.updatedAt = props.updated_at;
   }
 }
+
+export default Account;

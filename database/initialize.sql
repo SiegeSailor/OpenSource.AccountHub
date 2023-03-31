@@ -1,6 +1,6 @@
-CREATE DATABASE account-hub;
+CREATE DATABASE account_hub;
 
-USE account-hub;
+USE account_hub;
 
 CREATE TABLE account (
     email               VARCHAR(320)        PRIMARY KEY,

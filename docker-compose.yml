@@ -25,13 +25,15 @@ services:
     image: account-hub-database
     environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
-      - MYSQL_DATABASE=account-hub
+      - MYSQL_DATABASE=account_hub
       - MYSQL_INITDB_SKIP_TZINFO=${DATABASE_SKIP_TZINFO}
     container_name: database
     networks:
       - entry
     volumes:
       - data:/var/lib/mysql
+    ports:
+      - 3360:3306
 
   application:
     restart: always
@@ -46,7 +48,7 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_NAME=account-hub
+      - DATABASE_NAME=account_hub
       - DATABASE_CONNECTION_LIMIT=${DATABASE_CONNECTION_LIMIT}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - PRIVILEGED_EMAILS=${PRIVILEGED_EMAILS}
