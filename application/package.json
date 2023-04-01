@@ -30,7 +30,7 @@
     "standalone"
   ],
   "license": "ISC",
-  "main": "./build/source/entry-point.js",
+  "main": "./build/source/index.js",
   "name": "account-hub",
   "repository": {
     "type": "git",
@@ -38,8 +38,8 @@
   },
   "scripts": {
     "build": "npm run test && tsc",
-    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/entry-point.ts",
-    "start": "ts-node --require tsconfig-paths/register ./source/entry-point.ts",
+    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/index.ts",
+    "start": "ts-node --require tsconfig-paths/register ./source/index.ts",
     "test": "jest"
   },
   "version": "1.0.0"

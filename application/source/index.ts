@@ -1,3 +1,5 @@
+/// <reference path="./schema.d.ts"/>
+
 import express from "express";
 
 import utilities from "utilities";
