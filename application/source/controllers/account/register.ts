@@ -3,6 +3,7 @@ import type { PoolConnection } from "mysql2/promise";
 
 import utilities from "utilities";
 import models from "models";
+import settings from "settings";
 
 export default async function (request: Request, response: Response) {
   const { username, passcode } = request.body;
@@ -12,7 +13,7 @@ export default async function (request: Request, response: Response) {
       .status(400)
       .send(utilities.format.response("Required fields are not filled."));
 
-  let connection: PoolConnection;
+  let connection: PoolConnection | null = null;
   try {
     connection = await models.pool.getConnection();
     if ((await models.Account.findByUsername(connection, username)).length)
@@ -27,10 +28,23 @@ export default async function (request: Request, response: Response) {
       username,
       passcode
     );
+    await models.History.insert(
+      connection,
+      settings.constants.Category.ACCOUNT,
+      `${username} registered.`,
+      username
+    );
+    await connection.commit();
 
-    return response;
+    return response
+      .status(200)
+      .send(utilities.format.response("Successfully registered an account."));
   } catch (error) {
-    return response;
+    if (connection) await connection.rollback();
+    return response
+      .status(500)
+      .send(utilities.format.response("Failed to register an account."));
   } finally {
+    if (connection) connection.release();
   }
 }

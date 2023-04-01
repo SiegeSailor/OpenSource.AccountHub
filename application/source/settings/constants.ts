@@ -4,7 +4,7 @@ enum State {
   CANCELED = "C",
 }
 
-enum Category {
+export enum Category {
   ACCOUNT = "A",
   SYSTEM = "S",
   HISTORY = "H",
@@ -12,6 +12,7 @@ enum Category {
 
 enum Nobility {
   NAIVE = 1,
+  ADMIN = 100,
 }
 
 export default {

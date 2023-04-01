@@ -29,10 +29,10 @@ class Account implements Schema.IAccount {
     this.updatedAt = row.updated_at;
   }
 
-  static async validate(input: Pick<Schema.IAccount, "username" | "passcode">) {
-    const result: Partial<Schema.IAccount> = {};
+  static validate(input: Pick<Schema.IAccount, "username" | "passcode">) {
+    const account: typeof input = { username: "", passcode: "" };
     for (const key in input) {
-      result[key] = input[key];
+      account[key] = input[key];
       switch (key) {
         case "username":
           if (input[key].length < this.USERNAME_MIN_LENGTH)
@@ -42,7 +42,7 @@ class Account implements Schema.IAccount {
             );
           if (!this.REGEX_ONLY_LETTERS_DIGITS.test(input[key]))
             throw new Error(`${key} can only contain letters and numbers.`);
-          result[key] = input[key].toLowerCase();
+          account[key] = input[key].toLowerCase();
           break;
         case "passcode":
           if (input[key].length < this.PASSWORD_MIN_LENGTH)
@@ -57,7 +57,7 @@ class Account implements Schema.IAccount {
           break;
       }
     }
-    return result;
+    return account;
   }
 
   static async insert(
@@ -66,11 +66,11 @@ class Account implements Schema.IAccount {
     username: string,
     passcode: string
   ) {
-    this.validate({ username, passcode });
+    const account = this.validate({ username, passcode });
     const salt = utilities.hash.salt();
     await connection.execute(
       "INSERT INTO account (username, passcode, salt) VALUES (?, ?, ?);",
-      [username, hash(passcode, salt), salt]
+      [account.username, hash(account.passcode, salt), salt]
     );
   }
 
