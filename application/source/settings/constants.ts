@@ -1,23 +1,22 @@
-enum EState {
+enum State {
   FROZEN = "F",
   NORMAL = "N",
   CANCELED = "C",
 }
 
-enum ECategory {
+enum Category {
   ACCOUNT = "A",
   SYSTEM = "S",
   HISTORY = "H",
 }
 
-enum ENobility {
+enum Nobility {
   NAIVE = 1,
 }
 
 export default {
-  EState,
-  ECategory,
-  ENobility,
+  State,
+  Category,
+  Nobility,
   TOKEN_EXPIRE_IN: "1D",
-  PASSWORD_LENGTH: 16,
 };

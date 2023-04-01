@@ -3,7 +3,7 @@ CREATE DATABASE account_hub;
 USE account_hub;
 
 CREATE TABLE account (
-    username            VARCHAR(320)         PRIMARY KEY,
+    username            VARCHAR(320)        PRIMARY KEY,
     passcode            VARCHAR(320)        NOT NULL,
     salt                VARCHAR(256)        NOT NULL,
     nobility            TINYINT             DEFAULT 1,

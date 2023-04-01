@@ -5,8 +5,8 @@ declare module Schema {
     salt: string;
     nobility: number;
     state: string;
-    created_at: number;
-    updated_at: number;
+    createdAt: number;
+    updatedAt: number;
   }
 
   interface IHistory {
@@ -14,6 +14,6 @@ declare module Schema {
     category: string;
     content: string;
     username: string;
-    created_at: number;
+    createdAt: number;
   }
 }

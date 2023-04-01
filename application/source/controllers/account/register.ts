@@ -19,6 +19,15 @@ export default async function (request: Request, response: Response) {
       return response
         .status(409)
         .send(utilities.format.response("Account already exists."));
+
+    await connection.beginTransaction();
+    await models.Account.insert(
+      connection,
+      utilities.hash.password,
+      username,
+      passcode
+    );
+
     return response;
   } catch (error) {
     return response;

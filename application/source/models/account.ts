@@ -1,36 +1,77 @@
 import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 
-class Account {
+import settings from "settings";
+import utilities from "utilities";
+
+class Account implements Schema.IAccount {
+  static readonly USERNAME_MIN_LENGTH = 8;
+  static readonly REGEX_ONLY_LETTERS_DIGITS = /^[A-Za-z-9]+$/;
+  static readonly REGEX_ONE_BOTH_CASE_DIGIT_SPECIAL =
+    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?;\[\]\\',./`~\-=])/;
+  static readonly PASSWORD_MIN_LENGTH = 16;
+
   email = "";
   username = "";
   passcode = "";
   salt = "";
-  nobility = 1;
+  nobility = settings.constants.Nobility.NAIVE;
   state = "";
   createdAt = 0;
   updatedAt = 0;
 
-  constructor(schema: Schema.IAccount) {
-    this.username = schema.username;
-    this.passcode = schema.passcode;
-    this.salt = schema.salt;
-    this.nobility = schema.nobility;
-    this.state = schema.state;
-    this.createdAt = schema.created_at;
-    this.updatedAt = schema.updated_at;
+  constructor(row: RowDataPacket) {
+    this.username = row.username;
+    this.passcode = row.passcode;
+    this.salt = row.salt;
+    this.nobility = row.nobility;
+    this.state = row.state;
+    this.createdAt = row.created_at;
+    this.updatedAt = row.updated_at;
   }
 
-  static toObject(row: RowDataPacket) {
-    return {
-      email: row.email,
-      username: row.username,
-      passcode: row.passcode,
-      salt: row.salt,
-      nobility: row.nobility,
-      state: row.state,
-      created_at: row.created_at,
-      updated_at: row.updated_at,
-    };
+  static async validate(input: Pick<Schema.IAccount, "username" | "passcode">) {
+    const result: Partial<Schema.IAccount> = {};
+    for (const key in input) {
+      result[key] = input[key];
+      switch (key) {
+        case "username":
+          if (input[key].length < this.USERNAME_MIN_LENGTH)
+            throw new Error(
+              `${key} have to be at least 
+              ${this.USERNAME_MIN_LENGTH} long.`
+            );
+          if (!this.REGEX_ONLY_LETTERS_DIGITS.test(input[key]))
+            throw new Error(`${key} can only contain letters and numbers.`);
+          result[key] = input[key].toLowerCase();
+          break;
+        case "passcode":
+          if (input[key].length < this.PASSWORD_MIN_LENGTH)
+            throw new Error(
+              `${key} have to be at least ${this.PASSWORD_MIN_LENGTH} long.`
+            );
+          if (!this.REGEX_ONE_BOTH_CASE_DIGIT_SPECIAL.test(input[key]))
+            throw new Error(
+              `${key} has to contain at least 1 uppercase letter, 
+              1 lowercase letter, 1 number and 1 special character.`
+            );
+          break;
+      }
+    }
+    return result;
+  }
+
+  static async insert(
+    connection: PoolConnection,
+    hash: typeof utilities.hash.password,
+    username: string,
+    passcode: string
+  ) {
+    this.validate({ username, passcode });
+    const salt = utilities.hash.salt();
+    await connection.execute(
+      "INSERT INTO account (username, passcode, salt) VALUES (?, ?, ?);",
+      [username, hash(passcode, salt), salt]
+    );
   }
 
   static async findByUsername(connection: PoolConnection, username: string) {
@@ -39,7 +80,7 @@ class Account {
       [username]
     );
     return (rows as RowDataPacket[]).map((row) => {
-      return new Account(Account.toObject(row));
+      return new Account(row);
     });
   }
 }

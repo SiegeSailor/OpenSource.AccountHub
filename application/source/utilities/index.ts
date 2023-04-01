@@ -26,7 +26,7 @@ const hash = {
 };
 
 const format = {
-  response: function (message: string, data?: Record<string, string>) {
+  response: function (message: string, data?: { [key: string]: any }) {
     return {
       message,
       data,
