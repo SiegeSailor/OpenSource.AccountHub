@@ -4,7 +4,7 @@ const hash = {
   SALT_LENGTH: 64,
   PASSWORD_ITERATION: 1000,
   PASSWORD_HASH_LENGTH: 128,
-  PASSWORD_ALGORITHM: "SHA512",
+  PASSWORD_DIGITAL_SIGNATURE: "SHA512",
 
   encode: function (buffer: Buffer) {
     return buffer.toString("hex");
@@ -19,7 +19,7 @@ const hash = {
         salt,
         hash.PASSWORD_ITERATION,
         hash.PASSWORD_HASH_LENGTH,
-        hash.PASSWORD_ALGORITHM
+        hash.PASSWORD_DIGITAL_SIGNATURE
       )
     );
   },
