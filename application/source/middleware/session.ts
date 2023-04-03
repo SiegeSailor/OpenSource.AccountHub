@@ -6,7 +6,7 @@ import RedisStore from "connect-redis";
 import utilities from "utilities";
 import settings from "settings";
 
-async function authenticate(
+function authenticate(
   request: Request,
   response: Response,
   next: NextFunction
