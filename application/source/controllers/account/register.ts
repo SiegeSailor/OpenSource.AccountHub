@@ -1,11 +1,15 @@
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
 
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
 
-export default async function (request: Request, response: Response) {
+export default async function (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   const { username, passcode } = request.body;
 
   if (!username || !passcode)
@@ -41,9 +45,8 @@ export default async function (request: Request, response: Response) {
       .send(utilities.format.response("Successfully registered an account."));
   } catch (error) {
     if (connection) await connection.rollback();
-    return response
-      .status(500)
-      .send(utilities.format.response("Failed to register an account."));
+    next(error);
+    return response;
   } finally {
     if (connection) connection.release();
   }

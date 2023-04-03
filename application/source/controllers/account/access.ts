@@ -1,11 +1,15 @@
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
 
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
 
-export default async function (request: Request, response: Response) {
+export default async function (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   const { username, passcode } = request.body;
 
   if (!username || !passcode)
@@ -47,13 +51,17 @@ export default async function (request: Request, response: Response) {
       username
     );
 
+    request.session.regenerate(function (error) {
+      if (error) next(error);
+      request.session["account"] = account;
+    });
+
     return response
       .status(200)
       .send(utilities.format.response("Successfully accessed an account."));
   } catch (error) {
-    return response
-      .status(500)
-      .send(utilities.format.response("Failed to access."));
+    next(error);
+    return response;
   } finally {
     if (connection) connection.release();
   }

@@ -15,9 +15,13 @@ enum Nobility {
   ADMIN = 100,
 }
 
+enum Milliseconds {
+  DAY = 24 * 60 * 60 * 1000,
+}
+
 export default {
   State,
   Category,
   Nobility,
-  TOKEN_EXPIRE_IN: "1D",
+  Milliseconds,
 };

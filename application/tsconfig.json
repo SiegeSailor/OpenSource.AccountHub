@@ -21,7 +21,8 @@
       "models/*": ["models/*"],
       "routes/*": ["routes/*"],
       "settings/*": ["settings/*"],
-      "utilities/*": ["utilities/*"]
+      "utilities/*": ["utilities/*"],
+      "main": ["main"]
     },
     "resolveJsonModule": true,
     "rootDir": "./source",

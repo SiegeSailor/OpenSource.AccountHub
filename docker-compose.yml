@@ -50,8 +50,8 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_NAME=account_hub
       - DATABASE_CONNECTION_LIMIT=${DATABASE_CONNECTION_LIMIT}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - PRIVILEGED_EMAILS=${PRIVILEGED_EMAILS}
+      - SECRET=${SECRET}
+      - HTTPS=${HTTPS}
       - PORT=${PORT}
     container_name: application
     networks:
