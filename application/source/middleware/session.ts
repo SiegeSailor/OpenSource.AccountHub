@@ -23,7 +23,7 @@ export default {
     store: new RedisStore({
       client: new Redis({
         host: settings.environment.SESSION_HOST,
-        port: settings.environment.PORT_SESSION,
+        port: settings.environment.SESSION_PORT,
       }),
     }),
     secret: settings.environment.SECRET,

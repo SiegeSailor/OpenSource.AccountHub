@@ -33,7 +33,7 @@ services:
     volumes:
       - data:/var/lib/mysql
     ports:
-      - ${PORT_DATABASE}:3306
+      - ${DATABASE_PORT}:3306
 
   session:
     restart: always
@@ -48,7 +48,7 @@ services:
     networks:
       - entry
     ports:
-      - ${PORT_SESSION}:6379
+      - ${SESSION_PORT}:6379
 
   application:
     restart: always
@@ -70,14 +70,14 @@ services:
       - SESSION_PORT=${SESSION_PORT}
       - SECRET=${SECRET}
       - HTTPS=${HTTPS}
-      - PORT_APPLICATION=${PORT_APPLICATION}
+      - APPLICATION_PORT=${APPLICATION_PORT}
     container_name: application
     networks:
       - entry
     volumes:
       - ./application/source:/application/source
     ports:
-      - 80:${PORT_APPLICATION}
+      - 80:${APPLICATION_PORT}
     depends_on:
       - database
       - session
