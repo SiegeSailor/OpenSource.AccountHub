@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.route("/register").post(controllers.account.register);
 router.route("/access").post(controllers.account.access);
-router.route("/leave").post(middleware.session, controllers.account.leave);
+router
+  .route("/leave")
+  .post(middleware.session.authenticate, controllers.account.leave);
 
 export default router;
