@@ -9,7 +9,10 @@ networks:
       PROJECT: account-hub
 
 volumes:
-  data:
+  database:
+    labels:
+      PROJECT: account-hub
+  session:
     labels:
       PROJECT: account-hub
 
@@ -31,7 +34,7 @@ services:
     networks:
       - entry
     volumes:
-      - data:/var/lib/mysql
+      - database:/var/lib/mysql
     ports:
       - ${DATABASE_PORT}:3306
 
@@ -47,6 +50,8 @@ services:
     container_name: session
     networks:
       - entry
+    volumes:
+      - session:/data
     ports:
       - ${SESSION_PORT}:6379
 
