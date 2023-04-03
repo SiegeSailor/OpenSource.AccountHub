@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import session from "express-session";
 import Redis from "ioredis";
-import connectRedis from "connect-redis";
+import RedisStore from "connect-redis";
 
 import utilities from "utilities";
 import settings from "settings";
@@ -14,8 +14,6 @@ async function authenticate(
   if (request.session[settings.constants.Session.ACCOUNT]) next();
   else response.status(401).send(utilities.format.response("Invalid session."));
 }
-
-const RedisStore = connectRedis(session);
 
 export default {
   authenticate,
