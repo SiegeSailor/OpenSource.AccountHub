@@ -33,7 +33,22 @@ services:
     volumes:
       - data:/var/lib/mysql
     ports:
-      - 3360:3306
+      - ${PORT_DATABASE}:3306
+
+  session:
+    restart: always
+    build:
+      labels:
+        PROJECT: account-hub
+        SERVICE: session
+      context: ./session
+      dockerfile: Dockerfile
+    image: account-hub-session
+    container_name: session
+    networks:
+      - entry
+    ports:
+      - ${PORT_SESSION}:6379
 
   application:
     restart: always
@@ -52,13 +67,14 @@ services:
       - DATABASE_CONNECTION_LIMIT=${DATABASE_CONNECTION_LIMIT}
       - SECRET=${SECRET}
       - HTTPS=${HTTPS}
-      - PORT=${PORT}
+      - PORT_APPLICATION=${PORT_APPLICATION}
     container_name: application
     networks:
       - entry
     volumes:
       - ./application/source:/application/source
     ports:
-      - 80:${PORT}
+      - 80:${PORT_APPLICATION}
     depends_on:
       - database
+      - session

@@ -3,6 +3,6 @@
 import settings from "settings";
 import main from "main";
 
-main.listen(settings.environment.PORT, function () {
-  console.log(`Listening at ${settings.environment.PORT}.`);
+main.listen(settings.environment.PORT_APPLICATION, function () {
+  console.log(`Listening at ${settings.environment.PORT_APPLICATION}.`);
 });
