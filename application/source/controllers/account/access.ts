@@ -53,7 +53,7 @@ export default async function (
 
     request.session.regenerate(function (error) {
       if (error) next(error);
-      request.session["account"] = account;
+      request.session[settings.constants.Session.ACCOUNT] = account;
     });
 
     return response

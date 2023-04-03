@@ -19,9 +19,14 @@ enum Milliseconds {
   DAY = 24 * 60 * 60 * 1000,
 }
 
+enum Session {
+  ACCOUNT = "ACCOUNT",
+}
+
 export default {
   State,
   Category,
   Nobility,
   Milliseconds,
+  Session,
 };
