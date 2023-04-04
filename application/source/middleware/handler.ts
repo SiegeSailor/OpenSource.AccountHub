@@ -2,6 +2,15 @@ import type { Request, Response, NextFunction } from "express";
 
 import utilities from "utilities";
 
+function log(request: Request, _: Response, next: NextFunction) {
+  console.log(
+    `${utilities.format.time()} Received request from ${
+      request.ip
+    } to ${encodeURI(request.url)}.`
+  );
+  next();
+}
+
 function fallback(request: Request, response: Response) {
   response
     .status(404)
@@ -24,4 +33,4 @@ function error(
   );
 }
 
-export default { fallback, error };
+export default { log, fallback, error };

@@ -32,6 +32,10 @@ const format = {
       data,
     };
   },
+  time: function () {
+    const date = new Date();
+    return `${date.toTimeString().slice(0, 8)}`;
+  },
 };
 
 export default {

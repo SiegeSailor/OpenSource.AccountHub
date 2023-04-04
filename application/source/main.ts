@@ -5,9 +5,12 @@ import middleware from "middleware";
 
 const main = express();
 
-main.use(express.json());
-main.use(express.urlencoded({ extended: true }));
-main.use(middleware.session.session);
+main.use(
+  express.json(),
+  express.urlencoded({ extended: true }),
+  middleware.handler.log,
+  middleware.session.session
+);
 
 main.use("/", routes);
 main.use(middleware.handler.fallback);
