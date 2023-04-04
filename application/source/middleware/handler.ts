@@ -25,12 +25,11 @@ function error(
   response: Response,
   _: NextFunction
 ) {
-  response.status(500).send(
-    utilities.format.response("Failed to handle the request.", {
-      requestURL: request.url,
-      errorStack: error.stack,
-    })
-  );
+  console.error(`From ${request.url} -`);
+  console.error(error.stack);
+  response
+    .status(500)
+    .send(utilities.format.response("Failed to handle the request."));
 }
 
 export default { log, fallback, error };

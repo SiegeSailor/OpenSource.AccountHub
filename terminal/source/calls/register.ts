@@ -5,6 +5,7 @@ export default async function (username: string, passcode: string) {
     utilities.format.requestURL("account/register"),
     {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username,
         passcode,

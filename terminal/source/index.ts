@@ -30,26 +30,32 @@ async function initialize(message = "What do you want to do?") {
         console.log(
           "\tBoth are case insensitive. The minimum length is 8 for username, 16 for password."
         );
-        const { username, _passcode } = await main.prompt([
+        const { username } = await main.prompt([
           {
             type: "string",
             name: "username",
-          },
-          {
-            type: "password",
-            name: "_passcode",
-            message: "password",
+            message: "Enter username:",
           },
         ]);
-        console.log("Please enter the password again:");
-        const { passcode } = await main.prompt([
-          {
-            type: "password",
-            name: "passcode",
-            message: "password",
-          },
-        ]);
-        const result = await calls.register(username, passcode);
+
+        let password = "";
+        while (!password) {
+          const { _passcode, passcode } = await main.prompt([
+            {
+              type: "password",
+              name: "_passcode",
+              message: "Enter password:",
+            },
+            {
+              type: "password",
+              name: "passcode",
+              message: "Re-enter password:",
+            },
+          ]);
+          if (_passcode === passcode) password = passcode;
+          else console.log("You have to enter the same password twice.");
+        }
+        const result = await calls.register(username, password);
         break;
       case settings.constants.Choice.Access:
         break;
@@ -61,6 +67,7 @@ async function initialize(message = "What do you want to do?") {
       default:
         throw new Error("Invalid operation.");
     }
+    await initialize();
   } catch (error) {
     console.error(error);
     await initialize("Error occurred. Please try again.");

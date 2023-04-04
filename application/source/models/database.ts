@@ -8,5 +8,5 @@ export default mysql.createPool({
   password: settings.environment.DATABASE_PASSWORD,
   database: "account_hub",
   connectionLimit: settings.environment.DATABASE_CONNECTION_LIMIT,
-  port: settings.environment.DATABASE_PORT,
+  port: 3306,
 });
