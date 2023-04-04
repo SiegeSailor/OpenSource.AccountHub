@@ -16,7 +16,8 @@
     "noImplicitReturns": true,
     "outDir": "./build",
     "paths": {
-      "calls/*": ["calls/*"],
+      "commands/*": ["commands/*"],
+      "fetches/*": ["fetches/*"],
       "models/*": ["models/*"],
       "utilities/*": ["utilities/*"],
       "settings/*": ["settings/*"],

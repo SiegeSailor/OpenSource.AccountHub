@@ -26,12 +26,19 @@ export default async function (
         .send(utilities.format.response("Account already exists."));
 
     await connection.beginTransaction();
-    await models.Account.insert(
-      connection,
-      utilities.hash.password,
-      username,
-      passcode
-    );
+    try {
+      await models.Account.insert(
+        connection,
+        utilities.hash.password,
+        username,
+        passcode
+      );
+    } catch (_) {
+      const error = _ as Error;
+      return response
+        .status(400)
+        .send(utilities.format.response(error.message));
+    }
     await models.History.insert(
       connection,
       settings.constants.Category.ACCOUNT,
