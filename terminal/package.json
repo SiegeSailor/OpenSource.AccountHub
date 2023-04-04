@@ -1,22 +1,18 @@
 {
   "author": "SiegeSailor",
+  "bin": "./build/index.js",
   "bugs": {
     "url": "https://github.com/SiegeSailor/OpenSource.AccountHub/issues"
   },
   "dependencies": {
-    "connect-redis": "7.0.1",
-    "express": "4.18.2",
-    "express-session": "1.17.3",
-    "ioredis": "5.3.1",
-    "mysql2": "3.2.0"
+    "inquirer": "8.0.0",
+    "inquirer-press-to-continue": "1.1.4",
+    "nanospinner": "1.1.0"
   },
-  "description": "Application service for OpenSource.AccountHub.",
+  "description": "Terminal service for OpenSource.AccountHub.",
   "devDependencies": {
-    "@types/express": "4.17.17",
-    "@types/express-session": "1.17.7",
-    "@types/jest": "29.5.0",
+    "@types/inquirer": "9.0.3",
     "@types/node": "18.15.10",
-    "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
     "tsconfig-paths": "4.1.2",
@@ -32,16 +28,14 @@
   "homepage": "https://github.com/SiegeSailor/OpenSource.AccountHub#readme",
   "license": "ISC",
   "main": "./build/index.js",
-  "name": "account-hub-application",
+  "name": "account-hub-terminal",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SiegeSailor/OpenSource.AccountHub.git"
   },
   "scripts": {
-    "build": "npm run test && tsc",
-    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/index.ts",
-    "start": "ts-node --require tsconfig-paths/register ./source/index.ts",
-    "test": "jest"
+    "build": "tsc",
+    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/index.ts"
   },
   "version": "1.0.0"
 }

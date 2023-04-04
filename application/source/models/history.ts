@@ -3,18 +3,38 @@ import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 import type { Category } from "settings/constants";
 
 class History implements Schema.IHistory {
-  identifier: number;
-  category: string;
-  content: string;
-  username: string;
-  createdAt: number;
+  private _identifier: number;
+  private _category: string;
+  private _content: string;
+  private _username: string;
+  private _createdAt: number;
 
   constructor(row: RowDataPacket) {
-    this.identifier = row.identifier;
-    this.category = row.category;
-    this.content = row.content;
-    this.username = row.username;
-    this.createdAt = row.created_at;
+    this._identifier = row.identifier;
+    this._category = row.category;
+    this._content = row.content;
+    this._username = row.username;
+    this._createdAt = row.created_at;
+  }
+
+  public get identifier() {
+    return this._identifier;
+  }
+
+  public get category() {
+    return this._category;
+  }
+
+  public get content() {
+    return this._content;
+  }
+
+  public get username() {
+    return this._username;
+  }
+
+  public get createdAt() {
+    return this._createdAt;
   }
 
   static async insert(

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./source",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNEXT"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "outDir": "./build",
+    "paths": {
+      "calls/*": ["calls/*"],
+      "models/*": ["models/*"],
+      "utilities/*": ["utilities/*"],
+      "settings/*": ["settings/*"],
+      "main": ["main"]
+    },
+    "resolveJsonModule": true,
+    "rootDir": "./source",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "tsBuildInfoFile": "./build-cache"
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts"]
+}
