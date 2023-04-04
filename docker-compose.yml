@@ -28,7 +28,7 @@ services:
     image: account-hub-database
     environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
-      - MYSQL_DATABASE=account_hub
+      - MYSQL_DATABASE=main
       - MYSQL_INITDB_SKIP_TZINFO=${DATABASE_SKIP_TZINFO}
     container_name: database
     networks:
@@ -68,7 +68,6 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_NAME=account_hub
       - DATABASE_CONNECTION_LIMIT=${DATABASE_CONNECTION_LIMIT}
       - SESSION_HOST=${SESSION_HOST}
       - SESSION_PORT=${SESSION_PORT}

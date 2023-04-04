@@ -1,6 +1,4 @@
-CREATE DATABASE account_hub;
-
-USE account_hub;
+USE main;
 
 CREATE TABLE account (
     username            VARCHAR(320)        PRIMARY KEY,
