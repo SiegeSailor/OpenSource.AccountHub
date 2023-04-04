@@ -1,6 +1,6 @@
 const {
   HTTPS,
-  APPLICATION_HOST = "application",
+  APPLICATION_HOST = "localhost",
   APPLICATION_PORT = 80,
 } = process.env;
 

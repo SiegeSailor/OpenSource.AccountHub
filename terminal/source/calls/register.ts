@@ -1,14 +1,16 @@
-import settings from "settings";
 import utilities from "utilities";
 
 export default async function (username: string, passcode: string) {
-  const response = await fetch(utilities.format.requestURL("register"), {
-    method: "POST",
-    body: JSON.stringify({
-      username,
-      passcode,
-    }),
-  });
+  const response = await fetch(
+    utilities.format.requestURL("account/register"),
+    {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        passcode,
+      }),
+    }
+  );
 
   const result = await response.json();
 

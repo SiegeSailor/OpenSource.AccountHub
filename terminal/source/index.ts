@@ -23,22 +23,33 @@ async function initialize(message = "What do you want to do?") {
 
     switch (purpose) {
       case settings.constants.Choice.Register:
+        console.log("\tThe username can only contain letters and numbers.");
         console.log(
-          `The username can only contain letters and numbers, and be case insensitive. The password should contain at least 1 upper case letter, 1 lower case letter, 1 number and 1 special character. The minimum length of the password should be 16. `
+          "\tThe password should contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
         );
-        const { username, passcode } = await main.prompt([
+        console.log(
+          "\tBoth are case insensitive. The minimum length is 8 for username, 16 for password."
+        );
+        const { username, _passcode } = await main.prompt([
           {
             type: "string",
             name: "username",
-            message: "Enter the username Only letters and numbers:",
           },
           {
-            type: "string",
-            name: "passcode",
-            message:
-              "Enter the passcode. Contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character:",
+            type: "password",
+            name: "_passcode",
+            message: "password",
           },
         ]);
+        console.log("Please enter the password again:");
+        const { passcode } = await main.prompt([
+          {
+            type: "password",
+            name: "passcode",
+            message: "password",
+          },
+        ]);
+        const result = await calls.register(username, passcode);
         break;
       case settings.constants.Choice.Access:
         break;
