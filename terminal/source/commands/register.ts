@@ -1,7 +1,8 @@
-import calls from "fetches";
+import fetches from "fetches";
 import main from "main";
 import models from "models";
-import utilities from "utilities/index";
+import utilities from "utilities";
+import settings from "settings";
 
 export default async function (profile: InstanceType<typeof models.Profile>) {
   console.log("\tThe username can only contain letters and numbers.");
@@ -37,7 +38,22 @@ export default async function (profile: InstanceType<typeof models.Profile>) {
     else console.log("You have to enter the same password twice.");
   }
 
-  const response = await calls.register(username, password);
-  const message = await utilities.format.message(response);
+  const responseRegister = await fetches.register(username, password);
+  const message = await utilities.format.message(responseRegister);
   console.log(message);
+
+  const { isProceed } = await main.prompt([
+    {
+      type: "confirm",
+      name: "isProceed",
+      message: `Do you want to proceed to ${settings.constants.Choice.Access}?`,
+    },
+  ]);
+  if (!isProceed) return;
+  const responseAccess = await fetches.access(username, password);
+  //   responseAccess.headers.forEach((header) => {
+  //     console.log(header);
+  //   });
+  //   const result = await responseAccess.json();
+  //   console.log(result);
 }

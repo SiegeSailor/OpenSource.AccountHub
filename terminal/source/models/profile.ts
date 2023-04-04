@@ -1,9 +1,13 @@
 class Profile {
   private _username = "";
-  private _passcode = "";
   private _cookie = "";
 
   constructor() {}
+
+  public reset() {
+    this._username = "";
+    this._cookie = "";
+  }
 
   public seeSession() {
     return !!this._cookie;
@@ -13,20 +17,12 @@ class Profile {
     return this._username;
   }
 
-  public get passcode() {
-    return this._passcode;
-  }
-
   public get cookie() {
     return this._cookie;
   }
 
   public set username(username: string) {
     this._username = username;
-  }
-
-  public set passcode(passcode: string) {
-    this._passcode = passcode;
   }
 
   public set cookie(cookie: string) {

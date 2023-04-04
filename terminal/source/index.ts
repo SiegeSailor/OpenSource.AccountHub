@@ -7,17 +7,21 @@ const profile = new models.Profile();
 
 async function initialize(message = "What do you want to do?") {
   try {
+    console.log(
+      `\tWelcome, ${profile.seeSession() ? profile.username : "Guest"}.`
+    );
+    const choices = profile.seeSession()
+      ? [{ name: settings.constants.Choice.Leave }]
+      : [
+          { name: settings.constants.Choice.Register },
+          { name: settings.constants.Choice.Access },
+        ];
     const { _: purpose } = await main.prompt([
       {
         type: "list",
         name: "_",
         message,
-        choices: [
-          { name: settings.constants.Choice.Register },
-          { name: settings.constants.Choice.Access },
-          { name: settings.constants.Choice.Leave },
-          { name: settings.constants.Choice.Exit },
-        ],
+        choices: [...choices, { name: settings.constants.Choice.Exit }],
       },
     ]);
 
