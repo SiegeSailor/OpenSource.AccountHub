@@ -20,7 +20,10 @@ enum Milliseconds {
 }
 
 enum Session {
-  ACCOUNT = "ACCOUNT",
+  PREFIX = "ACCOUNT_HUB:",
+  NAME = "ACCOUNT_HUB",
+  IDENTIFIER = "IDENTIFIER",
+  USERNAME = "USERNAME",
 }
 
 export default {

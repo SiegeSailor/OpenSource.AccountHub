@@ -11,19 +11,24 @@ function authenticate(
   response: Response,
   next: NextFunction
 ) {
-  if (request.session[settings.constants.Session.ACCOUNT]) next();
+  if (request.session.cookie[settings.constants.Session.NAME]) next();
   else response.status(401).send(utilities.format.response("Invalid session."));
 }
 
+const client = new Redis({
+  host: settings.environment.SESSION_HOST,
+  port: settings.environment.SESSION_PORT,
+});
+
 export default {
   authenticate,
+  client,
   session: session({
     store: new RedisStore({
-      client: new Redis({
-        host: settings.environment.SESSION_HOST,
-        port: settings.environment.SESSION_PORT,
-      }),
+      client,
+      prefix: settings.constants.Session.PREFIX,
     }),
+    name: settings.constants.Session.NAME,
     secret: settings.environment.SECRET,
     resave: false,
     saveUninitialized: false,

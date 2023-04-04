@@ -51,10 +51,11 @@ export default async function (
       username
     );
 
-    request.session.regenerate(function (error) {
+    const session = request.session.regenerate(function (error) {
       if (error) next(error);
-      request.session[settings.constants.Session.ACCOUNT] = account;
     });
+    response.cookie(settings.constants.Session.USERNAME, username);
+    response.cookie(settings.constants.Session.IDENTIFIER, session.id);
 
     return response
       .status(200)

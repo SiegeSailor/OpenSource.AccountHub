@@ -4,6 +4,7 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
+import middleware from "middleware";
 
 export default async function (
   request: Request,
@@ -18,16 +19,14 @@ export default async function (
       connection,
       settings.constants.Category.ACCOUNT,
       "Leaved from a session.",
-      request.session[settings.constants.Session.ACCOUNT].username
+      request.session[settings.constants.Session.USERNAME]
     );
 
-    request.session[settings.constants.Session.ACCOUNT] = null;
-    request.session.save(function (error) {
-      if (error) next(error);
-      request.session.regenerate(function (error) {
-        if (error) next(error);
-      });
-    });
+    await middleware.session.client.del(
+      `${settings.constants.Session.PREFIX}${
+        request.session[settings.constants.Session.IDENTIFIER]
+      }`
+    );
 
     return response
       .status(200)

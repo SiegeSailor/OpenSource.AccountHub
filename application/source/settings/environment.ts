@@ -18,6 +18,6 @@ export default {
   SESSION_HOST,
   SESSION_PORT: Number(SESSION_PORT),
   SECRET,
-  HTTPS: Boolean(HTTPS),
+  HTTPS: Boolean(Number(HTTPS)),
   APPLICATION_PORT: Number(APPLICATION_PORT),
 };

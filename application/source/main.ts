@@ -5,6 +5,8 @@ import middleware from "middleware";
 
 const main = express();
 
+main.disable("x-powered-by");
+
 main.use(
   express.json(),
   express.urlencoded({ extended: true }),
