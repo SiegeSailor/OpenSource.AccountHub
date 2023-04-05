@@ -18,6 +18,7 @@ enum Nobility {
 enum Milliseconds {
   NOW = 0,
   DAY = 24 * 60 * 60 * 1000,
+  MINUTE = 60 * 1000,
 }
 
 enum Session {

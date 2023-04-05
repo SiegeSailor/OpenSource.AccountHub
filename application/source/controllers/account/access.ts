@@ -20,6 +20,31 @@ export default async function (
 
   let connection: PoolConnection | null = null;
   try {
+    const MAX_FAILED_ATTEMPT = 3;
+    const FAILED_ATTEMPT_PREFIX = "ATTEMPT:";
+    const LOCKOUT_TIME = settings.constants.Milliseconds.MINUTE * 5;
+
+    const keySession = `${FAILED_ATTEMPT_PREFIX}${username}`;
+    const attempt = await middleware.session.client.get(keySession);
+    if (attempt) {
+      const { count, timestampLast } = JSON.parse(attempt);
+      if (count >= MAX_FAILED_ATTEMPT) {
+        const milliseconds = Date.now() - timestampLast;
+
+        if (milliseconds < LOCKOUT_TIME) {
+          return response
+            .status(429)
+            .send(
+              utilities.format.response(
+                `Failed attempts more than ${MAX_FAILED_ATTEMPT}. Please wait ${Math.ceil(
+                  (LOCKOUT_TIME - milliseconds) / 1000
+                )} seconds before trying again.`
+              )
+            );
+        }
+      }
+    }
+
     connection = await models.pool.getConnection();
     const accounts = await models.Account.findByUsername(connection, username),
       _account = accounts[0];
@@ -27,10 +52,22 @@ export default async function (
       passcode: settings.constants.Imitation.PASSWORD,
       salt: settings.constants.Imitation.SALT,
     };
-    if (account.passcode !== utilities.hash.password(passcode, account.salt))
+    if (account.passcode !== utilities.hash.password(passcode, account.salt)) {
+      const attempt = await middleware.session.client.get(keySession);
+      let count = 1;
+      if (attempt) count = JSON.parse(attempt).count + 1;
+
+      await middleware.session.client.set(
+        keySession,
+        JSON.stringify({ count, timestampLast: Date.now() })
+      );
+
       return response
         .status(401)
-        .send(utilities.format.response("Invalid credential."));
+        .send(
+          utilities.format.response(`Invalid credential. Attempts ${count}.`)
+        );
+    }
 
     switch (account.state) {
       case settings.constants.State.FROZEN:

@@ -109,16 +109,14 @@ The following step may be used for integration test:
 
 Things will be completed after the first release:
 
-1. Dockerize with Monorepo Structure
-2. GitHub Actions CICD
-3. Deploy to AWS
-4. Connect to AWS Database
-5. Use AWS Cloud Logging
-6. Rewrite with TypeScript
-7. Session and Cookie
-8. XSS Prevention
-9. Unit Testing with Jest
-10. GitHub Issues Board
-11. Git Flow
-12. ESlint with Husky
-13. Integration Test with Postman
+1. GitHub Actions CICD
+2. Deploy to AWS
+3. Connect to AWS Database
+4. Use AWS Cloud Logging
+5. Rewrite with TypeScript
+6. XSS Prevention
+7. Unit Testing with Jest
+8. GitHub Issues Board
+9. Git Flow
+10. ESlint with Husky
+11. Integration Test with Postman
