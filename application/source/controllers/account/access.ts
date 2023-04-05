@@ -22,11 +22,11 @@ export default async function (
   try {
     connection = await models.pool.getConnection();
     const accounts = await models.Account.findByUsername(connection, username),
-      account = accounts[0];
-    if (!account)
-      return response
-        .status(401)
-        .send(utilities.format.response("Invalid credential."));
+      _account = accounts[0];
+    const account = _account || {
+      passcode: settings.constants.Imitation.PASSWORD,
+      salt: settings.constants.Imitation.SALT,
+    };
     if (account.passcode !== utilities.hash.password(passcode, account.salt))
       return response
         .status(401)

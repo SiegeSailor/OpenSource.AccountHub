@@ -26,10 +26,16 @@ enum Session {
   USERNAME = "USERNAME",
 }
 
+enum Imitation {
+  PASSWORD = "",
+  SALT = "4cefc0fc0f928880e5ac01ad42fc69211030e337ee7b8938cad172dce40f84bee95c00f85f951d0a1341681b34ed98b8fdf0ca4cdec28971855a6f05c373b368",
+}
+
 export default {
   State,
   Category,
   Nobility,
   Milliseconds,
   Session,
+  Imitation,
 };
