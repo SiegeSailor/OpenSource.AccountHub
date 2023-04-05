@@ -29,7 +29,15 @@ async function access(_username?: string, _passcode?: string) {
       return predicate.name === settings.constants.Session.NAME;
     }
   );
-  profile.cookie = cookie ? cookie.value : "_";
+  profile.session = cookie ? cookie.value : "_";
+}
+
+async function leave() {
+  const { response } = await commands.leave(
+    `${settings.constants.Session.NAME}=${profile.session};`
+  );
+  if (!response.ok) return;
+  profile.reset();
 }
 
 async function initialize(message = "What do you want to do?") {
@@ -37,7 +45,7 @@ async function initialize(message = "What do you want to do?") {
     console.log(
       `\tWelcome, ${
         profile.seeSession()
-          ? `${profile.username}.\n\tSession ID: ${profile.cookie}`
+          ? `${profile.username}.\n\tSession ID: ${profile.session}`
           : "Guest."
       }`
     );
@@ -64,8 +72,7 @@ async function initialize(message = "What do you want to do?") {
         await access();
         break;
       case settings.constants.Choice.LEAVE:
-        await commands.leave();
-        profile.reset();
+        await leave();
         break;
       case settings.constants.Choice.EXIT:
         console.log("Successfully terminated the program.\n");

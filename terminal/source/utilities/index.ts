@@ -7,7 +7,7 @@ const format = {
   },
   message: async function (response: Response) {
     const result = await response.json();
-    return `\t[${response.ok ? "SUCCESSFUL" : "FAILED"}] ${result.message}`;
+    return `\t[${response.ok ? "INFO" : "FAILED"}] ${result.message}`;
   },
 };
 

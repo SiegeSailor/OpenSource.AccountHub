@@ -1,32 +1,32 @@
 class Profile {
   private _username = "";
-  private _cookie = "";
+  private _session = "";
 
   constructor() {}
 
   public reset() {
     this._username = "";
-    this._cookie = "";
+    this._session = "";
   }
 
   public seeSession() {
-    return !!this._cookie;
+    return !!this._session;
   }
 
   public get username() {
     return this._username;
   }
 
-  public get cookie() {
-    return this._cookie;
+  public get session() {
+    return this._session;
   }
 
   public set username(username: string) {
     this._username = username;
   }
 
-  public set cookie(cookie: string) {
-    this._cookie = cookie;
+  public set session(session: string) {
+    this._session = session;
   }
 }
 
