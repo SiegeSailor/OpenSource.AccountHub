@@ -4,6 +4,7 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
+import middleware from "middleware";
 
 export default async function (
   request: Request,
@@ -51,15 +52,16 @@ export default async function (
       username
     );
 
-    const session = request.session.regenerate(function (error) {
+    request.session.regenerate(function (error) {
       if (error) next(error);
+      request.session[settings.constants.Session.USERNAME] = username;
+      // response.cookie(settings.constants.Session.NAME, request.session.id);
+      response
+        .status(200)
+        .send(utilities.format.response("Successfully accessed an account."));
     });
-    response.cookie(settings.constants.Session.USERNAME, username);
-    response.cookie(settings.constants.Session.IDENTIFIER, session.id);
 
-    return response
-      .status(200)
-      .send(utilities.format.response("Successfully accessed an account."));
+    return response;
   } catch (error) {
     next(error);
     return response;

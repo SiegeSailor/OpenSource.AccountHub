@@ -22,7 +22,6 @@ enum Milliseconds {
 enum Session {
   PREFIX = "ACCOUNT_HUB:",
   NAME = "ACCOUNT_HUB",
-  IDENTIFIER = "IDENTIFIER",
   USERNAME = "USERNAME",
 }
 

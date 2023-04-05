@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 import routes from "routes";
 import middleware from "middleware";
@@ -10,6 +11,7 @@ main.disable("x-powered-by");
 main.use(
   express.json(),
   express.urlencoded({ extended: true }),
+  cors({ origin: "*", credentials: true }),
   middleware.handler.log,
   middleware.session.session
 );

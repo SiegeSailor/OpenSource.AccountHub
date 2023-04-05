@@ -22,11 +22,11 @@ export default async function (
       request.session[settings.constants.Session.USERNAME]
     );
 
-    await middleware.session.client.del(
-      `${settings.constants.Session.PREFIX}${
-        request.session[settings.constants.Session.IDENTIFIER]
-      }`
-    );
+    // await middleware.session.client.del(
+    //   `${settings.constants.Session.PREFIX}${
+    //     request.session[settings.constants.Session.IDENTIFIER]
+    //   }`
+    // );
 
     return response
       .status(200)
