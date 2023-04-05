@@ -22,15 +22,16 @@ export default async function (
       request.session[settings.constants.Session.USERNAME]
     );
 
-    // await middleware.session.client.del(
-    //   `${settings.constants.Session.PREFIX}${
-    //     request.session[settings.constants.Session.IDENTIFIER]
-    //   }`
-    // );
+    request.session.cookie.maxAge = settings.constants.Milliseconds.NOW;
+    request.session.destroy(function (error) {
+      if (error) next(error);
+      response.clearCookie(settings.constants.Session.NAME);
+      response
+        .status(200)
+        .send(utilities.format.response("Successfully leaved from a session."));
+    });
 
-    return response
-      .status(200)
-      .send(utilities.format.response("Successfully leaved from a session."));
+    return response;
   } catch (error) {
     next(error);
     return response;

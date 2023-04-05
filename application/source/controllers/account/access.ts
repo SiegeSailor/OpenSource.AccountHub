@@ -55,7 +55,6 @@ export default async function (
     request.session.regenerate(function (error) {
       if (error) next(error);
       request.session[settings.constants.Session.USERNAME] = username;
-      // response.cookie(settings.constants.Session.NAME, request.session.id);
       response
         .status(200)
         .send(utilities.format.response("Successfully accessed an account."));

@@ -16,12 +16,13 @@ enum Nobility {
 }
 
 enum Milliseconds {
+  NOW = 0,
   DAY = 24 * 60 * 60 * 1000,
 }
 
 enum Session {
-  PREFIX = "ACCOUNT_HUB:",
   NAME = "ACCOUNT_HUB",
+  PREFIX = "ACCOUNT_HUB:",
   USERNAME = "USERNAME",
 }
 
