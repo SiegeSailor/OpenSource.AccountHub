@@ -16,7 +16,7 @@ Constructs endpoints for a sophisticated account database system within the OWAS
 
 ## Prerequisites
 
-See `engines` in [package.json](./package.json):
+See `engines` in [package.json](./terminal/package.json):
 
 ```json
 "engines": {
@@ -24,6 +24,8 @@ See `engines` in [package.json](./package.json):
     "npm": ">= 8.0.0"
 },
 ```
+
+Also, be sure to have Docker `>= 4` installed.
 
 MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use.
 

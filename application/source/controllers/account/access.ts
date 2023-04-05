@@ -68,6 +68,7 @@ export default async function (
           utilities.format.response(`Invalid credential. Attempts ${count}.`)
         );
     }
+    await middleware.session.client.del(keySession);
 
     switch (account.state) {
       case settings.constants.State.FROZEN:
