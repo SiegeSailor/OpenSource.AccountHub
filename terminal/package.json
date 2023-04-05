@@ -36,7 +36,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/index.ts"
+    "watch": "ts-node-dev --respawn --require tsconfig-paths/register ./source/index.ts",
+    "start": "ts-node --require tsconfig-paths/register ./source/index.ts"
   },
   "version": "1.0.0"
 }

@@ -67,12 +67,15 @@ async function initialize(message = "What do you want to do?") {
     switch (purpose) {
       case settings.constants.Choice.REGISTER:
         await register();
+        await initialize();
         break;
       case settings.constants.Choice.ACCESS:
         await access();
+        await initialize();
         break;
       case settings.constants.Choice.LEAVE:
         await leave();
+        await initialize();
         break;
       case settings.constants.Choice.EXIT:
         console.log("Successfully terminated the program.\n");
@@ -80,7 +83,6 @@ async function initialize(message = "What do you want to do?") {
       default:
         throw new Error("Invalid operation.");
     }
-    await initialize();
   } catch (error) {
     console.error(error);
     await initialize("Error occurred. Please try again.");
