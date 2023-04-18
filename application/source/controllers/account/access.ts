@@ -48,11 +48,15 @@ export default async function (
     connection = await models.pool.getConnection();
     const accounts = await models.Account.findByUsername(connection, username),
       _account = accounts[0];
+    const isNotExist = !!!_account;
     const account = _account || {
       passcode: settings.constants.Imitation.PASSWORD,
       salt: settings.constants.Imitation.SALT,
     };
-    if (account.passcode !== utilities.hash.password(passcode, account.salt)) {
+    if (
+      account.passcode !== utilities.hash.password(passcode, account.salt) ||
+      isNotExist
+    ) {
       const attempt = await middleware.session.client.get(keySession);
       let count = 1;
       if (attempt) count = JSON.parse(attempt).count + 1;
