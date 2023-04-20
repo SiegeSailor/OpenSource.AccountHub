@@ -25,7 +25,7 @@ export default {
   session: session({
     store: new RedisStore({
       client,
-      prefix: settings.constants.Session.PREFIX,
+      prefix: settings.constants.Prefix.SESSION,
     }),
     name: settings.constants.Session.NAME,
     secret: settings.environment.SECRET,

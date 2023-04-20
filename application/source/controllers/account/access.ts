@@ -21,11 +21,10 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     const MAX_FAILED_ATTEMPT = 3;
-    const FAILED_ATTEMPT_PREFIX = "ATTEMPT:";
     const LOCKOUT_TIME = settings.constants.Milliseconds.MINUTE * 5;
 
-    const keySession = `${FAILED_ATTEMPT_PREFIX}${username}`;
-    const attempt = await middleware.session.client.get(keySession);
+    const keyAttempt = `${settings.constants.Prefix.ATTEMPT}${username}`;
+    const attempt = await middleware.session.client.get(keyAttempt);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
       if (count >= MAX_FAILED_ATTEMPT) {
@@ -48,21 +47,21 @@ export default async function (
     connection = await models.pool.getConnection();
     const accounts = await models.Account.findByUsername(connection, username),
       _account = accounts[0];
-    const isNotExist = !!!_account;
-    const account = _account || {
-      passcode: settings.constants.Imitation.PASSWORD,
-      salt: settings.constants.Imitation.SALT,
-    };
+    const DUMMY_PASSCODE = "";
+    const DUMMY_SALT =
+      "4cefc0fc0f928880e5ac01ad42fc69211030e337ee7b8938cad172dce40f84be" +
+      "e95c00f85f951d0a1341681b34ed98b8fdf0ca4cdec28971855a6f05c373b368";
+    const account = _account || { passcode: DUMMY_PASSCODE, salt: DUMMY_SALT };
     if (
       account.passcode !== utilities.hash.password(passcode, account.salt) ||
-      isNotExist
+      !_account
     ) {
-      const attempt = await middleware.session.client.get(keySession);
+      const attempt = await middleware.session.client.get(keyAttempt);
       let count = 1;
       if (attempt) count = JSON.parse(attempt).count + 1;
 
       await middleware.session.client.set(
-        keySession,
+        keyAttempt,
         JSON.stringify({ count, timestampLast: Date.now() })
       );
 
@@ -72,7 +71,7 @@ export default async function (
           utilities.format.response(`Invalid credential. Attempts ${count}.`)
         );
     }
-    await middleware.session.client.del(keySession);
+    await middleware.session.client.del(keyAttempt);
 
     switch (account.state) {
       case settings.constants.State.FROZEN:
