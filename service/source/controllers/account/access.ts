@@ -24,7 +24,7 @@ export default async function (
   try {
     const MAX_FAILED_ATTEMPT = 3;
     const TIME_LOCKOUT = settings.constants.EMilliseconds.MINUTE * 5;
-    const keyAttempt = `${settings.constants.EStorePrefix.ATTEMPT}${email}`;
+    const keyAttempt = utilities.key.attempt(email);
     const attempt = await databases.store.get(keyAttempt);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
@@ -93,18 +93,18 @@ export default async function (
     let keySession: string | null = null;
     do {
       identifier = v4();
-      keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
+      keySession = utilities.key.session(identifier);
       serializedSession = await databases.store.get(keySession);
     } while (!!serializedSession);
+    const TIME_EXPIRE = settings.constants.EMilliseconds.HOUR / 1000;
     await databases.store.set(
       keySession,
       JSON.stringify(account.session),
-      "PX",
-      settings.constants.EMilliseconds.HOUR
+      "EX",
+      TIME_EXPIRE
     );
 
-    const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
-    const token = JWT.sign(account.session, settings.environment.SECRET, {
+    const token = JWT.sign({}, settings.environment.SECRET, {
       expiresIn: TIME_EXPIRE,
       jwtid: identifier,
     });
@@ -131,3 +131,4 @@ export default async function (
 
 // Generate Key functions
 // /refresh, /profile
+// version endpoint

@@ -19,16 +19,14 @@ async function authenticate(
   let payload: JwtPayload | null = null;
   try {
     payload = JWT.verify(token, settings.environment.SECRET) as JwtPayload;
-    if (!payload) throw new Error();
+    if (!payload || !payload.jti) throw new Error();
   } catch {
     return response
       .status(401)
       .send(utilities.format.response("Invalid session."));
   }
 
-  const session = await databases.store.get(
-    `${settings.constants.EStorePrefix.SESSION}${payload.jti}`
-  );
+  const session = await databases.store.get(utilities.key.session(payload.jti));
   if (!session)
     return response
       .status(401)

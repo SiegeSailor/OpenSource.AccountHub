@@ -23,8 +23,8 @@ enum EMilliseconds {
 }
 
 enum EStorePrefix {
-  SESSION = "ACCOUNT_HUB:",
-  ATTEMPT = "ATTEMPT:",
+  SESSION = "SESSION",
+  ATTEMPT = "ATTEMPT",
 }
 
 export default {

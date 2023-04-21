@@ -1,5 +1,7 @@
 import crypto from "crypto";
 
+import settings from "settings";
+
 const hash = {
   SALT_LENGTH: 64,
   PASSWORD_ITERATION: 1000,
@@ -38,7 +40,17 @@ const format = {
   },
 };
 
+const key = {
+  attempt: function (email: string) {
+    return `${settings.constants.EStorePrefix.ATTEMPT}:${email}`;
+  },
+  session: function (identifier: string) {
+    return `${settings.constants.EStorePrefix.SESSION}:${identifier}`;
+  },
+};
+
 export default {
   format,
   hash,
+  key,
 };
