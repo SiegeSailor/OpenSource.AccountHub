@@ -56,6 +56,16 @@ class Account implements Schema.IAccount {
     return this._updatedAt;
   }
 
+  public get insensitive(): Session.ISession {
+    return {
+      username: this._username,
+      nobility: this._nobility,
+      state: this._state,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+    };
+  }
+
   static validate(input: Pick<Schema.IAccount, "username" | "passcode">) {
     const account: typeof input = { username: "", passcode: "" };
     for (const key in input) {

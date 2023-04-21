@@ -4,6 +4,7 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
+import databases from "databases";
 
 export default async function (
   request: Request,
@@ -19,7 +20,7 @@ export default async function (
 
   let connection: PoolConnection | null = null;
   try {
-    connection = await models.pool.getConnection();
+    connection = await databases.pool.getConnection();
     if ((await models.Account.findByUsername(connection, username)).length)
       return response
         .status(409)

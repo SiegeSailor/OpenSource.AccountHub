@@ -17,6 +17,7 @@
     "outDir": "./build",
     "paths": {
       "controllers/*": ["controllers/*"],
+      "databases/*": ["databases/*"],
       "middleware/*": ["middleware/*"],
       "models/*": ["models/*"],
       "routes/*": ["routes/*"],

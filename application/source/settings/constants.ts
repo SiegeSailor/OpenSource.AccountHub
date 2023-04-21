@@ -21,11 +21,6 @@ enum Milliseconds {
   MINUTE = 60 * 1000,
 }
 
-enum Session {
-  NAME = "ACCOUNT_HUB",
-  USERNAME = "USERNAME",
-}
-
 enum Prefix {
   SESSION = "ACCOUNT_HUB:",
   ATTEMPT = "ATTEMPT:",
@@ -36,6 +31,5 @@ export default {
   Category,
   Nobility,
   Milliseconds,
-  Session,
   Prefix,
 };

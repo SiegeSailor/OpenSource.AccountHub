@@ -12,8 +12,7 @@ main.use(
   express.json(),
   express.urlencoded({ extended: true }),
   cors({ origin: "*", credentials: true }),
-  middleware.handler.log,
-  middleware.session.session
+  middleware.handler.log
 );
 
 main.use("/", routes);

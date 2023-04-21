@@ -1,10 +1,12 @@
 import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
+import JWT from "jsonwebtoken";
+import UUID from "uuid";
 
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
-import middleware from "middleware";
+import databases from "databases";
 
 export default async function (
   request: Request,
@@ -21,22 +23,21 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     const MAX_FAILED_ATTEMPT = 3;
-    const LOCKOUT_TIME = settings.constants.Milliseconds.MINUTE * 5;
-
+    const TIME_LOCKOUT = settings.constants.Milliseconds.MINUTE * 5;
     const keyAttempt = `${settings.constants.Prefix.ATTEMPT}${username}`;
-    const attempt = await middleware.session.client.get(keyAttempt);
+    const attempt = await databases.store.get(keyAttempt);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
       if (count >= MAX_FAILED_ATTEMPT) {
         const milliseconds = Date.now() - timestampLast;
 
-        if (milliseconds < LOCKOUT_TIME) {
+        if (milliseconds < TIME_LOCKOUT) {
           return response
             .status(429)
             .send(
               utilities.format.response(
                 `Failed attempts more than ${MAX_FAILED_ATTEMPT}. Please wait ${Math.ceil(
-                  (LOCKOUT_TIME - milliseconds) / 1000
+                  (TIME_LOCKOUT - milliseconds) / 1000
                 )} seconds before trying again.`
               )
             );
@@ -44,9 +45,10 @@ export default async function (
       }
     }
 
-    connection = await models.pool.getConnection();
+    connection = await databases.pool.getConnection();
     const accounts = await models.Account.findByUsername(connection, username),
       _account = accounts[0];
+
     const DUMMY_PASSCODE = "";
     const DUMMY_SALT =
       "4cefc0fc0f928880e5ac01ad42fc69211030e337ee7b8938cad172dce40f84be" +
@@ -56,11 +58,11 @@ export default async function (
       account.passcode !== utilities.hash.password(passcode, account.salt) ||
       !_account
     ) {
-      const attempt = await middleware.session.client.get(keyAttempt);
+      const attempt = await databases.store.get(keyAttempt);
       let count = 1;
       if (attempt) count = JSON.parse(attempt).count + 1;
 
-      await middleware.session.client.set(
+      await databases.store.set(
         keyAttempt,
         JSON.stringify({ count, timestampLast: Date.now() })
       );
@@ -71,7 +73,7 @@ export default async function (
           utilities.format.response(`Invalid credential. Attempts ${count}.`)
         );
     }
-    await middleware.session.client.del(keyAttempt);
+    await databases.store.del(keyAttempt);
 
     switch (account.state) {
       case settings.constants.State.FROZEN:
@@ -93,15 +95,24 @@ export default async function (
       username
     );
 
-    request.session.regenerate(function (error) {
-      if (error) next(error);
-      request.session[settings.constants.Session.USERNAME] = username;
-      response
-        .status(200)
-        .send(utilities.format.response("Successfully accessed an account."));
-    });
+    let identifier: string | null = null;
+    let serializedSession: string | null = null;
+    let keySession: string | null = null;
+    do {
+      identifier = UUID.v4();
+      keySession = `${settings.constants.Prefix.SESSION}${identifier}`;
+      serializedSession = await databases.store.get(keySession);
+    } while (!!serializedSession);
+    await databases.store.set(keySession, JSON.stringify(account.insensitive));
 
-    return response;
+    const TIME_EXPIRE = settings.constants.Milliseconds.DAY / 1000;
+    return response.status(200).send(
+      utilities.format.response("Successfully accessed an account.", {
+        token: JWT.sign({ identifier }, settings.environment.SECRET, {
+          expiresIn: TIME_EXPIRE,
+        }),
+      })
+    );
   } catch (error) {
     next(error);
     return response;

@@ -1,5 +1,3 @@
-/// <reference path="./schema.d.ts"/>
-
 import settings from "settings";
 import utilities from "utilities";
 import main from "main";

@@ -4,6 +4,7 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import settings from "settings";
+import databases from "databases";
 
 export default async function (
   request: Request,
@@ -12,25 +13,22 @@ export default async function (
 ) {
   let connection: PoolConnection | null = null;
   try {
-    connection = await models.pool.getConnection();
+    if (!request.session) throw new Error();
+    connection = await databases.pool.getConnection();
 
     await models.History.insert(
       connection,
       settings.constants.Category.ACCOUNT,
       "Leaved from a session.",
-      request.session[settings.constants.Session.USERNAME]
+      request.session.username
+    );
+    await databases.store.del(
+      `${settings.constants.Prefix.SESSION}${request.identifier}`
     );
 
-    request.session.cookie.maxAge = settings.constants.Milliseconds.NOW;
-    request.session.destroy(function (error) {
-      if (error) next(error);
-      response.clearCookie(settings.constants.Session.NAME);
-      response
-        .status(200)
-        .send(utilities.format.response("Successfully leaved from a session."));
-    });
-
-    return response;
+    return response
+      .status(200)
+      .send(utilities.format.response("Successfully leaved from a session."));
   } catch (error) {
     next(error);
     return response;
