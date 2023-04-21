@@ -14,6 +14,7 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     if (!request.session || !request.identifier) throw new Error();
+
     connection = await databases.pool.getConnection();
 
     await models.History.insert(
