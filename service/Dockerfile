@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /application
+WORKDIR /service
 
 COPY package*.json tsconfig.json ./
 

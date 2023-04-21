@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import JWT, { JWTPayload } from "jsonwebtoken";
+import JWT, { JwtPayload } from "jsonwebtoken";
 
 import utilities from "utilities";
 import settings from "settings";
@@ -16,9 +16,10 @@ async function authenticate(
       .status(401)
       .send(utilities.format.response("Token is required for this endpoint."));
 
-  let payload: JWTPayload | null = null;
+  let payload: JwtPayload | null = null;
   try {
-    payload = JWT.verify(token, settings.environment.SECRET);
+    payload = JWT.verify(token, settings.environment.SECRET) as JwtPayload;
+    if (!payload) throw new Error();
   } catch {
     return response
       .status(401)
@@ -26,7 +27,7 @@ async function authenticate(
   }
 
   const session = await databases.store.get(
-    `${settings.constants.EStorePrefix.SESSION}${payload.identifier}`
+    `${settings.constants.EStorePrefix.SESSION}${payload.jti}`
   );
   if (!session)
     return response
@@ -34,7 +35,7 @@ async function authenticate(
       .send(utilities.format.response("Session does not exist."));
 
   request.session = JSON.parse(session);
-  request.identifier = payload.identifier;
+  request.identifier = payload.jti;
   next();
   return response;
 }

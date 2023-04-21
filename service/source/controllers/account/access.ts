@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
 import JWT from "jsonwebtoken";
-import UUID from "uuid";
+import { v4 } from "uuid";
 
 import utilities from "utilities";
 import models from "models";
@@ -88,6 +88,22 @@ export default async function (
         break;
     }
 
+    let identifier: string | null = null;
+    let serializedSession: string | null = null;
+    let keySession: string | null = null;
+    do {
+      identifier = v4();
+      keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
+      serializedSession = await databases.store.get(keySession);
+    } while (!!serializedSession);
+    await databases.store.set(keySession, JSON.stringify(account.session));
+
+    const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
+    const token = JWT.sign(account.session, settings.environment.SECRET, {
+      expiresIn: TIME_EXPIRE,
+      jwtid: identifier,
+    });
+
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
@@ -95,22 +111,9 @@ export default async function (
       email
     );
 
-    let identifier: string | null = null;
-    let serializedSession: string | null = null;
-    let keySession: string | null = null;
-    do {
-      identifier = UUID.v4();
-      keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
-      serializedSession = await databases.store.get(keySession);
-    } while (!!serializedSession);
-    await databases.store.set(keySession, JSON.stringify(account.session));
-
-    const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
     return response.status(200).send(
       utilities.format.response("Successfully accessed an account.", {
-        token: JWT.sign({ identifier }, settings.environment.SECRET, {
-          expiresIn: TIME_EXPIRE,
-        }),
+        token,
       })
     );
   } catch (error) {
@@ -120,3 +123,8 @@ export default async function (
     if (connection) connection.release();
   }
 }
+
+// Check JWTID
+// Generate Key functions
+// Expired session handling (periodically clean?)
+// /refresh, /profile
