@@ -128,6 +128,3 @@ export default async function (
     if (connection) connection.release();
   }
 }
-
-// /refresh, /profile
-// version endpoint

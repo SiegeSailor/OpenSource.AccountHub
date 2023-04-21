@@ -22,7 +22,7 @@ async function authenticate(
     if (!payload || !payload.jti) throw new Error();
   } catch (_) {
     const error = _ as Error;
-    let message = "";
+    let message = "Invalid session.";
     switch (error.name) {
       case JWT.JsonWebTokenError.name:
         message = "Invalid token.";
