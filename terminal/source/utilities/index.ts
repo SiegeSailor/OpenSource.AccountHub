@@ -3,7 +3,7 @@ import settings from "settings";
 const format = {
   requestURL: function (path: string) {
     const protocol = settings.environment.HTTPS ? "https" : "http";
-    return `${protocol}://${settings.environment.APPLICATION_HOST}:${settings.environment.APPLICATION_PORT}/${path}`;
+    return `${protocol}://${settings.environment.SERVICE_HOST}:${settings.environment.SERVICE_PORT}/${path}`;
   },
   message: async function (response: Response) {
     const result = await response.json();

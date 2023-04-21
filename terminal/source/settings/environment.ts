@@ -1,11 +1,7 @@
-const {
-  HTTPS,
-  APPLICATION_HOST = "localhost",
-  APPLICATION_PORT = 80,
-} = process.env;
+const { HTTPS, SERVICE_HOST = "localhost", SERVICE_PORT = 80 } = process.env;
 
 export default {
   HTTPS: Boolean(HTTPS),
-  APPLICATION_HOST,
-  APPLICATION_PORT: Number(APPLICATION_PORT),
+  SERVICE_HOST,
+  SERVICE_PORT: Number(SERVICE_PORT),
 };

@@ -55,15 +55,15 @@ services:
     ports:
       - ${SESSION_PORT}:6379
 
-  application:
+  service:
     restart: always
     build:
       labels:
         PROJECT: account-hub
-        SERVICE: application
-      context: ./application
+        SERVICE: service
+      context: ./service
       dockerfile: Dockerfile
-    image: account-hub-application
+    image: account-hub-service
     environment:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_USER=${DATABASE_USER}
@@ -73,14 +73,14 @@ services:
       - SESSION_PORT=${SESSION_PORT}
       - SECRET=${SECRET}
       - HTTPS=${HTTPS}
-      - APPLICATION_PORT=${APPLICATION_PORT}
-    container_name: application
+      - SERVICE_PORT=${SERVICE_PORT}
+    container_name: service
     networks:
       - entry
     volumes:
-      - ./application/source:/application/source
+      - ./service/source:/service/source
     ports:
-      - 80:${APPLICATION_PORT}
+      - 80:${SERVICE_PORT}
     depends_on:
       - database
       - session
