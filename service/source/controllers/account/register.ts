@@ -11,9 +11,9 @@ export default async function (
   response: Response,
   next: NextFunction
 ) {
-  const { username, passcode } = request.body;
+  const { email, passcode } = request.body;
 
-  if (!username || !passcode)
+  if (!email || !passcode)
     return response
       .status(400)
       .send(utilities.format.response("Required fields are not filled."));
@@ -21,7 +21,7 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     connection = await databases.pool.getConnection();
-    if ((await models.Account.findByUsername(connection, username)).length)
+    if ((await models.Account.findByEmail(connection, email)).length)
       return response
         .status(409)
         .send(utilities.format.response("Account already exists."));
@@ -31,7 +31,7 @@ export default async function (
       await models.Account.insert(
         connection,
         utilities.hash.password,
-        username,
+        email,
         passcode
       );
     } catch (_) {
@@ -44,7 +44,7 @@ export default async function (
       connection,
       settings.constants.ECategory.ACCOUNT,
       "Registered the account.",
-      username
+      email
     );
     await connection.commit();
 

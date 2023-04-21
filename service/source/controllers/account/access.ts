@@ -13,9 +13,9 @@ export default async function (
   response: Response,
   next: NextFunction
 ) {
-  const { username, passcode } = request.body;
+  const { email, passcode } = request.body;
 
-  if (!username || !passcode)
+  if (!email || !passcode)
     return response
       .status(400)
       .send(utilities.format.response("Required fields are not filled."));
@@ -24,7 +24,7 @@ export default async function (
   try {
     const MAX_FAILED_ATTEMPT = 3;
     const TIME_LOCKOUT = settings.constants.EMilliseconds.MINUTE * 5;
-    const keyAttempt = `${settings.constants.EStorePrefix.ATTEMPT}${username}`;
+    const keyAttempt = `${settings.constants.EStorePrefix.ATTEMPT}${email}`;
     const attempt = await databases.store.get(keyAttempt);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
@@ -46,7 +46,7 @@ export default async function (
     }
 
     connection = await databases.pool.getConnection();
-    const accounts = await models.Account.findByUsername(connection, username),
+    const accounts = await models.Account.findByEmail(connection, email),
       _account = accounts[0];
 
     const DUMMY_PASSCODE = "";
@@ -92,7 +92,7 @@ export default async function (
       connection,
       settings.constants.ECategory.ACCOUNT,
       "Accessed the account.",
-      username
+      email
     );
 
     let identifier: string | null = null;
@@ -103,7 +103,7 @@ export default async function (
       keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
       serializedSession = await databases.store.get(keySession);
     } while (!!serializedSession);
-    await databases.store.set(keySession, JSON.stringify(account.insensitive));
+    await databases.store.set(keySession, JSON.stringify(account.session));
 
     const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
     return response.status(200).send(

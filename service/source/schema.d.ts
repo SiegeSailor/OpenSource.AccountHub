@@ -1,6 +1,6 @@
 declare module Schema {
   interface IAccount {
-    username: string;
+    email: string;
     passcode: string;
     salt: string;
     nobility: number;
@@ -13,7 +13,7 @@ declare module Schema {
     identifier: number;
     category: string;
     content: string;
-    username: string;
+    accountEmail: string;
     createdAt: number;
   }
 }

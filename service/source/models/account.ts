@@ -4,13 +4,14 @@ import settings from "settings";
 import utilities from "utilities";
 
 class Account implements Schema.IAccount {
-  static readonly USERNAME_MIN_LENGTH = 8;
-  static readonly PASSWORD_MIN_LENGTH = 16;
+  static readonly EMAIL_MIN_LENGTH = 3;
+  static readonly PASSWORD_MIN_LENGTH = 12;
   static readonly REGEX_ONLY_LETTERS_DIGITS = /^[A-Za-z-9]+$/;
+  static readonly REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   static readonly REGEX_ONE_BOTH_CASE_DIGIT_SPECIAL =
     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?;\[\]\\',./`~\-=])/;
 
-  private _username = "";
+  private _email = "";
   private _passcode = "";
   private _salt = "";
   private _nobility = settings.constants.ENobility.NAIVE;
@@ -19,7 +20,7 @@ class Account implements Schema.IAccount {
   private _updatedAt = 0;
 
   constructor(row: RowDataPacket) {
-    this._username = row.username;
+    this._email = row.email;
     this._passcode = row.passcode;
     this._salt = row.salt;
     this._nobility = row.nobility;
@@ -28,8 +29,8 @@ class Account implements Schema.IAccount {
     this._updatedAt = row.updated_at;
   }
 
-  public get username() {
-    return this._username;
+  public get email() {
+    return this._email;
   }
 
   public get passcode() {
@@ -56,9 +57,9 @@ class Account implements Schema.IAccount {
     return this._updatedAt;
   }
 
-  public get insensitive(): Session.ISession {
+  public get session(): Session.ISession {
     return {
-      username: this._username,
+      email: this._email,
       nobility: this._nobility,
       state: this._state,
       createdAt: this._createdAt,
@@ -66,18 +67,18 @@ class Account implements Schema.IAccount {
     };
   }
 
-  static validate(input: Pick<Schema.IAccount, "username" | "passcode">) {
-    const account: typeof input = { username: "", passcode: "" };
+  static validate(input: Pick<Schema.IAccount, "email" | "passcode">) {
+    const account: typeof input = { email: "", passcode: "" };
     for (const key in input) {
       account[key] = input[key];
       switch (key) {
-        case "username":
-          if (input[key].length < this.USERNAME_MIN_LENGTH)
+        case "email":
+          if (input[key].length < this.EMAIL_MIN_LENGTH)
             throw new Error(
-              `${key} have to be at least ${this.USERNAME_MIN_LENGTH} long.`
+              `${key} have to be at least ${this.EMAIL_MIN_LENGTH} long.`
             );
-          if (!this.REGEX_ONLY_LETTERS_DIGITS.test(input[key]))
-            throw new Error(`${key} can only contain letters and numbers.`);
+          if (!this.REGEX_EMAIL.test(input[key]))
+            throw new Error(`${key} is not a valid email address.`);
           break;
         case "passcode":
           if (input[key].length < this.PASSWORD_MIN_LENGTH)
@@ -97,21 +98,21 @@ class Account implements Schema.IAccount {
   static async insert(
     connection: PoolConnection,
     hash: typeof utilities.hash.password,
-    username: string,
+    email: string,
     passcode: string
   ) {
-    const account = this.validate({ username, passcode });
+    const account = this.validate({ email, passcode });
     const salt = utilities.hash.salt();
     await connection.execute(
-      "INSERT INTO account (username, passcode, salt) VALUES (?, ?, ?);",
-      [account.username, hash(account.passcode, salt), salt]
+      "INSERT INTO account (email, passcode, salt) VALUES (?, ?, ?);",
+      [account.email, hash(account.passcode, salt), salt]
     );
   }
 
-  static async findByUsername(connection: PoolConnection, username: string) {
+  static async findByEmail(connection: PoolConnection, email: string) {
     const [rows] = await connection.execute(
-      "SELECT * FROM account WHERE username = ?",
-      [username]
+      "SELECT * FROM account WHERE email = ?",
+      [email]
     );
     return (rows as RowDataPacket[]).map((row) => {
       return new Account(row);

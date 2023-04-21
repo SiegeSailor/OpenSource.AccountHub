@@ -1,6 +1,6 @@
 declare module Session {
   interface ISession {
-    username: string;
+    email: string;
     nobility: number;
     state: string;
     createdAt: number;

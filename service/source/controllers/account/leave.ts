@@ -20,7 +20,7 @@ export default async function (
       connection,
       settings.constants.ECategory.ACCOUNT,
       "Leaved from a session.",
-      request.session.username
+      request.session.email
     );
     await databases.store.del(
       `${settings.constants.EStorePrefix.SESSION}${request.identifier}`
