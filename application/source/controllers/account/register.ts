@@ -42,7 +42,7 @@ export default async function (
     }
     await models.History.insert(
       connection,
-      settings.constants.Category.ACCOUNT,
+      settings.constants.ECategory.ACCOUNT,
       "Registered the account.",
       username
     );

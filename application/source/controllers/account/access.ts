@@ -23,8 +23,8 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     const MAX_FAILED_ATTEMPT = 3;
-    const TIME_LOCKOUT = settings.constants.Milliseconds.MINUTE * 5;
-    const keyAttempt = `${settings.constants.Prefix.ATTEMPT}${username}`;
+    const TIME_LOCKOUT = settings.constants.EMilliseconds.MINUTE * 5;
+    const keyAttempt = `${settings.constants.EStorePrefix.ATTEMPT}${username}`;
     const attempt = await databases.store.get(keyAttempt);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
@@ -76,11 +76,11 @@ export default async function (
     await databases.store.del(keyAttempt);
 
     switch (account.state) {
-      case settings.constants.State.FROZEN:
+      case settings.constants.EState.FROZEN:
         return response
           .status(403)
           .send(utilities.format.response("This account has been frozen."));
-      case settings.constants.State.CANCELED:
+      case settings.constants.EState.CANCELED:
         return response
           .status(403)
           .send(utilities.format.response("This account has been canceled."));
@@ -90,7 +90,7 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.Category.ACCOUNT,
+      settings.constants.ECategory.ACCOUNT,
       "Accessed the account.",
       username
     );
@@ -100,12 +100,12 @@ export default async function (
     let keySession: string | null = null;
     do {
       identifier = UUID.v4();
-      keySession = `${settings.constants.Prefix.SESSION}${identifier}`;
+      keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
       serializedSession = await databases.store.get(keySession);
     } while (!!serializedSession);
     await databases.store.set(keySession, JSON.stringify(account.insensitive));
 
-    const TIME_EXPIRE = settings.constants.Milliseconds.DAY / 1000;
+    const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
     return response.status(200).send(
       utilities.format.response("Successfully accessed an account.", {
         token: JWT.sign({ identifier }, settings.environment.SECRET, {

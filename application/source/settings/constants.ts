@@ -1,35 +1,35 @@
-enum State {
+enum EState {
   FROZEN = "F",
   NORMAL = "N",
   CANCELED = "C",
 }
 
-export enum Category {
+export enum ECategory {
   ACCOUNT = "A",
   SYSTEM = "S",
   HISTORY = "H",
 }
 
-enum Nobility {
+enum ENobility {
   NAIVE = 1,
   ADMIN = 100,
 }
 
-enum Milliseconds {
+enum EMilliseconds {
   NOW = 0,
   DAY = 24 * 60 * 60 * 1000,
   MINUTE = 60 * 1000,
 }
 
-enum Prefix {
+enum EStorePrefix {
   SESSION = "ACCOUNT_HUB:",
   ATTEMPT = "ATTEMPT:",
 }
 
 export default {
-  State,
-  Category,
-  Nobility,
-  Milliseconds,
-  Prefix,
+  EState,
+  ECategory,
+  ENobility,
+  EMilliseconds,
+  EStorePrefix,
 };

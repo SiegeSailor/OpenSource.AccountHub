@@ -18,12 +18,12 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.Category.ACCOUNT,
+      settings.constants.ECategory.ACCOUNT,
       "Leaved from a session.",
       request.session.username
     );
     await databases.store.del(
-      `${settings.constants.Prefix.SESSION}${request.identifier}`
+      `${settings.constants.EStorePrefix.SESSION}${request.identifier}`
     );
 
     return response

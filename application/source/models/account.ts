@@ -13,7 +13,7 @@ class Account implements Schema.IAccount {
   private _username = "";
   private _passcode = "";
   private _salt = "";
-  private _nobility = settings.constants.Nobility.NAIVE;
+  private _nobility = settings.constants.ENobility.NAIVE;
   private _state = "";
   private _createdAt = 0;
   private _updatedAt = 0;
