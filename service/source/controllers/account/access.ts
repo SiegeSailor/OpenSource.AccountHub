@@ -129,6 +129,5 @@ export default async function (
   }
 }
 
-// Generate Key functions
 // /refresh, /profile
 // version endpoint

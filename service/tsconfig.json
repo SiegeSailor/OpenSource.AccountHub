@@ -35,5 +35,5 @@
     "tsBuildInfoFile": "./build-cache"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "**/*.d.ts"]
 }
