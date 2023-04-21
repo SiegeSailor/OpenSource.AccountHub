@@ -20,10 +20,21 @@ async function authenticate(
   try {
     payload = JWT.verify(token, settings.environment.SECRET) as JwtPayload;
     if (!payload || !payload.jti) throw new Error();
-  } catch {
-    return response
-      .status(401)
-      .send(utilities.format.response("Invalid session."));
+  } catch (_) {
+    const error = _ as Error;
+    let message = "";
+    switch (error.name) {
+      case JWT.JsonWebTokenError.name:
+        message = "Invalid token.";
+        break;
+      case JWT.NotBeforeError.name:
+        message = "Token is not available yet.";
+        break;
+      case JWT.TokenExpiredError.name:
+        message = "Token has expired.";
+        break;
+    }
+    return response.status(401).send(utilities.format.response(message));
   }
 
   const session = await databases.store.get(utilities.key.session(payload.jti));
