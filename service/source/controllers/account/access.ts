@@ -96,7 +96,12 @@ export default async function (
       keySession = `${settings.constants.EStorePrefix.SESSION}${identifier}`;
       serializedSession = await databases.store.get(keySession);
     } while (!!serializedSession);
-    await databases.store.set(keySession, JSON.stringify(account.session));
+    await databases.store.set(
+      keySession,
+      JSON.stringify(account.session),
+      "PX",
+      settings.constants.EMilliseconds.HOUR
+    );
 
     const TIME_EXPIRE = settings.constants.EMilliseconds.DAY / 1000;
     const token = JWT.sign(account.session, settings.environment.SECRET, {
@@ -124,7 +129,5 @@ export default async function (
   }
 }
 
-// Check JWTID
 // Generate Key functions
-// Expired session handling (periodically clean?)
 // /refresh, /profile
