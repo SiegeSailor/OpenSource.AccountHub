@@ -19,7 +19,7 @@ async function authenticate(
   let payload: JwtPayload | null = null;
   try {
     payload = JWT.verify(token, settings.environment.SECRET) as JwtPayload;
-    if (!payload || !payload.jti) throw new Error();
+    if (!payload) throw new Error();
   } catch (_) {
     const error = _ as Error;
     let message = "Invalid session.";
@@ -37,14 +37,16 @@ async function authenticate(
     return response.status(401).send(utilities.format.response(message));
   }
 
-  const session = await databases.store.get(utilities.key.session(payload.jti));
+  const session = await databases.store.get(
+    utilities.key.session(payload.identifier)
+  );
   if (!session)
     return response
       .status(401)
       .send(utilities.format.response("Session does not exist."));
 
   request.session = JSON.parse(session);
-  request.identifier = payload.jti;
+  request.payload = payload;
   next();
   return response;
 }

@@ -96,17 +96,15 @@ export default async function (
       keySession = utilities.key.session(identifier);
       serializedSession = await databases.store.get(keySession);
     } while (!!serializedSession);
-    const TIME_EXPIRE = settings.constants.EMilliseconds.HOUR / 1000;
     await databases.store.set(
       keySession,
       JSON.stringify(account.session),
       "EX",
-      TIME_EXPIRE
+      settings.constants.EToken.EXPIRY_SECONDS
     );
 
-    const token = JWT.sign({}, settings.environment.SECRET, {
-      expiresIn: TIME_EXPIRE,
-      jwtid: identifier,
+    const token = JWT.sign({ identifier }, settings.environment.SECRET, {
+      expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
     });
 
     await models.History.insert(

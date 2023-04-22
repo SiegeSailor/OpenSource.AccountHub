@@ -13,5 +13,8 @@ router
 router
   .route("/profile")
   .get(middleware.session.authenticate, controllers.account.profile);
+router
+  .route("/revive")
+  .post(middleware.session.authenticate, controllers.account.revive);
 
 export default router;

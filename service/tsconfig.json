@@ -10,6 +10,8 @@
     "lib": ["DOM", "DOM.Iterable", "ESNEXT"],
     "module": "CommonJS",
     "moduleResolution": "Node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noEmit": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,

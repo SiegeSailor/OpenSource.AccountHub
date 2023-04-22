@@ -4,7 +4,7 @@ import utilities from "utilities";
 
 function log(request: Request, _: Response, next: NextFunction) {
   console.log(
-    `${utilities.format.time()} Received request from ${
+    `${utilities.format.time()} Received a request from ${
       request.ip
     } to ${encodeURI(request.url)}.`
   );

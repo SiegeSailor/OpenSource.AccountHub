@@ -27,10 +27,15 @@ enum EStorePrefix {
   ATTEMPT = "ATTEMPT",
 }
 
+enum EToken {
+  EXPIRY_SECONDS = EMilliseconds.HOUR / 1000,
+}
+
 export default {
   EState,
   ECategory,
   ENobility,
   EMilliseconds,
   EStorePrefix,
+  EToken,
 };

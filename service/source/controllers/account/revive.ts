@@ -1,10 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
+import JWT from "jsonwebtoken";
 
 import utilities from "utilities";
 import models from "models";
-import settings from "settings";
 import databases from "databases";
+import settings from "settings";
 
 export default async function (
   request: Request,
@@ -13,23 +14,31 @@ export default async function (
 ) {
   let connection: PoolConnection | null = null;
   try {
-    if (!request.session || !request.payload) throw new Error();
+    if (!request.session || !request.payload || !request.payload.exp)
+      throw new Error();
 
     connection = await databases.pool.getConnection();
+
+    const token = JWT.sign(
+      {
+        ...request.payload,
+        exp: request.payload.exp + settings.constants.EToken.EXPIRY_SECONDS,
+      },
+      settings.environment.SECRET
+    );
 
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
-      "Leaved from a session.",
+      "Revived the token.",
       request.session.email
     );
-    await databases.store.del(
-      utilities.key.session(request.payload.identifier)
-    );
 
-    return response
-      .status(200)
-      .send(utilities.format.response("Successfully leaved from a session."));
+    return response.status(200).send(
+      utilities.format.response("Successfully revived the token.", {
+        token,
+      })
+    );
   } catch (error) {
     next(error);
     return response;
