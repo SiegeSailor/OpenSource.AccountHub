@@ -38,7 +38,7 @@ async function authenticate(
   }
 
   const session = await databases.store.get(
-    utilities.key.session(payload.identifier)
+    utilities.key.session(payload.data.identifier)
   );
   if (!session)
     return response

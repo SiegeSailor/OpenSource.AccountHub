@@ -103,9 +103,13 @@ export default async function (
       settings.constants.EToken.EXPIRY_SECONDS
     );
 
-    const token = JWT.sign({ identifier }, settings.environment.SECRET, {
-      expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
-    });
+    const token = JWT.sign(
+      { data: { identifier } },
+      settings.environment.SECRET,
+      {
+        expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
+      }
+    );
 
     await models.History.insert(
       connection,

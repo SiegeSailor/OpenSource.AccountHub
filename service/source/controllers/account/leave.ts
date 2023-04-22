@@ -24,7 +24,7 @@ export default async function (
       request.session.email
     );
     await databases.store.del(
-      utilities.key.session(request.payload.identifier)
+      utilities.key.session(request.payload.data.identifier)
     );
 
     return response
