@@ -11,22 +11,30 @@ export default async function (
   response: Response,
   next: NextFunction
 ) {
+  const { email } = request.params;
+
+  if (!email)
+    return response
+      .status(400)
+      .send(utilities.format.response("Required fields are not filled."));
+
   let connection: PoolConnection | null = null;
   try {
     if (!request.session) throw new Error();
 
     connection = await databases.pool.getConnection();
 
-    const accounts = await models.Account.findByEmail(
-        connection,
-        request.session.email
-      ),
+    const accounts = await models.Account.findByEmail(connection, email),
       account = accounts[0];
+    if (!account)
+      return response
+        .status(404)
+        .send(utilities.format.response("The required account doesn't exist."));
 
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
-      "Viewed the profile.",
+      `Viewed the profile from ${email}.`,
       request.session.email
     );
 
@@ -45,3 +53,5 @@ export default async function (
     if (connection) connection.release();
   }
 }
+
+// privilege table, history, i18n, Update profile, frozen, cancel

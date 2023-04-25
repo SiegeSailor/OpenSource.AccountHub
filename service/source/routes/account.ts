@@ -11,7 +11,7 @@ router
   .route("/leave")
   .post(middleware.session.authenticate, controllers.account.leave);
 router
-  .route("/profile")
+  .route("/profile/:email")
   .get(middleware.session.authenticate, controllers.account.profile);
 router
   .route("/revive")
