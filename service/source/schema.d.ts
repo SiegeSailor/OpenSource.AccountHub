@@ -3,7 +3,6 @@ declare module Schema {
     email: string;
     passcode: string;
     salt: string;
-    nobility: number;
     state: string;
     createdAt: number;
     updatedAt: number;

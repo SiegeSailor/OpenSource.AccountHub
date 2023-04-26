@@ -14,7 +14,6 @@ class Account implements Schema.IAccount {
   private _email = "";
   private _passcode = "";
   private _salt = "";
-  private _nobility = settings.constants.ENobility.NAIVE;
   private _state = "";
   private _createdAt = 0;
   private _updatedAt = 0;
@@ -23,7 +22,6 @@ class Account implements Schema.IAccount {
     this._email = row.email;
     this._passcode = row.passcode;
     this._salt = row.salt;
-    this._nobility = row.nobility;
     this._state = row.state;
     this._createdAt = row.created_at;
     this._updatedAt = row.updated_at;
@@ -41,10 +39,6 @@ class Account implements Schema.IAccount {
     return this._salt;
   }
 
-  public get nobility() {
-    return this._nobility;
-  }
-
   public get state() {
     return this._state;
   }
@@ -60,7 +54,6 @@ class Account implements Schema.IAccount {
   public get session(): Session.ISession {
     return {
       email: this._email,
-      nobility: this._nobility,
       state: this._state,
       createdAt: this._createdAt,
       updatedAt: this._updatedAt,
