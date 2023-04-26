@@ -29,7 +29,7 @@ export default async function (
     if (!account)
       return response
         .status(404)
-        .send(utilities.format.response("The account doesn't exist."));
+        .send(utilities.format.response("The account does not exist."));
 
     await models.Account.grant(connection, email, privileges);
 

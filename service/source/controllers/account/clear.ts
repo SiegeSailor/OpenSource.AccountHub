@@ -20,14 +20,16 @@ export default async function (
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
-      "Leaved from a session.",
+      "Cleared existing sessions.",
       request.session.email
     );
     await databases.store.del(utilities.key.session(request.session.email));
 
     return response
       .status(200)
-      .send(utilities.format.response("Successfully leaved from a session."));
+      .send(
+        utilities.format.response("Successfully cleared existing sessions.")
+      );
   } catch (error) {
     next(error);
     return response;
