@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import settings from "settings/index";
 
 import utilities from "utilities";
 
@@ -12,7 +13,7 @@ function log(request: Request, _: Response, next: NextFunction) {
 }
 
 function fallback(request: Request, response: Response) {
-  response
+  return response
     .status(404)
     .send(
       utilities.format.response(
@@ -28,8 +29,23 @@ function error(
   _: NextFunction
 ) {
   console.error(`From ${request.url}`);
-  console.error(error.stack);
-  response
+  console.error(error);
+
+  if (error.code) {
+    switch (error.code) {
+      case settings.constants.EDatabaseCode.DUP_ENTRY:
+      case settings.constants.EDatabaseCode.DUPLICATE_KEY:
+        return response
+          .status(409)
+          .send(utilities.format.response("Data already exist."));
+      default:
+        return response
+          .status(500)
+          .send(utilities.format.response("Errors occur in the database."));
+    }
+  }
+
+  return response
     .status(500)
     .send(utilities.format.response("Failed to handle the request."));
 }

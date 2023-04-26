@@ -24,19 +24,12 @@ export default async function (
 
     await connection.beginTransaction();
 
-    try {
-      await models.Account.insert(
-        connection,
-        utilities.hash.password,
-        email,
-        passcode
-      );
-    } catch (_) {
-      const error = _ as Error;
-      return response
-        .status(400)
-        .send(utilities.format.response(`${error["code"]} ${error.message}`));
-    }
+    await models.Account.insert(
+      connection,
+      utilities.hash.password,
+      email,
+      passcode
+    );
 
     await models.History.insert(
       connection,

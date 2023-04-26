@@ -7,6 +7,12 @@ declare global {
       payload?: JwtPayload;
     }
   }
+
+  export interface Error {
+    code?: string;
+    errno?: number;
+    sql?: string;
+  }
 }
 
 export default {};
