@@ -5,9 +5,9 @@ import utilities from "utilities";
 
 function log(request: Request, _: Response, next: NextFunction) {
   console.log(
-    `${utilities.format.time()} Received a request from ${
-      request.ip
-    } to ${encodeURI(request.url)}.`
+    `${utilities.format.time()} Received a request to ${encodeURI(
+      request.url
+    )}.`
   );
   next();
 }
@@ -29,7 +29,10 @@ function error(
   _: NextFunction
 ) {
   console.error(`From ${request.url}`);
-  console.error(error);
+  console.error(error.stack);
+  Object.entries(error).forEach(([key, value]) => {
+    console.error(`${key}: ${value}`);
+  });
 
   if (error.code) {
     switch (error.code) {
