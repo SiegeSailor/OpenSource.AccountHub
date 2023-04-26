@@ -14,14 +14,14 @@ export default async function (
   const { email } = request.params;
   const { privileges } = request.body;
 
-  if (!email || !privileges)
+  if (!privileges)
     return response
       .status(400)
       .send(utilities.format.response("Required fields are not filled."));
 
   let connection: PoolConnection | null = null;
   try {
-    if (!request.session) throw new Error();
+    if (!request.session) throw new ReferenceError();
 
     connection = await databases.pool.getConnection();
 

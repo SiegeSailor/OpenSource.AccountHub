@@ -48,6 +48,33 @@ class History implements Schema.IHistory {
       [category, content, accountEmail]
     );
   }
+
+  static async findByEmailRange(
+    connection: PoolConnection,
+    email: string,
+    limit: number,
+    page: number,
+    start: number,
+    end: number
+  ) {
+    const condition = { limit, page, start, end };
+    for (const key in condition)
+      if (condition[key] <= 0)
+        throw new TypeError(
+          `${key} has to be a positive number rather than ${condition[key]}.`
+        );
+
+    const offset = (page - 1) * limit;
+    const histories = (
+      await connection.execute(
+        "SELECT * FROM history WHERE email = ? AND created_at >= ? AND created_at <= ? ORDER BY email LIMIT ? OFFSET ?;",
+        [email, new Date(start), new Date(end), limit, offset]
+      )
+    )[0];
+    return (histories as RowDataPacket[]).map((row) => {
+      return new History(row);
+    });
+  }
 }
 
 export default History;

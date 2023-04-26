@@ -15,7 +15,7 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     if (!request.session || !request.payload || !request.payload.exp)
-      throw new Error();
+      throw new ReferenceError();
 
     connection = await databases.pool.getConnection();
 
