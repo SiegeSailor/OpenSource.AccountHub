@@ -5,7 +5,7 @@ import utilities from "utilities";
 
 function log(request: Request, _: Response, next: NextFunction) {
   console.log(
-    `${utilities.format.time()} Received a request to ${encodeURI(
+    `[INFO] ${utilities.format.time()} Received a request to ${encodeURI(
       request.url
     )}.`
   );
@@ -28,13 +28,20 @@ function error(
   response: Response,
   _: NextFunction
 ) {
-  console.error(`From ${request.url}`);
+  console.error(
+    `[ERROR] ${utilities.format.time()} ${error.name} from ${request.url}`
+  );
   console.error(error.stack);
-  Object.entries(error).forEach(([key, value]) => {
-    console.error(`${key}: ${value}`);
-  });
+
+  if (error.name === "TypeError")
+    return response
+      .status(400)
+      .send(
+        utilities.format.response(utilities.format.capitalize(error.message))
+      );
 
   if (error.code) {
+    console.error(`Error Code: ${error.code}`);
     switch (error.code) {
       case settings.constants.EDatabaseCode.DUP_ENTRY:
       case settings.constants.EDatabaseCode.DUPLICATE_KEY:

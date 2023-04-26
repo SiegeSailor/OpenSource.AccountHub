@@ -72,19 +72,19 @@ class Account implements Schema.IAccount {
       switch (key) {
         case "email":
           if (input[key].length < this.EMAIL_MIN_LENGTH)
-            throw new Error(
-              `${key} have to be at least ${this.EMAIL_MIN_LENGTH} long.`
+            throw new TypeError(
+              `${key} has to be at least ${this.EMAIL_MIN_LENGTH} long.`
             );
           if (!this.REGEX_EMAIL.test(input[key]))
-            throw new Error(`${key} is not a valid email address.`);
+            throw new TypeError(`${key} is not a valid email address.`);
           break;
         case "passcode":
           if (input[key].length < this.PASSWORD_MIN_LENGTH)
-            throw new Error(
-              `${key} have to be at least ${this.PASSWORD_MIN_LENGTH} long.`
+            throw new TypeError(
+              `${key} has to be at least ${this.PASSWORD_MIN_LENGTH} long.`
             );
           if (!this.REGEX_ONE_BOTH_CASE_DIGIT_SPECIAL.test(input[key]))
-            throw new Error(
+            throw new TypeError(
               `${key} has to contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.`
             );
           break;

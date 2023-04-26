@@ -38,6 +38,9 @@ const format = {
     const date = new Date();
     return `${date.toTimeString().slice(0, 8)}`;
   },
+  capitalize: function (input: string) {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+  },
   bracket: function (count: number) {
     return `(${Array.from({ length: count }).fill("?").join(", ")})`;
   },
