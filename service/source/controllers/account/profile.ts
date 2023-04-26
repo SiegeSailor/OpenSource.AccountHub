@@ -30,6 +30,12 @@ export default async function (
         .status(404)
         .send(utilities.format.response("The account does not exist."));
 
+    await databases.store.set(
+      utilities.key.session(request.session.email),
+      JSON.stringify(account.session),
+      "XX"
+    );
+
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,

@@ -17,13 +17,14 @@ export default async function (
 
     connection = await databases.pool.getConnection();
 
+    await databases.store.del(utilities.key.session(request.session.email));
+
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
       "Cleared existing sessions.",
       request.session.email
     );
-    await databases.store.del(utilities.key.session(request.session.email));
 
     return response
       .status(200)

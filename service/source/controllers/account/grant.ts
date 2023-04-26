@@ -25,17 +25,17 @@ export default async function (
 
     connection = await databases.pool.getConnection();
 
-    const account = await models.Account.findByEmail(connection, email);
-    if (!account)
-      return response
-        .status(404)
-        .send(utilities.format.response("The account does not exist."));
+    await connection.beginTransaction();
 
     await models.Account.grant(connection, email, privileges);
 
     await databases.store.set(
       utilities.key.session(request.session.email),
-      JSON.stringify({ ...account.session, privileges })
+      JSON.stringify({
+        ...request.session,
+        privileges: [...request.session.privileges, ...privileges],
+      }),
+      "XX"
     );
 
     await models.History.insert(
@@ -44,6 +44,7 @@ export default async function (
       `Grant ${privileges} privileges to ${email}.`,
       request.session.email
     );
+    await connection.commit();
 
     return response
       .status(200)
@@ -53,6 +54,7 @@ export default async function (
         )
       );
   } catch (error) {
+    if (connection) await connection.rollback();
     next(error);
     return response;
   } finally {
