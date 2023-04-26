@@ -38,6 +38,10 @@ const format = {
     const date = new Date();
     return `${date.toTimeString().slice(0, 8)}`;
   },
+  statement: function (length: number, count: number) {
+    const bracket = `(${Array.from({ length: count }).fill("?").join(", ")})`;
+    return Array.from({ length }).fill(bracket).join(", ");
+  },
 };
 
 const key = {

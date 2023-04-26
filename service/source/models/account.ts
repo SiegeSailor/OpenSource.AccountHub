@@ -112,19 +112,16 @@ class Account implements Schema.IAccount {
     email: string,
     privileges: number[]
   ) {
-    let placeholder = "";
-    for (let index = 0; index < privileges.length; index++) {
-      placeholder += "(?, ?)";
-      if (index !== privileges.length - 1) placeholder += ", ";
-    }
-    const values: (string | number)[] = [];
-    privileges.forEach((privilege) => {
-      values.push(privilege);
-      values.push(email);
-    });
     await connection.execute(
-      `INSERT INTO privilege (identifier, account_email) VALUES ${placeholder};`,
-      values
+      `INSERT INTO privilege (identifier, account_email) VALUES ${utilities.format.statement(
+        privileges.length,
+        2
+      )};`,
+      privileges.reduce<(string | number)[]>((accumulator, current) => {
+        accumulator.push(current);
+        accumulator.push(email);
+        return accumulator;
+      }, [])
     );
   }
 
