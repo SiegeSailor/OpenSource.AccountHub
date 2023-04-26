@@ -15,7 +15,9 @@ function fallback(request: Request, response: Response) {
   response
     .status(404)
     .send(
-      utilities.format.response(`${encodeURI(request.url)} is not available.`)
+      utilities.format.response(
+        `${request.method} ${encodeURI(request.url)} is not available.`
+      )
     );
 }
 

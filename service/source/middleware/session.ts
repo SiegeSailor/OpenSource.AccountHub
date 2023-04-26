@@ -28,10 +28,10 @@ async function authenticate(
         message = "Invalid token.";
         break;
       case JWT.NotBeforeError.name:
-        message = "Token is not available yet.";
+        message = "The token is not available yet.";
         break;
       case JWT.TokenExpiredError.name:
-        message = "Token has expired.";
+        message = "The token has expired.";
         break;
     }
     return response.status(401).send(utilities.format.response(message));
