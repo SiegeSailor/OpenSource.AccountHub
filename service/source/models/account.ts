@@ -1,18 +1,17 @@
 import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 
-import settings from "settings";
 import utilities from "utilities";
 
 class Account implements Schema.IAccount {
   static readonly EMAIL_MIN_LENGTH = 3;
   static readonly PASSWORD_MIN_LENGTH = 12;
-  static readonly REGEX_ONLY_LETTERS_DIGITS = /^[A-Za-z-9]+$/;
   static readonly REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   static readonly REGEX_ONE_BOTH_CASE_DIGIT_SPECIAL =
     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?;\[\]\\',./`~\-=])/;
 
   private _email = "";
   private _passcode = "";
+  private _privileges = [];
   private _salt = "";
   private _state = "";
   private _createdAt = 0;
@@ -21,6 +20,7 @@ class Account implements Schema.IAccount {
   constructor(row: RowDataPacket) {
     this._email = row.email;
     this._passcode = row.passcode;
+    this._privileges = row.privileges;
     this._salt = row.salt;
     this._state = row.state;
     this._createdAt = row.created_at;
@@ -29,6 +29,10 @@ class Account implements Schema.IAccount {
 
   public get email() {
     return this._email;
+  }
+
+  public get privileges() {
+    return this._privileges;
   }
 
   public get passcode() {
@@ -54,6 +58,7 @@ class Account implements Schema.IAccount {
   public get session(): Session.ISession {
     return {
       email: this._email,
+      privileges: this._privileges,
       state: this._state,
       createdAt: this._createdAt,
       updatedAt: this._updatedAt,
@@ -103,12 +108,20 @@ class Account implements Schema.IAccount {
   }
 
   static async findByEmail(connection: PoolConnection, email: string) {
-    const [rows] = await connection.execute(
-      "SELECT * FROM account WHERE email = ?",
-      [email]
-    );
-    return (rows as RowDataPacket[]).map((row) => {
-      return new Account(row);
+    const account = (
+      await connection.execute("SELECT * FROM account WHERE email = ?", [email])
+    )[0][0];
+    const privileges = (
+      await connection.execute(
+        "SELECT * FROM privilege WHERE account_email = ?",
+        [email]
+      )
+    )[0];
+    return new Account({
+      ...account,
+      privileges: (privileges as RowDataPacket[]).map((privilege) => {
+        return Number(privilege.identifier);
+      }),
     });
   }
 }

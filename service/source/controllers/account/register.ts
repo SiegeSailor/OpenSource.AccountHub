@@ -21,7 +21,7 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     connection = await databases.pool.getConnection();
-    if ((await models.Account.findByEmail(connection, email)).length)
+    if (await models.Account.findByEmail(connection, email))
       return response
         .status(409)
         .send(utilities.format.response("Account already exists."));

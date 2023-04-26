@@ -24,8 +24,7 @@ export default async function (
 
     connection = await databases.pool.getConnection();
 
-    const accounts = await models.Account.findByEmail(connection, email),
-      account = accounts[0];
+    const account = await models.Account.findByEmail(connection, email);
     if (!account)
       return response
         .status(404)
@@ -54,4 +53,4 @@ export default async function (
   }
 }
 
-// privilege table, history, i18n, Update profile, frozen, cancel
+// privilege table, history (get from a range of date), i18n, Update profile, frozen, cancel, access again?

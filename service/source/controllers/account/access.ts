@@ -46,8 +46,7 @@ export default async function (
     }
 
     connection = await databases.pool.getConnection();
-    const accounts = await models.Account.findByEmail(connection, email),
-      _account = accounts[0];
+    const _account = await models.Account.findByEmail(connection, email);
 
     const DUMMY_PASSCODE = "";
     const DUMMY_SALT =

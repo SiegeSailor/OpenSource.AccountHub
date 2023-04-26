@@ -19,6 +19,10 @@ CREATE TABLE history (
     PRIMARY KEY (identifier)
 );
 
-CREATE TABLE privilege {
-
-}
+CREATE TABLE privilege (
+    identifier          SMALLINT            UNSIGNED,
+    account_email       VARCHAR(320),
+    created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (identifier, account_email)
+)
