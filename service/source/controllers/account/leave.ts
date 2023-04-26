@@ -13,7 +13,7 @@ export default async function (
 ) {
   let connection: PoolConnection | null = null;
   try {
-    if (!request.session || !request.payload) throw new Error();
+    if (!request.session) throw new Error();
 
     connection = await databases.pool.getConnection();
 
@@ -23,9 +23,7 @@ export default async function (
       "Leaved from a session.",
       request.session.email
     );
-    await databases.store.del(
-      utilities.key.session(request.payload.data.identifier)
-    );
+    await databases.store.del(utilities.key.session(request.session.email));
 
     return response
       .status(200)

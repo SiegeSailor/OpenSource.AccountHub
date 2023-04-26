@@ -38,12 +38,12 @@ async function authenticate(
   }
 
   const session = await databases.store.get(
-    utilities.key.session(payload.data.identifier)
+    utilities.key.session(payload.data.email)
   );
   if (!session)
     return response
       .status(401)
-      .send(utilities.format.response("Session does not exist."));
+      .send(utilities.format.response("The session does not exist."));
 
   request.session = JSON.parse(session);
   request.payload = payload;

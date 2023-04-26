@@ -16,5 +16,8 @@ router
 router
   .route("/revive")
   .post(middleware.session.authenticate, controllers.account.revive);
+router
+  .route("/privilege/grant/:email")
+  .post(middleware.session.authenticate, controllers.account.grant);
 
 export default router;

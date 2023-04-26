@@ -1,7 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import type { PoolConnection } from "mysql2/promise";
 import JWT from "jsonwebtoken";
-import { v4 } from "uuid";
 
 import utilities from "utilities";
 import models from "models";
@@ -24,8 +23,8 @@ export default async function (
   try {
     const MAX_FAILED_ATTEMPT = 3;
     const TIME_LOCKOUT = settings.constants.EMilliseconds.MINUTE * 5;
-    const keyAttempt = utilities.key.attempt(email);
-    const attempt = await databases.store.get(keyAttempt);
+    const key = utilities.key.attempt(email);
+    const attempt = await databases.store.get(key);
     if (attempt) {
       const { count, timestampLast } = JSON.parse(attempt);
       if (count >= MAX_FAILED_ATTEMPT) {
@@ -57,12 +56,12 @@ export default async function (
       account.passcode !== utilities.hash.password(passcode, account.salt) ||
       !_account
     ) {
-      const attempt = await databases.store.get(keyAttempt);
+      const attempt = await databases.store.get(key);
       let count = 1;
       if (attempt) count = JSON.parse(attempt).count + 1;
 
       await databases.store.set(
-        keyAttempt,
+        key,
         JSON.stringify({ count, timestampLast: Date.now() })
       );
 
@@ -72,7 +71,7 @@ export default async function (
           utilities.format.response(`Invalid credential. Attempts ${count}.`)
         );
     }
-    await databases.store.del(keyAttempt);
+    await databases.store.del(key);
 
     switch (account.state) {
       case settings.constants.EState.FROZEN:
@@ -87,27 +86,14 @@ export default async function (
         break;
     }
 
-    let identifier: string | null = null;
-    let isSuccessful = false;
-    do {
-      identifier = v4();
-      const result = await databases.store.set(
-        utilities.key.session(identifier),
-        JSON.stringify(account.session),
-        "EX",
-        settings.constants.EToken.EXPIRY_SECONDS,
-        "NX"
-      );
-      isSuccessful = result === "OK";
-    } while (!isSuccessful);
-
-    const token = JWT.sign(
-      { data: { identifier } },
-      settings.environment.SECRET,
-      {
-        expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
-      }
+    await databases.store.set(
+      utilities.key.session(email),
+      JSON.stringify(account.session)
     );
+
+    const token = JWT.sign({ data: { email } }, settings.environment.SECRET, {
+      expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
+    });
 
     await models.History.insert(
       connection,

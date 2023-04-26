@@ -107,6 +107,28 @@ class Account implements Schema.IAccount {
     );
   }
 
+  static async grant(
+    connection: PoolConnection,
+    email: string,
+    privileges: number[]
+  ) {
+    // try-catch duplicated P.K. / session modification / leave -> clear
+    let placeholder = "";
+    for (let index = 0; index < privileges.length; index++) {
+      placeholder += "(?, ?)";
+      if (index !== privileges.length - 1) placeholder += ", ";
+    }
+    const values: (string | number)[] = [];
+    privileges.forEach((privilege) => {
+      values.push(privilege);
+      values.push(email);
+    });
+    await connection.execute(
+      `INSERT INTO privilege (identifier, account_email) VALUES ${placeholder};`,
+      values
+    );
+  }
+
   static async findByEmail(connection: PoolConnection, email: string) {
     const account = (
       await connection.execute("SELECT * FROM account WHERE email = ?", [email])

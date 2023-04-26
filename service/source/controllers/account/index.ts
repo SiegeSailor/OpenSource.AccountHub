@@ -3,6 +3,7 @@ import access from "controllers/account/access";
 import leave from "controllers/account/leave";
 import profile from "controllers/account/profile";
 import revive from "controllers/account/revive";
+import grant from "controllers/account/grant";
 
 export default {
   register,
@@ -10,4 +11,5 @@ export default {
   leave,
   profile,
   revive,
+  grant,
 };

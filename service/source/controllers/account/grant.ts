@@ -12,8 +12,9 @@ export default async function (
   next: NextFunction
 ) {
   const { email } = request.params;
+  const { privileges } = request.body;
 
-  if (!email)
+  if (!email || !privileges)
     return response
       .status(400)
       .send(utilities.format.response("Required fields are not filled."));
@@ -28,12 +29,19 @@ export default async function (
     if (!account)
       return response
         .status(404)
-        .send(utilities.format.response("The account does not exist."));
+        .send(utilities.format.response("The account doesn't exist."));
+
+    await models.Account.grant(connection, email, privileges);
+
+    await databases.store.set(
+      utilities.key.session(request.session.email),
+      JSON.stringify({ ...account.session, privileges })
+    );
 
     await models.History.insert(
       connection,
       settings.constants.ECategory.ACCOUNT,
-      `Viewed the profile from ${email}.`,
+      `Grant ${privileges} privileges to ${email}.`,
       request.session.email
     );
 
@@ -41,8 +49,7 @@ export default async function (
       .status(200)
       .send(
         utilities.format.response(
-          "Successfully fetched the profile.",
-          account.session
+          "Successfully granted privileges to the account."
         )
       );
   } catch (error) {
