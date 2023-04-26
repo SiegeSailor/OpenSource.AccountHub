@@ -4,6 +4,7 @@ import clear from "controllers/account/clear";
 import profile from "controllers/account/profile";
 import revive from "controllers/account/revive";
 import grant from "controllers/account/grant";
+import revoke from "controllers/account/revoke";
 
 export default {
   register,
@@ -12,4 +13,5 @@ export default {
   profile,
   revive,
   grant,
+  revoke,
 };

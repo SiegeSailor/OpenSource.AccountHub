@@ -19,5 +19,8 @@ router
 router
   .route("/privilege/grant/:email")
   .post(middleware.session.authenticate, controllers.account.grant);
+router
+  .route("/privilege/revoke/:email")
+  .post(middleware.session.authenticate, controllers.account.revoke);
 
 export default router;

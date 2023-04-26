@@ -125,6 +125,19 @@ class Account implements Schema.IAccount {
     );
   }
 
+  static async revoke(
+    connection: PoolConnection,
+    email: string,
+    privileges: number[]
+  ) {
+    await connection.execute(
+      `DELETE FROM privilege WHERE account_email = ? AND identifier IN ${utilities.format.bracket(
+        privileges.length
+      )};`,
+      [email, ...privileges]
+    );
+  }
+
   static async findByEmail(connection: PoolConnection, email: string) {
     const account = (
       await connection.execute("SELECT * FROM account WHERE email = ?", [email])

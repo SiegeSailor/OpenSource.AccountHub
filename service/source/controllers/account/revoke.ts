@@ -27,13 +27,16 @@ export default async function (
 
     await connection.beginTransaction();
 
-    await models.Account.grant(connection, email, privileges);
+    await models.Account.revoke(connection, email, privileges);
 
+    const set = new Set(privileges);
     await databases.store.set(
       utilities.key.session(request.session.email),
       JSON.stringify({
         ...request.session,
-        privileges: request.session.privileges.concat(privileges),
+        privileges: request.session.privileges.filter((privilege) => {
+          return !set.has(privilege);
+        }),
       }),
       "XX"
     );
@@ -41,7 +44,7 @@ export default async function (
     await models.History.insert(
       connection,
       settings.constants.EHistoryCategory.ACCOUNT,
-      `Granted ${privileges} privileges to ${email}.`,
+      `Revoked ${privileges} privileges from ${email}.`,
       request.session.email
     );
     await connection.commit();
@@ -50,7 +53,7 @@ export default async function (
       .status(200)
       .send(
         utilities.format.response(
-          "Successfully granted privileges to the account."
+          "Successfully revoked privileges to the account."
         )
       );
   } catch (error) {
