@@ -21,12 +21,9 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     connection = await databases.pool.getConnection();
-    if (await models.Account.findByEmail(connection, email))
-      return response
-        .status(409)
-        .send(utilities.format.response("Account already exists."));
 
     await connection.beginTransaction();
+
     try {
       await models.Account.insert(
         connection,
@@ -38,11 +35,12 @@ export default async function (
       const error = _ as Error;
       return response
         .status(400)
-        .send(utilities.format.response(error.message));
+        .send(utilities.format.response(`${error["code"]} ${error.message}`));
     }
+
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       "Registered the account.",
       email
     );

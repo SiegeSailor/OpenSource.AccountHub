@@ -74,11 +74,11 @@ export default async function (
     await databases.store.del(key);
 
     switch (account.state) {
-      case settings.constants.EState.FROZEN:
+      case settings.constants.EAccountState.FROZEN:
         return response
           .status(403)
           .send(utilities.format.response("This account has been frozen."));
-      case settings.constants.EState.CANCELED:
+      case settings.constants.EAccountState.CANCELED:
         return response
           .status(403)
           .send(utilities.format.response("This account has been canceled."));
@@ -92,12 +92,12 @@ export default async function (
     );
 
     const token = JWT.sign({ data: { email } }, settings.environment.SECRET, {
-      expiresIn: settings.constants.EToken.EXPIRY_SECONDS,
+      expiresIn: settings.constants.EJWT.EXPIRY_SECONDS,
     });
 
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       "Accessed the account.",
       email
     );

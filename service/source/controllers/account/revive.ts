@@ -22,14 +22,14 @@ export default async function (
     const token = JWT.sign(
       {
         ...request.payload,
-        exp: request.payload.exp + settings.constants.EToken.EXPIRY_SECONDS,
+        exp: request.payload.exp + settings.constants.EJWT.EXPIRY_SECONDS,
       },
       settings.environment.SECRET
     );
 
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       "Revived the token.",
       request.session.email
     );

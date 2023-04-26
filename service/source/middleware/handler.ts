@@ -27,7 +27,7 @@ function error(
   response: Response,
   _: NextFunction
 ) {
-  console.error(`From ${request.url} -`);
+  console.error(`From ${request.url}`);
   console.error(error.stack);
   response
     .status(500)

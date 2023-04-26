@@ -38,7 +38,7 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       `Viewed the profile from ${email}.`,
       request.session.email
     );

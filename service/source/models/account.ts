@@ -112,7 +112,6 @@ class Account implements Schema.IAccount {
     email: string,
     privileges: number[]
   ) {
-    // try-catch duplicated P.K.
     let placeholder = "";
     for (let index = 0; index < privileges.length; index++) {
       placeholder += "(?, ?)";

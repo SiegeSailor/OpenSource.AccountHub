@@ -21,7 +21,7 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       "Cleared existing sessions.",
       request.session.email
     );

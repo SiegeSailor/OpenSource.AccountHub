@@ -1,6 +1,6 @@
 import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 
-import type { ECategory } from "settings/constants";
+import type { EHistoryCategory } from "settings/constants";
 
 class History implements Schema.IHistory {
   private _identifier: number;
@@ -39,7 +39,7 @@ class History implements Schema.IHistory {
 
   static async insert(
     connection: PoolConnection,
-    category: ECategory,
+    category: EHistoryCategory,
     content: string,
     accountEmail: string
   ) {

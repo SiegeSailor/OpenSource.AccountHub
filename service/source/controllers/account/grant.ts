@@ -33,14 +33,14 @@ export default async function (
       utilities.key.session(request.session.email),
       JSON.stringify({
         ...request.session,
-        privileges: [...request.session.privileges, ...privileges],
+        privileges: request.session.privileges.concat(privileges),
       }),
       "XX"
     );
 
     await models.History.insert(
       connection,
-      settings.constants.ECategory.ACCOUNT,
+      settings.constants.EHistoryCategory.ACCOUNT,
       `Grant ${privileges} privileges to ${email}.`,
       request.session.email
     );
