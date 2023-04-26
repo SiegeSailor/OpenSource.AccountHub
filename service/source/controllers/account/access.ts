@@ -88,19 +88,18 @@ export default async function (
     }
 
     let identifier: string | null = null;
-    let serializedSession: string | null = null;
-    let keySession: string | null = null;
+    let isSuccessful = false;
     do {
       identifier = v4();
-      keySession = utilities.key.session(identifier);
-      serializedSession = await databases.store.get(keySession);
-    } while (!!serializedSession);
-    await databases.store.set(
-      keySession,
-      JSON.stringify(account.session),
-      "EX",
-      settings.constants.EToken.EXPIRY_SECONDS
-    );
+      const result = await databases.store.set(
+        utilities.key.session(identifier),
+        JSON.stringify(account.session),
+        "EX",
+        settings.constants.EToken.EXPIRY_SECONDS,
+        "NX"
+      );
+      isSuccessful = result === "OK";
+    } while (!isSuccessful);
 
     const token = JWT.sign(
       { data: { identifier } },
