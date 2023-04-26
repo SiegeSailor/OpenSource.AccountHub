@@ -20,7 +20,7 @@ export default async function (
 
     connection = await databases.pool.getConnection();
 
-    await models.History.findByEmailRange(
+    const range = await models.History.findByEmailRange(
       connection,
       email,
       Number(limit),
@@ -32,13 +32,17 @@ export default async function (
     await models.History.insert(
       connection,
       settings.constants.EHistoryCategory.HISTORY,
-      `Viewed the history of ${email} from ${start} to ${end}.`,
+      `Viewed the history of ${email}.`,
       request.session.email
     );
 
-    return response
-      .status(200)
-      .send(utilities.format.response("Successfully fetched the history."));
+    return response.status(200).send(
+      utilities.format.response("Successfully fetched the history.", {
+        range: range.map((history) => {
+          return history.all;
+        }),
+      })
+    );
   } catch (error) {
     next(error);
     return response;

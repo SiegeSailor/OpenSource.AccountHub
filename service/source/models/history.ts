@@ -37,6 +37,16 @@ class History implements Schema.IHistory {
     return this._createdAt;
   }
 
+  public get all() {
+    return {
+      identifier: this.identifier,
+      category: this.category,
+      content: this.content,
+      accountEmail: this.accountEmail,
+      createdAt: this.createdAt,
+    };
+  }
+
   static async insert(
     connection: PoolConnection,
     category: EHistoryCategory,
@@ -59,16 +69,14 @@ class History implements Schema.IHistory {
   ) {
     const condition = { limit, page, start, end };
     for (const key in condition)
-      if (condition[key] <= 0)
-        throw new TypeError(
-          `${key} has to be a positive number rather than ${condition[key]}.`
-        );
+      if (Number.isNaN(condition[key]) || condition[key] <= 0)
+        throw new TypeError(`${key} has to be a positive number.`);
 
-    const offset = (page - 1) * limit;
+    const offset = String((page - 1) * limit);
     const histories = (
       await connection.execute(
-        "SELECT * FROM history WHERE email = ? AND created_at >= ? AND created_at <= ? ORDER BY email LIMIT ? OFFSET ?;",
-        [email, new Date(start), new Date(end), limit, offset]
+        "SELECT * FROM history WHERE account_email = ? AND created_at > ? AND created_at < ? ORDER BY created_at LIMIT ? OFFSET ?;",
+        [email, new Date(start), new Date(end), String(limit), offset]
       )
     )[0];
     return (histories as RowDataPacket[]).map((row) => {

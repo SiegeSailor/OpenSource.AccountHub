@@ -41,10 +41,9 @@ export default async function (
     return response
       .status(200)
       .send(
-        utilities.format.response(
-          "Successfully fetched the profile.",
-          account.session
-        )
+        utilities.format.response("Successfully fetched the profile.", {
+          profile: account.session,
+        })
       );
   } catch (error) {
     next(error);
