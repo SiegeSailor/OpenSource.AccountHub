@@ -43,7 +43,7 @@ const format = {
     return input.charAt(0).toUpperCase() + input.slice(1);
   },
   resource: function (request: Request) {
-    return `${request.method} ${encodeURI(request.url)}`;
+    return `${request.method} ${encodeURI(request.originalUrl)}`;
   },
   bracket: function (count: number) {
     return `(${Array.from({ length: count }).fill("?").join(", ")})`;
