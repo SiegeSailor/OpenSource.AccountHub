@@ -21,6 +21,14 @@ export default async function (
   let connection: PoolConnection | null = null;
   try {
     if (!request.session) throw new ReferenceError();
+    if (email === request.session.email)
+      return response
+        .status(403)
+        .send(
+          utilities.format.response(
+            "The account owner himself can not modify privileges."
+          )
+        );
 
     connection = await databases.pool.getConnection();
 
