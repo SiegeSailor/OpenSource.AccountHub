@@ -73,6 +73,7 @@ services:
       - SESSION_PORT=${SESSION_PORT}
       - SECRET=${SECRET}
       - HTTPS=${HTTPS}
+      - ORIGIN=${ORIGIN}
       - SERVICE_PORT=${SERVICE_PORT}
     container_name: service
     networks:
