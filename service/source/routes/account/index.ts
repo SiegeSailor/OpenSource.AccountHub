@@ -2,8 +2,11 @@ import express from "express";
 
 import controllers from "controllers";
 import middleware from "middleware";
+import privilege from "routes/account/privilege";
 
 const router = express.Router();
+
+router.use("/privilege", privilege);
 
 router.route("/register").post(controllers.account.register);
 router.route("/access").post(controllers.account.access);
@@ -16,11 +19,5 @@ router
 router
   .route("/revive")
   .post(middleware.session.authenticate, controllers.account.revive);
-router
-  .route("/privilege/grant/:email")
-  .post(middleware.session.authenticate, controllers.account.grant);
-router
-  .route("/privilege/revoke/:email")
-  .post(middleware.session.authenticate, controllers.account.revoke);
 
 export default router;
