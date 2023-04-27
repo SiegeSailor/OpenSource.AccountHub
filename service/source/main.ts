@@ -3,6 +3,7 @@ import cors from "cors";
 
 import routes from "routes";
 import middleware from "middleware";
+import settings from "settings";
 
 const main = express();
 
@@ -11,7 +12,7 @@ main.disable("x-powered-by");
 main.use(
   express.json(),
   express.urlencoded({ extended: true }),
-  cors({ origin: "*", credentials: true }),
+  cors({ origin: settings.environment.ORIGIN, credentials: true }),
   middleware.handler.log
 );
 

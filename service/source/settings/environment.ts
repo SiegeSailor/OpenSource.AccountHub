@@ -8,6 +8,7 @@ const {
   SECRET = "",
   HTTPS,
   SERVICE_PORT = 3000,
+  ORIGIN,
 } = process.env;
 
 export default {
@@ -20,4 +21,5 @@ export default {
   SECRET,
   HTTPS: Boolean(Number(HTTPS)),
   SERVICE_PORT: Number(SERVICE_PORT),
+  ORIGIN,
 };
