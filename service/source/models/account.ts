@@ -11,7 +11,7 @@ class Account implements Schema.IAccount {
 
   private _email = "";
   private _passcode = "";
-  private _privileges = [];
+  private _privileges: number[] = [];
   private _salt = "";
   private _state = "";
   private _createdAt = 0;
@@ -20,11 +20,13 @@ class Account implements Schema.IAccount {
   constructor(row: RowDataPacket) {
     this._email = row.email;
     this._passcode = row.passcode;
-    this._privileges = row.privileges;
+    this._privileges = row.privileges.map((privilege) => {
+      return Number(privilege);
+    });
     this._salt = row.salt;
     this._state = row.state;
-    this._createdAt = row.created_at;
-    this._updatedAt = row.updated_at;
+    this._createdAt = Date.parse(row.created_at);
+    this._updatedAt = Date.parse(row.updated_at);
   }
 
   public get email() {
@@ -55,7 +57,7 @@ class Account implements Schema.IAccount {
     return this._updatedAt;
   }
 
-  public get session(): Session.ISession {
+  public get response(): Session.ISession {
     return {
       email: this._email,
       privileges: this._privileges,
@@ -150,7 +152,7 @@ class Account implements Schema.IAccount {
     return new Account({
       ...account,
       privileges: (privileges as RowDataPacket[]).map((privilege) => {
-        return Number(privilege.identifier);
+        return privilege.identifier;
       }),
     });
   }

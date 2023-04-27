@@ -38,7 +38,7 @@ export default async function (
     return response.status(200).send(
       utilities.format.response("Successfully fetched the history.", {
         range: range.map((history) => {
-          return history.all;
+          return history.response;
         }),
       })
     );

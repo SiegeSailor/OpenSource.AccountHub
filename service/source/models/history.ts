@@ -12,7 +12,7 @@ class History implements Schema.IHistory {
     this._resource = row.resource;
     this._content = row.content;
     this._email = row.email;
-    this._createdAt = row.created_at;
+    this._createdAt = Date.parse(row.created_at);
   }
 
   public get identifier() {
@@ -35,7 +35,7 @@ class History implements Schema.IHistory {
     return this._createdAt;
   }
 
-  public get all() {
+  public get response() {
     return {
       identifier: this.identifier,
       resource: this.resource,

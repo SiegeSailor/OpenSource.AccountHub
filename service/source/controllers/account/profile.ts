@@ -26,7 +26,7 @@ export default async function (
 
     await databases.store.set(
       utilities.key.session(request.session.email),
-      JSON.stringify(account.session),
+      JSON.stringify(account.response),
       "XX"
     );
 
@@ -39,7 +39,7 @@ export default async function (
 
     return response.status(200).send(
       utilities.format.response("Successfully fetched the profile.", {
-        profile: account.session,
+        profile: account.response,
       })
     );
   } catch (error) {

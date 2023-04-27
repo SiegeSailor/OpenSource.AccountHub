@@ -88,7 +88,7 @@ export default async function (
 
     await databases.store.set(
       utilities.key.session(email),
-      JSON.stringify(account.session)
+      JSON.stringify(account.response)
     );
 
     const token = JWT.sign({ data: { email } }, settings.environment.SECRET, {
