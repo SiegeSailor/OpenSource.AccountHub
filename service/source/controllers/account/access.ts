@@ -97,8 +97,8 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.EHistoryCategory.ACCOUNT,
-      "Accessed the account.",
+      utilities.format.resource(request),
+      null,
       email
     );
 

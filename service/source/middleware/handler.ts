@@ -1,13 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
-import settings from "settings/index";
 
+import settings from "settings";
 import utilities from "utilities";
 
 function log(request: Request, _: Response, next: NextFunction) {
   console.log(
-    `[INFO] ${utilities.format.time()} Received a request to ${encodeURI(
-      request.url
-    )}.`
+    `[INFO] ${utilities.format.time()} ${utilities.format.resource(request)}.`
   );
   next();
 }
@@ -17,7 +15,7 @@ function fallback(request: Request, response: Response) {
     .status(404)
     .send(
       utilities.format.response(
-        `${request.method} ${encodeURI(request.url)} is not available.`
+        `${utilities.format.resource(request)} is not available.`
       )
     );
 }
@@ -29,7 +27,9 @@ function error(
   _: NextFunction
 ) {
   console.error(
-    `[ERROR] ${utilities.format.time()} ${error.name} from ${request.url}`
+    `[ERROR] ${utilities.format.time()} ${
+      error.name
+    } from ${utilities.format.resource(request)}`
   );
   console.error(error.stack);
 

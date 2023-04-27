@@ -3,7 +3,6 @@ import type { PoolConnection } from "mysql2/promise";
 
 import utilities from "utilities";
 import models from "models";
-import settings from "settings";
 import databases from "databases";
 
 export default async function (
@@ -21,8 +20,8 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.EHistoryCategory.ACCOUNT,
-      "Cleared existing sessions.",
+      utilities.format.resource(request),
+      null,
       request.session.email
     );
 

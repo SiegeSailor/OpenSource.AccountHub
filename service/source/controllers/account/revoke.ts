@@ -4,7 +4,6 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import databases from "databases";
-import settings from "settings";
 
 export default async function (
   request: Request,
@@ -43,8 +42,8 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.EHistoryCategory.ACCOUNT,
-      `Revoked ${privileges} privileges from ${email}.`,
+      utilities.format.resource(request),
+      JSON.stringify(request.body),
       request.session.email
     );
     await connection.commit();

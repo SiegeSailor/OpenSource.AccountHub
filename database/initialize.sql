@@ -11,18 +11,18 @@ CREATE TABLE account (
 
 CREATE TABLE history (
     identifier          INT                 NOT NULL AUTO_INCREMENT,
-    category            CHAR(1)             NOT NULL,
-    content             VARCHAR(80)         NOT NULL,
-    account_email       VARCHAR(320)        NOT NULL,
+    resource            VARCHAR(320)        NOT NULL,
+    content             VARCHAR(320),
+    email               VARCHAR(320)        NOT NULL,
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
     PRIMARY KEY (identifier)
 );
 
 CREATE TABLE privilege (
     identifier          SMALLINT            UNSIGNED,
-    account_email       VARCHAR(320),
+    email               VARCHAR(320),
     created_at          TIMESTAMP           DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
-    PRIMARY KEY (identifier, account_email)
+    FOREIGN KEY (email) REFERENCES account (email) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (identifier, email)
 )

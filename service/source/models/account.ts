@@ -113,7 +113,7 @@ class Account implements Schema.IAccount {
     privileges: number[]
   ) {
     await connection.execute(
-      `INSERT INTO privilege (identifier, account_email) VALUES ${utilities.format.statement(
+      `INSERT INTO privilege (identifier, email) VALUES ${utilities.format.statement(
         privileges.length,
         2
       )};`,
@@ -131,7 +131,7 @@ class Account implements Schema.IAccount {
     privileges: number[]
   ) {
     await connection.execute(
-      `DELETE FROM privilege WHERE account_email = ? AND identifier IN ${utilities.format.bracket(
+      `DELETE FROM privilege WHERE email = ? AND identifier IN ${utilities.format.bracket(
         privileges.length
       )};`,
       [email, ...privileges]
@@ -143,10 +143,9 @@ class Account implements Schema.IAccount {
       await connection.execute("SELECT * FROM account WHERE email = ?", [email])
     )[0][0];
     const privileges = (
-      await connection.execute(
-        "SELECT * FROM privilege WHERE account_email = ?",
-        [email]
-      )
+      await connection.execute("SELECT * FROM privilege WHERE email = ?", [
+        email,
+      ])
     )[0];
     return new Account({
       ...account,

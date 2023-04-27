@@ -11,9 +11,9 @@ declare module Schema {
 
   interface IHistory {
     identifier: number;
-    category: string;
+    resource: string;
     content: string;
-    accountEmail: string;
+    email: string;
     createdAt: number;
   }
 }

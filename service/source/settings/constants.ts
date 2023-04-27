@@ -4,12 +4,6 @@ enum EAccountState {
   CANCELED = "C",
 }
 
-export enum EHistoryCategory {
-  ACCOUNT = "A",
-  SYSTEM = "S",
-  HISTORY = "H",
-}
-
 enum EStorePrefix {
   SESSION = "SESSION",
   ATTEMPT = "ATTEMPT",
@@ -33,7 +27,6 @@ enum EDatabaseCode {
 
 export default {
   EAccountState,
-  EHistoryCategory,
   EStorePrefix,
   EMilliseconds,
   EJWT,

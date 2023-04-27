@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import crypto from "crypto";
 
 import settings from "settings";
@@ -40,6 +41,9 @@ const format = {
   },
   capitalize: function (input: string) {
     return input.charAt(0).toUpperCase() + input.slice(1);
+  },
+  resource: function (request: Request) {
+    return `${request.method} ${encodeURI(request.url)}`;
   },
   bracket: function (count: number) {
     return `(${Array.from({ length: count }).fill("?").join(", ")})`;

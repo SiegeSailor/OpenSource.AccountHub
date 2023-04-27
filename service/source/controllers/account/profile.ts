@@ -4,7 +4,6 @@ import type { PoolConnection } from "mysql2/promise";
 import utilities from "utilities";
 import models from "models";
 import databases from "databases";
-import settings from "settings";
 
 export default async function (
   request: Request,
@@ -33,18 +32,16 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.EHistoryCategory.ACCOUNT,
-      `Viewed the profile from ${email}.`,
+      utilities.format.resource(request),
+      null,
       request.session.email
     );
 
-    return response
-      .status(200)
-      .send(
-        utilities.format.response("Successfully fetched the profile.", {
-          profile: account.session,
-        })
-      );
+    return response.status(200).send(
+      utilities.format.response("Successfully fetched the profile.", {
+        profile: account.session,
+      })
+    );
   } catch (error) {
     next(error);
     return response;

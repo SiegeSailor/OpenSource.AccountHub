@@ -29,8 +29,8 @@ export default async function (
 
     await models.History.insert(
       connection,
-      settings.constants.EHistoryCategory.ACCOUNT,
-      "Revived the token.",
+      utilities.format.resource(request),
+      null,
       request.session.email
     );
 

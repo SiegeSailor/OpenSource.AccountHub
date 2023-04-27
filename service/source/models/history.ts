@@ -1,19 +1,17 @@
 import type { PoolConnection, RowDataPacket } from "mysql2/promise";
 
-import type { EHistoryCategory } from "settings/constants";
-
 class History implements Schema.IHistory {
   private _identifier: number;
-  private _category: string;
+  private _resource: string;
   private _content: string;
-  private _accountEmail: string;
+  private _email: string;
   private _createdAt: number;
 
   constructor(row: RowDataPacket) {
     this._identifier = row.identifier;
-    this._category = row.category;
+    this._resource = row.resource;
     this._content = row.content;
-    this._accountEmail = row.account_email;
+    this._email = row.email;
     this._createdAt = row.created_at;
   }
 
@@ -21,16 +19,16 @@ class History implements Schema.IHistory {
     return this._identifier;
   }
 
-  public get category() {
-    return this._category;
+  public get resource() {
+    return this._resource;
   }
 
   public get content() {
     return this._content;
   }
 
-  public get accountEmail() {
-    return this._accountEmail;
+  public get email() {
+    return this._email;
   }
 
   public get createdAt() {
@@ -40,22 +38,22 @@ class History implements Schema.IHistory {
   public get all() {
     return {
       identifier: this.identifier,
-      category: this.category,
+      resource: this.resource,
       content: this.content,
-      accountEmail: this.accountEmail,
+      email: this.email,
       createdAt: this.createdAt,
     };
   }
 
   static async insert(
     connection: PoolConnection,
-    category: EHistoryCategory,
-    content: string,
-    accountEmail: string
+    resource: string,
+    content: string | null,
+    email: string
   ) {
     await connection.execute(
-      "INSERT INTO history (category, content, account_email) VALUES (?, ?, ?);",
-      [category, content, accountEmail]
+      "INSERT INTO history (resource, content, email) VALUES (?, ?, ?);",
+      [resource, content, email]
     );
   }
 
@@ -75,7 +73,7 @@ class History implements Schema.IHistory {
     const offset = String((page - 1) * limit);
     const histories = (
       await connection.execute(
-        "SELECT * FROM history WHERE account_email = ? AND created_at > ? AND created_at < ? ORDER BY created_at LIMIT ? OFFSET ?;",
+        "SELECT * FROM history WHERE email = ? AND created_at > ? AND created_at < ? ORDER BY created_at LIMIT ? OFFSET ?;",
         [email, new Date(start), new Date(end), String(limit), offset]
       )
     )[0];
