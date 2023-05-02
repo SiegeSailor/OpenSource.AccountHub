@@ -25,7 +25,7 @@ See `engines` in [package.json](./terminal/package.json):
 },
 ```
 
-Also, be sure to have Docker `>= 4` installed. If you were to use your local database, MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use.
+Also, be sure to have Docker `>= 4` installed. If you were to use your local database, MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use for MacBook with M1 Chip.
 
 ## Get Started
 
