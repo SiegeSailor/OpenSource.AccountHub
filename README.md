@@ -72,18 +72,33 @@ SERVICE_PORT=
 ORIGIN=
 ```
 
+## Security
+
+The following is the security document list:
+
+- Proposing the security requirement analysis based on [OWASP SAMM 2.0](https://owasp.org/www-project-samm/) with maturity level 1 in general using OWASP SAMM Toolbox
+- Performing threat modeling analysis using [OWASP Threat Modeling](https://owasp.org/www-community/Threat_Modeling) document
+- Demonstrating attack surface analysis with [OWASP Attack Surface Analysis Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html). Tool and method remain undecided
+- Implementing changes regard to identified security requirements from 1 to 3
+
+The following list should be a part of CICD or be automated in some aspects:
+
+- Using SonarQube and ESLint for static code analysis (SAST) on security and code quality aspects
+- Using one or more tool from [OWASP Vulnerability Scanning Tool](https://owasp.org/www-community/Vulnerability_Scanning_Tools) for dynamic code analysis (DAST)
+- Updating the test cycle and flow for unit testing, integration testing, and penetration testing
+- Running tests and document possible attacks that can exploit the security vulnerabilities in the system
+- Repeating the process from 1 to 4 until the security requirement analysis is satisfied. Some unknown attacks may remain unresolved for research purpose
+
 ## Future Plan
 
-Things will be completed after the first release:
+Things will be completed before the first release:
 
 1. GitHub Actions CICD
-2. Deploy to AWS
+2. Deploy to AWS ECS
 3. Connect to AWS Database
 4. Use AWS Cloud Logging
-5. Rewrite with TypeScript
-6. XSS Prevention
-7. Unit Testing with Jest
-8. GitHub Issues Board
-9. Git Flow
-10. ESlint with Husky
-11. Integration Test with Postman
+5. Unit Testing with Jest
+6. GitHub Issues Board
+7. Git Flow
+8. ESlint with Husky
+9. Integration Test with Postman
