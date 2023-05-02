@@ -95,7 +95,7 @@ Follow [OWASP Attack Surface Analysis Cheat Sheet](https://cheatsheetseries.owas
 
 ![OWASP ZAP](./images/OWASP%20ZAP.png)
 
-![OWASP ZAP Attack](./images/OWASP%20ZAP.png)
+![OWASP ZAP Attack](./images/OWASP%20ZAP%20Attack.png)
 
 Run the service first then perform automated scan through HTTP:
 
