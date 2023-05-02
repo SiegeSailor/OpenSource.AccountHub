@@ -25,9 +25,7 @@ See `engines` in [package.json](./terminal/package.json):
 },
 ```
 
-Also, be sure to have Docker `>= 4` installed.
-
-MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use.
+Also, be sure to have Docker `>= 4` installed. If you were to use your local database, MySQL [8.0.32 macOS-arm64](https://dev.mysql.com/downloads/file/?id=516827) is valid to use.
 
 ## Get Started
 
@@ -57,55 +55,22 @@ npm run start
 
 ### Environment
 
-Create a `.env` file in root:
+Create a `.env` file in the root folder:
 
+```bash
+DATABASE_HOST= # database
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_CONNECTION_LIMIT=
+DATABASE_SKIP_TZINFO= # 1 | 0
+DATABASE_PORT=
+SESSION_HOST= # session
+SESSION_PORT=
+SECRET= #
+HTTPS= # 1 | 0
+SERVICE_PORT=
+ORIGIN=
 ```
-MYSQL_HOST=
-MYSQL_USER=
-MYSQL_PASSWORD=
-MYSQL_DATABASE=
-MYSQL_CONNECTION_LIMIT=
-JWT_SECRET_KEY=
-PRIVILEGED_EMAILS=
-PORT=
-```
-
-### Endpoints
-
-The followings are valid endpoints:
-
-- Use `/account/freeze/:email` when there is a token leak. Ask others to use `/account/defrost/:email` to defrost
-- `nobility` is set to 1 as default. Any advanced operation require `> 1` such as update other accounts
-
-| Method | Endpoint                     | Description                                                    | Protection                          |
-| ------ | ---------------------------- | -------------------------------------------------------------- | ----------------------------------- |
-| GET    | /                            | Health check.                                                  |                                     |
-| GET    | /account?limit=&page=        | List all accounts with pagination and insensitive information. | Token.                              |
-| POST   | /account/register            | Create an account.                                             |                                     |
-| POST   | /account/login               | Obtain a token with username and passcode.                     |                                     |
-| POST   | /account/cancel              | Cancel an account. This is irreversible.                       | Token. Only the owner.              |
-| GET    | /account/profile/:email      | Obtain the account information for the desired email.          | Token. Nobility `> 1` or ownership. |
-| PATCH  | /account/profile/:email      | Update the account information for the desired email.          | Token. Nobility `> 1` or ownership. |
-| POST   | /account/freeze/:email       | Freeze an account.                                             | Token. Nobility `> 1` or ownership. |
-| POST   | /account/defrost/:email      | Defrost an account.                                            | Token. Nobility `> 1`.              |
-| GET    | /history/:email?limit=&page= | List all history for the desired email with pagination.        | Token.                              |
-
-### Test Flow
-
-The following step may be used for integration test:
-
-1. Register 2 accounts. Let's say there are `A` and `B`, and `A` is in `PRIVILEGED_EMAILS`.
-2. Login with the `A`, the system-privileged account
-3. Update `B` with nobility `2`
-4. Login with `B`
-5. See profiles
-6. Freeze `B` self
-7. Use `A` to defrost
-8. Login with `A`
-9. Cancel `A`
-10. Login with `B`
-11. See all history
-12. See all accounts
 
 ## Future Plan
 
