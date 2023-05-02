@@ -1,5 +1,4 @@
 - [Account Hub](#account-hub)
-  - [Quick Note](#quick-note)
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
     - [Environment](#environment)
@@ -20,35 +19,6 @@ Constructs endpoints for a sophisticated account database system within the OWAS
 ├── ...
 └── README.md
 ```
-
-## Quick Note
-
-Things should be done before the first release:
-
-- [ ] Feature
-  - Update Password
-  - Frozen/Cancel Account
-  - Cache Policy for `/history/range`
-- [ ] API Document
-  - Swagger
-- [ ] Web Server
-  - Nginx
-  - HTTPS
-  - CSP
-- [ ] CICD
-  - GitHub Actions
-- [ ] Cloud
-  - AWS ECS
-  - AWS Database
-  - AWS Cloud Logging
-- [ ] Codebase
-  - Branch Policy
-  - Issue Board
-  - Secret Management
-- [ ] Test
-  - Unit Test with Jest
-  - ESlint with Husky
-  - Integration Test
 
 ## Prerequisites
 
