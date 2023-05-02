@@ -1,3 +1,10 @@
+- [Account Hub](#account-hub)
+  - [Quick Note](#quick-note)
+  - [Prerequisites](#prerequisites)
+  - [Get Started](#get-started)
+    - [Environment](#environment)
+  - [Security](#security)
+
 # Account Hub
 
 Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework. File structure:
@@ -13,6 +20,35 @@ Constructs endpoints for a sophisticated account database system within the OWAS
 ├── ...
 └── README.md
 ```
+
+## Quick Note
+
+Things should be done before the first release:
+
+- [ ] Feature
+  - Update Password
+  - Frozen/Cancel Account
+  - Cache Policy for `/history/range`
+- [ ] API Document
+  - Swagger
+- [ ] Web Server
+  - Nginx
+  - HTTPS
+  - CSP
+- [ ] CICD
+  - GitHub Actions
+- [ ] Cloud
+  - AWS ECS
+  - AWS Database
+  - AWS Cloud Logging
+- [ ] Codebase
+  - Branch Policy
+  - Issue Board
+  - Secret Management
+- [ ] Test
+  - Unit Test with Jest
+  - ESlint with Husky
+  - Integration Test
 
 ## Prerequisites
 
@@ -88,17 +124,3 @@ The following list should be a part of CICD or be automated in some aspects:
 - Updating the test cycle and flow for unit testing, integration testing, and penetration testing
 - Running tests and document possible attacks that can exploit the security vulnerabilities in the system
 - Repeating the process from 1 to 4 until the security requirement analysis is satisfied. Some unknown attacks may remain unresolved for research purpose
-
-## Future Plan
-
-Things will be completed before the first release:
-
-1. GitHub Actions CICD
-2. Deploy to AWS ECS
-3. Connect to AWS Database
-4. Use AWS Cloud Logging
-5. Unit Testing with Jest
-6. GitHub Issues Board
-7. Git Flow
-8. ESlint with Husky
-9. Integration Test with Postman
