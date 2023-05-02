@@ -51,6 +51,14 @@ const format = {
   statement: function (length: number, count: number) {
     return Array.from({ length }).fill(format.bracket(count)).join(", ");
   },
+  escape: function (input: string) {
+    return input
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  },
 };
 
 const key = {
