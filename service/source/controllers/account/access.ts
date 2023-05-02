@@ -45,16 +45,16 @@ export default async function (
     }
 
     connection = await databases.pool.getConnection();
-    const _account = await models.Account.findByEmail(connection, email);
+    const account = await models.Account.findByEmail(connection, email);
 
     const DUMMY_PASSCODE = "";
     const DUMMY_SALT =
       "4cefc0fc0f928880e5ac01ad42fc69211030e337ee7b8938cad172dce40f84be" +
       "e95c00f85f951d0a1341681b34ed98b8fdf0ca4cdec28971855a6f05c373b368";
-    const account = _account || { passcode: DUMMY_PASSCODE, salt: DUMMY_SALT };
+    const _account = account || { passcode: DUMMY_PASSCODE, salt: DUMMY_SALT };
     if (
-      account.passcode !== utilities.hash.password(passcode, account.salt) ||
-      !_account
+      _account.passcode !== utilities.hash.password(passcode, _account.salt) ||
+      !account
     ) {
       const attempt = await databases.store.get(key);
       let count = 1;
