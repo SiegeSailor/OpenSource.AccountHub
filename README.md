@@ -95,6 +95,14 @@ Follow [OWASP Attack Surface Analysis Cheat Sheet](https://cheatsheetseries.owas
 
 ![OWASP ZAP](./images/OWASP%20ZAP.png)
 
+![OWASP ZAP Attack](./images/OWASP%20ZAP.png)
+
+Run the service first then perform automated scan through HTTP:
+
+```bash
+docker-compose up --build
+```
+
 ### Threat Modeling
 
 Follow [OWASP Threat Modeling](https://owasp.org/www-community/Threat_Modeling). The tool remains unselected.
