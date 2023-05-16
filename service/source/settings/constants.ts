@@ -21,8 +21,13 @@ enum EJWT {
 }
 
 enum EDatabaseCode {
-  DUP_ENTRY = "ER_DUP_ENTRY",
-  DUPLICATE_KEY = "ER_DUPLICATE_KEY",
+  DUPLICATE_ENTRY = "ER_DUP_ENTRY",
+  DUPLICATE_KEY = "ER_DUP_KEY",
+}
+
+enum ETTL {
+  NO_KEY = -1,
+  NO_TTL = -2,
 }
 
 export default {
@@ -31,4 +36,5 @@ export default {
   EMilliseconds,
   EJWT,
   EDatabaseCode,
+  ETTL,
 };

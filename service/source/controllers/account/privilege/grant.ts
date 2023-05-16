@@ -36,13 +36,12 @@ export default async function (
 
     await models.Account.grant(connection, email, privileges);
 
-    await databases.store.set(
+    await utilities.store.update(
       utilities.key.session(request.session.email),
       JSON.stringify({
         ...request.session,
         privileges: request.session.privileges.concat(privileges),
-      }),
-      "XX"
+      })
     );
 
     await models.History.insert(

@@ -5,7 +5,9 @@ import utilities from "utilities";
 
 function log(request: Request, _: Response, next: NextFunction) {
   console.log(
-    `[INFO] ${utilities.format.time()} ${utilities.format.resource(request)}.`
+    `[INFO] ${utilities.format.time()} ${utilities.format.resource(
+      request
+    )} from ${request.ip}.`
   );
   next();
 }
@@ -43,7 +45,7 @@ function error(
   if (error.code) {
     console.error(`Error Code: ${error.code}`);
     switch (error.code) {
-      case settings.constants.EDatabaseCode.DUP_ENTRY:
+      case settings.constants.EDatabaseCode.DUPLICATE_ENTRY:
       case settings.constants.EDatabaseCode.DUPLICATE_KEY:
         return response
           .status(409)

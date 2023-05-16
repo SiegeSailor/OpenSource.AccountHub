@@ -62,7 +62,9 @@ export default async function (
 
       await databases.store.set(
         key,
-        JSON.stringify({ count, timestampLast: Date.now() })
+        JSON.stringify({ count, timestampLast: Date.now() }),
+        "PX",
+        settings.constants.EMilliseconds.HOUR
       );
 
       return response
@@ -88,7 +90,9 @@ export default async function (
 
     await databases.store.set(
       utilities.key.session(email),
-      JSON.stringify(account.response)
+      JSON.stringify(account.response),
+      "PX",
+      settings.constants.EMilliseconds.DAY
     );
 
     const token = JWT.sign({ data: { email } }, settings.environment.SECRET, {

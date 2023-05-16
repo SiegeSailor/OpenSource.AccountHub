@@ -37,15 +37,14 @@ export default async function (
     await models.Account.revoke(connection, email, privileges);
 
     const set = new Set(privileges);
-    await databases.store.set(
+    await utilities.store.update(
       utilities.key.session(request.session.email),
       JSON.stringify({
         ...request.session,
         privileges: request.session.privileges.filter((privilege) => {
           return !set.has(privilege);
         }),
-      }),
-      "XX"
+      })
     );
 
     await models.History.insert(

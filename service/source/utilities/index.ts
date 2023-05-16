@@ -2,6 +2,7 @@ import type { Request } from "express";
 import crypto from "crypto";
 
 import settings from "settings";
+import databases from "databases";
 
 const hash = {
   SALT_LENGTH: 64,
@@ -70,8 +71,36 @@ const key = {
   },
 };
 
+const store = {
+  update: async function (key: string, value: string) {
+    const transaction = databases.store.multi();
+    transaction.pttl(key);
+    transaction.set(key, value, "XX");
+
+    const results = await transaction.exec();
+    if (!results) return null;
+
+    const ttl = results[0][1] as string | number;
+    const result = results[1][1];
+    switch (ttl) {
+      case settings.constants.ETTL.NO_KEY:
+      case settings.constants.ETTL.NO_TTL:
+        return null;
+      default:
+        break;
+    }
+
+    if (result !== "OK")
+      throw new Error(`Encountered errors while updating ${key} in session.`);
+
+    await databases.store.pexpire(key, ttl);
+    return result;
+  },
+};
+
 export default {
   format,
   hash,
   key,
+  store,
 };

@@ -144,7 +144,7 @@ class Account implements Schema.IAccount {
     const account = (
       await connection.execute("SELECT * FROM account WHERE email = ?", [email])
     )[0][0];
-    if (!account) return;
+    if (!account) return null;
     const privileges = (
       await connection.execute("SELECT * FROM privilege WHERE email = ?", [
         email,

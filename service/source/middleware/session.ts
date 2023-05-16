@@ -19,7 +19,7 @@ async function authenticate(
   let payload: JwtPayload | null = null;
   try {
     payload = JWT.verify(token, settings.environment.SECRET) as JwtPayload;
-    if (!payload) throw new Error();
+    if (!payload) throw new ReferenceError();
   } catch (_) {
     const error = _ as Error;
     let message = "Invalid session.";
