@@ -71,38 +71,3 @@ HTTPS= # 1 | 0
 SERVICE_PORT=
 ORIGIN=
 ```
-
-## Security
-
-Analysis results, diagrams, and reports are stored within [Document](./document/). Security documentation and analysis should be manually performed before each release, and the corresponding issues should be listed on [Issues](https://github.com/SiegeSailor/OpenSource.AccountHub/issues):
-
-### Security Requirement
-
-Follow [OWASP SAMM 2.0](https://owasp.org/www-project-samm/). The goal is to achieve maturity level 1 in general using [SAMMwise](https://github.com/owaspsamm/sammwise), which is a officially recommended tool by OWASP:
-
-```bash
-docker pull stephenmorgan/owasp-sammwise
-docker run --port 3000:3000 stephenmorgan/owasp-sammwise
-```
-
-Load the JSON result file and view the charts:
-
-![SAMMwise](./images/SAMMwise.png)
-
-### Attack Surface
-
-Follow [OWASP Attack Surface Analysis Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html) to understand and manage application security risks as designing and changing the application, as well as by application security specialists doing a security risk assessment. The focus is on protecting an application from external attack. [OWASP ZAP](https://www.zaproxy.org/) is used:
-
-![OWASP ZAP](./images/OWASP%20ZAP.png)
-
-![OWASP ZAP Attack](./images/OWASP%20ZAP%20Attack.png)
-
-Run the service first then perform automated scan through HTTP:
-
-```bash
-docker-compose up --build
-```
-
-### Threat Modeling
-
-Follow [OWASP Threat Modeling](https://owasp.org/www-community/Threat_Modeling). The tool remains unselected.
