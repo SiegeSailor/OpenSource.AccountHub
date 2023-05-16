@@ -1,3 +1,8 @@
+- [Account Hub](#account-hub)
+  - [Prerequisites](#prerequisites)
+  - [Get Started](#get-started)
+    - [Environment](#environment)
+
 # Account Hub
 
 Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework. File structure:
